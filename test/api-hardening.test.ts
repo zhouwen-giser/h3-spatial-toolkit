@@ -359,12 +359,12 @@ describe("server configuration", () => {
     });
   });
 
-  it("fails startup configuration instead of accepting NaN or unsafe values", () => {
+  it("fails startup configuration instead of accepting NaN or unsafe values", async () => {
     expect(() => loadServerConfig({ PORT: "not-a-number" })).toThrow("PORT");
     expect(() => loadServerConfig({ METRICS_ENABLED: "yes" })).toThrow("METRICS_ENABLED");
     expect(() => loadServerConfig({ LOG_LEVEL: "verbose" })).toThrow("LOG_LEVEL");
     expect(() => loadServerConfig({ ALLOWED_RESOLUTIONS: "7,16" })).toThrow("ALLOWED_RESOLUTIONS");
-    expect(() => buildApp({ maxResultCells: 0 })).rejects.toThrow("maxResultCells");
+    await expect(() => buildApp({ maxResultCells: 0 })).rejects.toThrow("maxResultCells");
   });
 });
 

@@ -43,16 +43,19 @@ try {
 
   const port = await freePort();
   let logs = "";
+  const serverEnvironment = {
+    ...process.env,
+    NODE_ENV: "production",
+    HOST: "127.0.0.1",
+    PORT: String(port)
+  };
+  if (process.platform === "win32") serverEnvironment.H3_TOOLKIT_TEST_SHUTDOWN_IPC = "YES";
   child = spawn(process.execPath, ["dist/server.js"], {
     cwd: directory,
-    env: {
-      ...process.env,
-      NODE_ENV: "production",
-      HOST: "127.0.0.1",
-      PORT: String(port),
-      H3_TOOLKIT_TEST_SHUTDOWN_IPC: "YES"
-    },
-    stdio: ["ignore", "pipe", "pipe", "ipc"]
+    env: serverEnvironment,
+    // Keep IPC exclusive to the Windows fallback. On POSIX the real
+    // SIGTERM path must be able to drain and exit without an open channel.
+    stdio: process.platform === "win32" ? ["ignore", "pipe", "pipe", "ipc"] : ["ignore", "pipe", "pipe"]
   });
   child.stdout.on("data", (chunk) => {
     logs += chunk;

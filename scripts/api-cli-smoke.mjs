@@ -123,9 +123,13 @@ assert.equal(
   "--operation must be one of count, sum, average, min, max, weightedAverage, density, distinctCount\n"
 );
 
+const serverEnvironment = { ...process.env, HOST: "127.0.0.1", PORT: String(port) };
+if (process.platform === "win32") serverEnvironment.H3_TOOLKIT_TEST_SHUTDOWN_IPC = "YES";
 const server = spawn(process.execPath, ["apps/api/dist/server.js"], {
-  env: { ...process.env, HOST: "127.0.0.1", PORT: String(port), H3_TOOLKIT_TEST_SHUTDOWN_IPC: "YES" },
-  stdio: ["ignore", "pipe", "pipe", "ipc"]
+  env: serverEnvironment,
+  // An open IPC channel keeps Node alive after a real POSIX signal. Only
+  // create it for the Windows test fallback that actually uses the channel.
+  stdio: process.platform === "win32" ? ["ignore", "pipe", "pipe", "ipc"] : ["ignore", "pipe", "pipe"]
 });
 let logs = "";
 let shutdownFailure;

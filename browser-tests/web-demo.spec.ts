@@ -43,24 +43,47 @@ async function saveScreenshot(page: Page, testInfo: TestInfo, name: string) {
   await page.screenshot({ path: testInfo.outputPath(name), fullPage: true });
 }
 
-test("normal renderer exercises the deck.gl WebGL path", async ({ browser, browserName, page }, testInfo) => {
+test("normal renderer exercises WebGL when available or its controlled fallback", async ({
+  browser,
+  browserName,
+  page
+}, testInfo) => {
   const pageErrors: string[] = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
 
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
+  const webglAvailable = await page.evaluate(() => {
+    const canvas = document.createElement("canvas");
+    return Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+  });
   const renderer = page.getByTestId("renderer");
-  await expect(renderer).toHaveText("deck.gl");
-  await expect(renderer).toHaveAttribute("data-renderer-source", "webgl");
+  if (webglAvailable) {
+    await expect(renderer).toHaveText("deck.gl");
+    await expect(renderer).toHaveAttribute("data-renderer-source", "webgl");
+    await expect(page.locator(".map canvas")).toBeVisible();
+  } else {
+    await expect(renderer).toHaveText("SVG fallback");
+    await expect(renderer).toHaveAttribute("data-renderer-source", "webgl-unavailable");
+    await expect(page.locator(".map canvas")).toHaveCount(0);
+    await expect(page.locator(".map svg")).toBeVisible();
+  }
   const rendererName = (await renderer.textContent()) ?? "unknown";
   const rendererSource = await renderer.getAttribute("data-renderer-source");
-  await expect(page.locator(".map canvas")).toBeVisible();
 
   await expectNoSevereAccessibilityViolations(page, testInfo, "normal-renderer");
   expect(pageErrors).toEqual([]);
   await testInfo.attach("runtime.json", {
-    body: Buffer.from(JSON.stringify({ browserName, browserVersion: browser.version(), rendererName, rendererSource })),
+    body: Buffer.from(
+      JSON.stringify({
+        browserName,
+        browserVersion: browser.version(),
+        webglAvailable,
+        rendererName,
+        rendererSource
+      })
+    ),
     contentType: "application/json"
   });
   await saveScreenshot(page, testInfo, `${browserName}-normal-renderer.png`);
