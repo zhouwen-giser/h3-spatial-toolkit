@@ -80,6 +80,6 @@
 
 ## 交付判定
 
-当前源码具备由后续 Codex 读取设计、选择 Work Item、安装、开发、执行本地/浏览器/数据库门禁和记录证据的完整入口。`cd3211f` 已在远端 PR 由 quality/portable/browser/database workflows 实际认证；本轮最终治理同步仍按用户要求通过 Git commit/push 交付，不生成新的源码交付包。
+当前源码具备由后续 Codex 读取设计、选择 Work Item、安装、开发、执行本地/浏览器/数据库门禁和记录证据的完整入口。已认证实现提交 `cd3211f` 已在远端 PR 由 quality/portable/browser/database workflows 实际认证；治理同步提交 `2d03bff` 也已 push，并由独立的 9-job quality/portable/browser run 全部通过。本轮不生成新的源码交付包。
 
 生产发布不得引用 G4、容器运行或跨平台 PASS 代替具体身份平台、Load/Soak、镜像阈值/签名、HA/PITR 和组织批准。完整待办见 `docs/29_UNFINISHED_WORK_REGISTER.md`。

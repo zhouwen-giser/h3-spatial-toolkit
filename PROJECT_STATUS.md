@@ -18,7 +18,7 @@
 | 数据库 | 已认证实现提交 `cd3211f` 的托管 run-scoped G4 PASS：PostgreSQL 17.10 / PostGIS 3.5.7 / h3+h3_postgis 4.5.0，100K/1M/10M、计划、升级、回滚和逻辑恢复同一 run-id 完成 |
 | 跨平台 | 已认证实现提交 `cd3211f` 的 GitHub-hosted quality/portable/browser 9/9 jobs PASS：Ubuntu x64、Windows x64、macOS arm64、Linux arm64，Node 22/24 |
 | 供应链 | npm audit 0；Source SBOM 145 components / 134 external packages；License 检查 146 production packages；已认证实现提交 `cd3211f` 的镜像扫描 3 Critical + 19 High，阈值 FAIL；签名/provenance 未执行 |
-| 交付 | `cd3211f` 已 push 且远端 quality/database runs 成功；当前治理同步仍须按用户要求 commit/push。新源码 ZIP/Manifest/Checksum/Summary 和解压内容复验继续 NOT_RUN |
+| 交付 | 已认证实现提交 `cd3211f` 与治理同步提交 `2d03bff` 均已 push；前者的 quality/database runs 与后者的 9-job quality matrix 均成功。新源码 ZIP/Manifest/Checksum/Summary 和解压内容复验继续 NOT_RUN |
 
 ## 当前工作
 
