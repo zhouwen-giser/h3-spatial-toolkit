@@ -23,11 +23,11 @@
 | Benchmark 10K–10M | 当前 Windows/Node 22 | 是 | 1 warmup + 3 recorded、median gate；静默 exact-environment 9/9 PASS；并发 FAIL 留档；历史 Linux NOT_COMPARABLE |
 | Release metadata | Node | 是 | 当前 0.3.0/1.4.0 `acceptance:local` 检查 PASS |
 | Release package/reproducibility/content | Node/zip/unzip | 用户排除 | `NOT_RUN`；历史 0.2.0/1.3.0 不适用 |
-| PostgreSQL H3/PostGIS | Docker/Compose；镜像内 psql | 部分 | 严格切片通过；完整 run-scoped runner 待明确授权，`PARTIAL` |
+| PostgreSQL H3/PostGIS | Docker/Compose；镜像内 psql | 是（托管认证） | certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的完整 run-scoped runner PASS；G4 `PASS` |
 | Auth/Tenant/Rate Limit | 注入边界 + 身份/Gateway | 部分 | 本地 fail-closed contract PASS；具体 OIDC/JWKS/Gateway `PARTIAL` |
 | Load/Soak/Chaos | 目标集群 | 否 | `NOT_RUN` |
 | HA/Backup/PITR/Upgrade | 目标数据库平台 | 否 | `NOT_RUN` |
-| Cross-platform | Linux/macOS/Windows + Node 22/24 + x64/arm64 | 当前 Windows Node 22；远端矩阵已定义 | `PARTIAL`，待托管执行 |
+| Cross-platform | Linux/macOS/Windows + Node 22/24 + x64/arm64 | Windows 本地 + GitHub-hosted runners | certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 quality/portable/browser 9/9 jobs PASS；G6 Cross-platform `PASS` |
 
 ## 3. 本地自动门禁
 
@@ -74,7 +74,7 @@ Benchmark 负责单机算法回归；Load/Soak 负责并发、GC、连接池、�
 
 ### 数据库
 
-必须真实执行 Migration、幂等、rollback/forward-fix、Golden、EXPLAIN、规模、备份恢复和扩展升级。个别切片通过不等于一份完整 run-scoped G4 证据；当前严格 runner 因会重建本地合成认证库而等待明确授权。SQL 静态检查只能提前发现结构错误。
+必须真实执行 Migration、幂等、rollback/forward-fix、Golden、EXPLAIN、规模、备份恢复和扩展升级。个别切片通过不等于一份完整 run-scoped G4 证据；已认证实现提交 `cd3211f` 的托管严格 runner 已在一次性 Compose 数据库完整执行并通过。SQL 静态检查只能提前发现结构错误，未来数据库相关实现变更仍须以新 run-id 重新认证。
 
 ## 6. Flaky Test Policy
 

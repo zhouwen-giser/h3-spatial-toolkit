@@ -20,4 +20,5 @@ Work 状态：`REVIEW`。Gate 状态：`PARTIAL`。
 - `003_invariants.sql` 为 append-only、事务内、可重复 Migration；Schema 正反例切片通过。
 - 隔离数据库的 h3/h3_postgis 4.2.3→4.5.0 数据/索引 checksum 升级切片重复通过。
 - 注入 SQLSTATE 23505 的事务 DDL rollback 证明失败后不遗留对象，重复通过。
-- 完整 run-scoped G4 尚待用户批准重建本地合成认证库；目标 HA/PITR 平台仍未选择，因此不能标记 COMPLETE/PASS。
+- 已认证实现提交 `cd3211f` 的 run `31642261871` 已将 Migration 重复执行、4.2.3→4.5.0 升级、SQLSTATE 23505 DDL rollback、backup SHA-256 与非空逻辑 restore 收敛为同一 run-id，G4 部分 PASS。
+- 目标 HA/PITR 平台、forward-fix 发布演练和跨版本受管恢复仍未完成，因此本 Work Item 保持 `REVIEW/PARTIAL`，不标记 COMPLETE。

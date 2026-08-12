@@ -8,9 +8,9 @@
 
 | Work Item | 领域 | Work 状态 | Gate 状态 | 需要的环境/决策 | 目标 Gate |
 |---|---|---|---|---|---|
-| P0-DB-CERT-001 | PostGIS/H3 实机认证 | REVIEW | PARTIAL | 严格切片通过；完整 runner 会重建本地合成认证库，等待用户明确授权 | G4 |
-| P0-GOLDEN-001 | h3-js/h3-pg 跨引擎 | COMPLETE_LOCAL | PASS（slice） | Windows Docker DB 11/11；随完整 G4 run-id 重新绑定最终镜像 | G4 |
-| P1-DB-MIGRATION-001 | Migration/upgrade/rollback | REVIEW | PARTIAL | 升级与 DDL rollback 个别切片通过；完整 run-scoped G4/目标 DB 演练待办 | G4/G6 |
+| P0-DB-CERT-001 | PostGIS/H3 实机认证 | COMPLETE | PASS | 已认证实现提交 `cd3211f` 的 run `31642261871` 同一 run-id 56 artifacts 完整通过；已移入 completed | G4 |
+| P0-GOLDEN-001 | h3-js/h3-pg 跨引擎 | COMPLETE | PASS | 已认证实现提交 `cd3211f` 的完整 G4 内 Golden 11/11 与 Adapter 13/13 PASS | G4 |
+| P1-DB-MIGRATION-001 | Migration/upgrade/rollback | REVIEW | PARTIAL | G4 内 migration/4.2.3→4.5.0/DDL rollback/逻辑 restore PASS；目标 HA/PITR 演练待办 | G4/G6 |
 | P1-API-HARDEN-001 | Error/limits/semantic validation | COMPLETE_LOCAL | PASS | 已完成；生产负载仍由独立项认证 | G1/G2 |
 | P1-BROWSER-A11Y-001 | 浏览器/WebGL/SVG/A11y | COMPLETE_LOCAL | PASS | Windows Chromium/Firefox/WebKit 9/9；跨平台持续矩阵由 CI 项跟踪 | G2 |
 | P1-WEB-BUNDLE-001 | Web Demo 分包/预算 | COMPLETE_LOCAL | PASS | 动态拆包、预算和真实本地浏览器已通过 | G2/G3 |
@@ -18,13 +18,13 @@
 | P1-LOAD-SOAK-001 | 并发/Soak/Chaos | READY | NOT_RUN | Target cluster、SLO、代表性数据和故障注入授权 | G3/G6 |
 | P1-SEC-OBS-001 | OIDC/Tenant/OTel/SLO | IN_PROGRESS | PARTIAL | 本地 Auth contract/日志/Metrics PASS；具体 IdP/JWKS/Gateway/OTel 平台待定 | G5/G6 |
 | P1-DATA-GOV-001 | 数据分类/保留/删除 | BLOCKED | BLOCKED | Owner/legal policy | G5 |
-| P1-SUPPLY-001 | SBOM/image scan/sign | IN_PROGRESS | PARTIAL | Source SBOM 145 / License 146 PASS；source-label 绑定前镜像扫描 3 Critical + 19 High、阈值 FAIL；需绑定当前 commit 重扫并完成 Registry signing/provenance | G5 |
-| P1-DEPLOY-DR-001 | HA/backup/PITR/failover | READY | NOT_RUN | Deployment/DB platform、RTO/RPO 和演练授权 | G6 |
-| P1-CROSS-PLATFORM-001 | Node/OS/arch matrix | READY | PARTIAL | Workflow 已定义；托管 Linux/macOS/Windows/arm64 执行待证实 | G6 |
-| P1-CI-CERT-001 | 外部 CI 与保护规则 | READY | PARTIAL | Hosted PR 可运行；完整矩阵、required checks 和 branch protection 待证实 | G0/G7 |
+| P1-SUPPLY-001 | SBOM/image scan/sign | IN_PROGRESS | PARTIAL | Source SBOM 145 / License 146 PASS；已认证实现提交 `cd3211f` 的镜像扫描 3 Critical + 19 High、阈值 FAIL；Registry signing/provenance 待办 | G5 |
+| P1-DEPLOY-DR-001 | HA/backup/PITR/failover | READY | PARTIAL | Container runtime 与单实例 G4 restore PASS；双副本、HA/PITR/Failover、RTO/RPO 待办 | G6 |
+| P1-CROSS-PLATFORM-001 | Node/OS/arch matrix | COMPLETE | PASS | 已认证实现提交 `cd3211f` 的 hosted quality/portable/browser 9/9 jobs PASS；已移入 completed | G6 |
+| P1-CI-CERT-001 | 外部 CI 与保护规则 | REVIEW | PARTIAL | Hosted quality/database runs PASS；required checks、branch protection 与 artifact policy 待审 | G0/G7 |
 | P1-GOV-OWNER-001 | CODEOWNERS/批准人 | BLOCKED | BLOCKED | 人员和职责决策 | G7 |
 | P1-PUBLISH-001 | npm/内部 Registry 发布 | BLOCKED | BLOCKED | 分发模式决策 | G7 |
-| P1-RELEASE-001 | Changelog/Release metadata | IN_PROGRESS | PARTIAL | 0.3.0/1.4.0 本地 metadata PASS；远端 CI/Owner/发布待办；package gate 本轮排除 | G7 |
+| P1-RELEASE-001 | Changelog/Release metadata | IN_PROGRESS | PARTIAL | 0.3.0/1.4.0 metadata 与已认证实现提交 `cd3211f` 的远端 CI PASS；Owner/正式发布待办；package gate 本轮排除 | G7 |
 | P2-JOB-001 | 异步 Job/Worker/Result | PLANNED | NOT_RUN | Queue/Object Store ADR | Future |
 | P2-OLAP-001 | DuckDB/ClickHouse Adapter | DEFERRED | NOT_RUN | 真实规模证据 | Future |
 | P2-ADV-ANALYTICS-001 | Hotspot/时空统计 | DEFERRED | NOT_RUN | 业务需求和统计验证 | Future |
@@ -44,15 +44,16 @@
 - 带完整环境键、correctness checksum、1 次预热 + 3 次记录 median 和 20% 阈值的 10K–10M Benchmark；Windows 静默独立复验 9/9 PASS，并发负载 FAIL 留档，历史 Linux NOT_COMPARABLE。
 - 可再生的 6 Point + 4 Polygon 跨引擎 Golden 基线及 PostGIS 对照 runner。
 - CycloneDX 1.6 源码 SBOM（145 components / 134 external packages）、146 production packages License 检查和 npm audit 0。
-- 数据库扩展版本、Schema/Upsert 断言、Migration、Smoke、10K–10M、四类计划、Golden、逻辑 Backup/Restore、升级和 DDL rollback 的 run-scoped 证据脚本；完整执行等待授权。
+- 已认证实现提交 `cd3211f` 的托管数据库 run 包含扩展版本、Schema/Upsert 断言、Migration、Smoke、10K–10M、四类计划、Golden、逻辑 Backup/Restore、升级和 DDL rollback，共 56 artifacts；G4 PASS。
 - Bash syntax/strict-mode/ShellCheck 本地门禁和 API SIGTERM/Windows IPC graceful shutdown smoke。
-- 26.0 MB production-only API deploy、devDependency exclusion 和 non-root Dockerfile；API/PostgreSQL 镜像已在 source-label 绑定前构建/扫描，但 3 Critical + 19 High 导致阈值 FAIL，且不能绑定当前 commit。
+- 已认证实现提交 `cd3211f` 的 hosted quality/portable/browser 9/9 jobs，覆盖 Ubuntu/Windows/macOS、x64/arm64、Node 22/24 和托管三浏览器；G6 Cross-platform PASS。
+- 26.0 MB production-only API deploy、devDependency exclusion 和 non-root Dockerfile；API/PostgreSQL 镜像已绑定已认证实现提交 `cd3211f` 并运行/扫描，但 3 Critical + 19 High 导致阈值 FAIL。
 
 以上新增项目于 2026-08-13 在 Windows x64、Node v22.14.0 环境按各自范围执行，并在 `evidence/gates/` 或忽略提交的 run output 中留证。它们的通过范围仅限对应本地源码、算法、浏览器或数据库切片，不能推导生产平台 PASS。
 
 历史 `0.2.0` / 模板 `1.3.0` 曾执行可复现源码 ZIP、Manifest、Release Summary、Checksum 和解压内容审计；用户已明确将这些步骤从当前 `0.3.0` / `1.4.0` 完成要求中移除，因此 `G7_RELEASE_PACKAGE=NOT_RUN`，历史结果不计入当前 PASS。
 
-当前工作量判断：本地源码/浏览器候选已完成主要能力；若目标是包含完整 G4、具体身份/租户、平台观测、Load、镜像供应链、HA/DR 和发布批准的生产同步服务，尚需约 18–31 人日；若异步大任务也属于“软件完成”口径，再增加 10–15 人日。详细假设见 `docs/18_DEVELOPMENT_PLAN.md` 3.1 节。
+当前工作量判断：源码、浏览器、完整 G4、容器 runtime 与跨平台候选已完成；若目标是包含具体身份/租户、平台观测、Load、镜像供应链、HA/DR 和发布批准的生产同步服务，尚需约 17–28 人日；若异步大任务也属于“软件完成”口径，再增加 10–15 人日。详细假设见 `docs/18_DEVELOPMENT_PLAN.md` 3.1 节。
 
 ## 4. 禁止替代关系
 

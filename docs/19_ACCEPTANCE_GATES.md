@@ -174,7 +174,7 @@ pnpm acceptance:database
 | Scale | 100K/1M/10M 数据量测试 |
 | Lifecycle | 备份、恢复、扩展升级和回滚演练 |
 
-当前脚本已经自动化扩展版本、Migration 重复执行、Smoke、10K Fixture、两类 EXPLAIN、Cross-engine Golden、custom-format backup/restore 和 count/checksum 证据。10K 仅用于流程认证，100K/1M/10M 性能与升级/回滚仍需目标环境补充。
+当前脚本已经自动化扩展版本、Migration 重复执行、Smoke、严格 Schema/Upsert/exact-filter 断言、Cross-engine Golden、Adapter integration、10K/100K/1M/10M 四类索引计划、扩展升级、事务 DDL rollback、custom-format backup SHA-256 与两表逻辑恢复指纹。certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的托管 run `31642261871` 已完整执行并以 56 个 artifacts 通过 G4；未来数据库相关源码变化仍必须以新 run-id 重新认证。
 
 证据目录建议：
 
@@ -190,7 +190,7 @@ output/acceptance/database/
 └── restore-rehearsal.md
 ```
 
-当前模板默认状态为 `NOT_RUN`，只有实际输出上述证据后才能改为 PASS。
+只有同一待认证实现 revision 的 run-id 实际输出上述证据且聚合命令退出码为 0 才能改为 PASS；本轮 certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 PASS 不替代 G6 HA/PITR/Failover。
 
 ## 8. G5 — Security and Supply Chain
 
@@ -221,7 +221,7 @@ pnpm check:supply-chain
 
 阻断条件：Critical/High 漏洞无处置、鉴权绕过、跨租户访问、Secret 泄露或资源限额可被绕过。
 
-`G5_SBOM_SOURCE` 只证明 npm 生产依赖的 CycloneDX 1.6 inventory 与许可清单可再生。当前容器扫描发生在 source revision label 绑定前，虽真实得到 3 Critical + 19 High 且阈值 FAIL，仍不能绑定当前 commit 或提升 `G5_SBOM_IMAGE_SIGNING`。`G5_AUTH_TENANT`、绑定源码后的基础/发行镜像重扫、签名与 provenance 必须在真实 IdP/Gateway/Registry 边界完成；源码 SBOM PASS 时 `G5_SBOM_IMAGE_SIGNING` 仍只能是 `PARTIAL`。
+`G5_SBOM_SOURCE` 只证明 npm 生产依赖的 CycloneDX 1.6 inventory 与许可清单可再生。certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的容器重扫真实得到 3 Critical + 19 High 且阈值 FAIL；源码绑定和 runtime PASS 不能提升 `G5_SBOM_IMAGE_SIGNING`。`G5_AUTH_TENANT`、漏洞消除/正式处置、签名与 provenance 必须在真实 IdP/Gateway/Registry 边界完成；源码 SBOM PASS 时 `G5_SBOM_IMAGE_SIGNING` 仍只能是 `PARTIAL`。
 
 ## 9. G6 — Deployment and Recovery
 
@@ -237,6 +237,8 @@ pnpm check:supply-chain
 - RTO/RPO 由业务批准并通过演练。
 
 G6 至少拆分为 `G6_CONTAINER_RUNTIME`、`G6_HA_RECOVERY`、`G6_CROSS_PLATFORM`。Compose/YAML 静态存在只允许聚合状态为 `PARTIAL`，不能产生任何运行子门禁 PASS。
+
+`G6_CONTAINER_RUNTIME` 只证明绑定 certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 API 镜像可启动/readiness、non-root 与 runtime hygiene，以及同一认证实现 revision 的独立 PostgreSQL 镜像在 G4 中 healthy。`G6_CROSS_PLATFORM` 只证明仓库声明的 Node/OS/arch/browser 矩阵实际成功；Firefox 无 WebGL 时允许并必须验证真实 SVG fallback。二者 PASS 不证明漏洞策略、签名、多架构镜像发布、rolling drain、HA、PITR 或 failover，聚合 `G6_DEPLOYMENT` 仍可保持 `PARTIAL`。
 
 `G6_GRACEFUL_SHUTDOWN_LOCAL` 通过编译产物 loopback smoke 验证 SIGTERM 后 Fastify close、3 秒内干净退出和 exit code 0；它不证明容器 drain、负载下关停或滚动发布。
 
@@ -267,7 +269,7 @@ pnpm check:release-metadata
 | 状态 | 含义 |
 |---|---|
 | `PASS` | 本 Gate 全部验收项通过 |
-| `CONDITIONAL_PASS` | 仅允许受控环境，条件和截止时间明确 |
+| `PARTIAL` | 仅部分验收项已有真实证据；剩余条件、适用环境和截止时间写入说明，不计为 PASS |
 | `NOT_RUN` | 环境/时机未执行，不代表失败或通过 |
 | `BLOCKED` | 已知失败或上游 Gate 未满足 |
 

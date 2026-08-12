@@ -24,6 +24,8 @@
 - 工程治理、测试策略、发布规范、运维、安全隐私、环境矩阵和未完成工作登记册。
 - Format、Lint、文档、仓库卫生、OpenAPI/JSON Schema、License、环境探测和可复现发布门禁。
 - PR/Issue/依赖更新治理模板和机器可读 Gate 证据目录。
+- 已认证实现提交 `cd3211f` 的 GitHub-hosted 数据库认证：PostgreSQL 17.10/PostGIS 3.5.7/h3 4.5.0，13/13 integration、10M 计划、扩展升级、事务 rollback、backup checksum 与逻辑恢复共 56 artifacts PASS。
+- 已认证实现提交 `cd3211f` 的 GitHub-hosted 跨平台认证：Ubuntu x64、Windows x64、macOS arm64、Linux arm64 的 Node 22/24 与托管 Chromium/Firefox/WebKit 共 9/9 jobs PASS；Firefox 无 WebGL 时验证真实 SVG fallback。
 
 ### Changed
 
@@ -32,6 +34,7 @@
 - 当前交付边界改为每轮 Git commit/push 和远端 PR；按用户明确要求，当前轮不生成/复验新的源码 ZIP、Manifest、Checksum 或 Release Summary，`G7_RELEASE_PACKAGE=NOT_RUN`。
 - Docker build context 排除宿主依赖与临时产物，构建阶段显式使用非交互 CI 模式。
 - 数据库认证 runner 兼容 Windows Git Bash，并将认证 PostgreSQL 安全绑定到 `127.0.0.1:55432`。
+- API/PostgreSQL 镜像绑定精确源码 revision 并完成实际 runtime 验证；独立本地扫描与托管 G4 build 使用各自镜像 ID，不混作同一 artifact。
 
 ### Fixed
 
@@ -41,7 +44,7 @@
 
 ### Known limitations
 
-- 完整 G4 run-scoped 认证正等待重建本地合成数据库的明确授权；具体 OIDC/JWKS/Gateway/持久租户、Load/Soak、HA/PITR、远端跨平台矩阵、镜像阈值处置、签名/provenance 和生产批准仍未完成。
+- 具体 OIDC/JWKS/Gateway/持久租户、Load/Soak、双副本 rollout、HA/PITR、镜像阈值处置、签名/provenance、required-check/Owner 和生产批准仍未完成。绑定已认证实现提交 `cd3211f` 的镜像扫描仍为 3 Critical + 19 High，G5 image 保持 PARTIAL。
 
 ## [0.2.0] - 2026-08-12
 

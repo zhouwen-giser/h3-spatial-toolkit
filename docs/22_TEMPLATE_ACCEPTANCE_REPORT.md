@@ -6,9 +6,9 @@
 
 **源码候选状态：本地 Gate 范围内可交付；项目生产状态：`BLOCKED`。**
 
-当前 Windows Work 环境已真实完成本地源码/契约/API/CLI 子门禁、三引擎浏览器与可访问性矩阵，以及具备完整环境键的单机性能比较。平台中立的 fail-closed 鉴权边界也已由本地契约测试覆盖。严格数据库 runner 已实现，Schema/Upsert/Adapter/索引计划/10M 规模/生命周期等切片分别通过，但完整 runner 会重建本地合成认证数据库，在用户明确授权前没有执行，因此 G4 保持 `PARTIAL`。
+当前 Windows Work 环境已真实完成本地源码/契约/API/CLI 子门禁、三引擎浏览器与可访问性矩阵，以及具备完整环境键的单机性能比较。平台中立的 fail-closed 鉴权边界也已由本地契约测试覆盖。已认证实现提交 `cd3211f` 的托管数据库 run `31642261871` 已把 Schema/Upsert/Adapter/Golden、索引计划、10M 规模、扩展升级、DDL rollback、backup checksum 和非空逻辑恢复收敛为同一 run-id 的 56 个 artifacts，因此 `G4_DATABASE=PASS`。
 
-具体 IdP/JWKS、持久租户隔离、Gateway、OTel/SLO、Load/Soak、HA/PITR、镜像漏洞处置/签名和生产批准仍未完成。当前 `pnpm acceptance:local` 已通过并刷新版本化证据；跨平台 CI Workflow 已定义，但 G6 只有在远端托管 Runner 实际成功后才能升级。远端 CI/push 状态仍必须由实际仓库结果补充，不能由本报告预判。
+具体 IdP/JWKS、持久租户隔离、Gateway、OTel/SLO、Load/Soak、HA/PITR、镜像漏洞处置/签名和生产批准仍未完成。已认证实现提交 `cd3211f` 的远端 quality/portable/browser run `31642176184` 已 9/9 jobs 成功，覆盖 Ubuntu x64、Windows x64、macOS arm64、Linux arm64、Node 22/24 与托管三浏览器，因此 `G6_CROSS_PLATFORM=PASS`。该实现提交的 API/数据库镜像实际运行使 `G6_CONTAINER_RUNTIME=PASS`，但聚合 Deployment/Recovery 仍为 `PARTIAL`。
 
 用户已明确将新源码 ZIP、`SHA256SUMS`、`MANIFEST.json`、Release Summary、全新目录解压/frozen install/static 复验和交付包内容审计排除出本轮完成要求。因此当前 `G7_RELEASE_PACKAGE=NOT_RUN`；历史 `0.2.0` / 模板 `1.3.0` 的包证据不适用于当前源码树。
 
@@ -35,23 +35,24 @@
 | G2 Web Bundle | Entry 405,176 / gzip 126,346 bytes；Deck async 632,091 / gzip 181,874 bytes；total JS 1,037,334 bytes | PASS |
 | G2 Browser/Accessibility | Chromium 151.0.7922.34、Firefox 153.0、WebKit 26.5；正常 WebGL + 强制 SVG；键盘/Focus/Resolution/Clear/Reset/200% 等效回流；Axe critical/serious 0 | PASS：9/9 |
 | G3 Algorithm Performance | Windows Node 22 完整环境键；每场景 1 次预热 + 3 次记录并取 median；correctness 通过；静默独立复验 9/9 在 20% 阈值内 | PASS |
+| G4 PostgreSQL H3/PostGIS | run `31642261871`：PostgreSQL 17.10/PostGIS 3.5.7/h3 4.5.0；13/13 integration、10M 四计划、升级/回滚、backup checksum、两表逻辑恢复共 56 artifacts | PASS |
 | G5 Local Auth Contract | `local` 默认兼容；`required` 缺 authenticator 启动失败；Principal/Tenant/Scope/401/403 fail closed | PARTIAL：本地边界已证实，具体 IdP/Gateway 未接入 |
 | G5 Dependency/License/Secret/Source SBOM | npm audit 0；CycloneDX 145 components / 134 external packages；License 检查 146 production packages | PASS（不含镜像阈值/签名） |
 | G6 Local Runtime Layout | production-only layout、non-root、readiness 和 graceful shutdown 本地验证 | PASS（不等于容器/HA/跨平台） |
+| G6 Container Runtime | 已认证实现提交 `cd3211f` 的 API readiness/non-root/runtime hygiene；独立 PostgreSQL runtime 在完整 G4 中 healthy | PASS（不等于漏洞、签名、rollout 或 HA） |
+| G6 Cross-platform | run `31642176184`：2 quality + 6 portable + 1 browser；Ubuntu/Windows/macOS、x64/arm64、Node 22/24、Chromium/Firefox/WebKit | PASS：9/9 jobs |
 
 ## 未执行、部分执行或阻塞门禁
 
 | Gate | 状态 | 原因/解锁条件 |
 |---|---|---|
 | G3 Load/Soak/Chaos | NOT_RUN | 需目标集群、SLO、代表性数据和故障注入授权；单机 Benchmark 不替代 |
-| G4 PostgreSQL H3/PostGIS | PARTIAL | 严格 runner 与个别切片已实现/执行；完整 run-scoped 执行会重建本地合成认证库，正等待用户明确授权 |
 | G5 Auth/Tenant | PARTIAL | 本地注入契约 fail closed；具体 OIDC/JWKS、持久租户隔离、Gateway 和跨组件传播待定 |
-| G5 Image scan/sign/provenance | PARTIAL | source-label 绑定前扫描共 3 Critical + 19 High（API 2C/2H；PostgreSQL 1C/17H），阈值 FAIL；不能绑定当前 commit 或提升 Gate；Registry 签名/provenance NOT_RUN |
-| G6 Container/HA/Recovery | PARTIAL/NOT_RUN | 本地容器候选与数据库切片不替代目标平台 HA、PITR、Failover、RTO/RPO 演练 |
-| G6 Cross-platform | PARTIAL | 矩阵 Workflow 已定义；远端 Linux/macOS/Windows、Node 22/24、x64/arm64 尚未全部执行成功 |
+| G5 Image scan/sign/provenance | PARTIAL | 已认证实现提交 `cd3211f` 的扫描共 3 Critical + 19 High（API 2C/2H；PostgreSQL 1C/17H），阈值 FAIL；Registry 签名/provenance NOT_RUN |
+| G6 HA/Recovery | NOT_RUN | Container runtime 已 PASS，但目标平台双副本 rollout、HA、PITR、Failover、RTO/RPO 演练未执行；聚合 Deployment 保持 PARTIAL |
 | G7 Release Metadata | PASS | 当前 `acceptance:local` 已执行 0.3.0/1.4.0 版本、Changelog 与 Gate 分类检查 |
 | G7 Release Package | NOT_RUN | 用户明确排除当前轮的新 ZIP/Manifest/Checksum/Summary/解压复验和内容审计 |
-| G7 Production Release | BLOCKED | G3 Load、G4、G5、G6、Owner/批准链仍未完成 |
+| G7 Production Release | BLOCKED | G3 Load、具体 G5、G6 HA/Recovery、Owner/批准链仍未完成；G4 与跨平台已不再是阻塞项 |
 
 ## 最新 Benchmark 摘要
 
@@ -73,12 +74,12 @@
 4. 新增平台中立鉴权边界：只信任已验证 Principal，Tenant 不接受调用方覆盖，六业务 Scope 和 Metrics Scope fail closed。
 5. 新增 Playwright/Axe 三引擎矩阵并真实执行 9/9，覆盖正常 WebGL、强制 SVG、键盘/Focus、缩放与关键交互。
 6. Benchmark 采用完整环境键、1 次预热、3 次记录、median 判定与 p95 诊断；无匹配基线时门禁 `NOT_COMPARABLE` 并非零退出，同环境回归超过 20% 失败。
-7. 数据库追加 Schema 不变量、真实四列 Upsert、两阶段查询、四类计划探针、10K–10M、逻辑恢复指纹、扩展升级和 DDL 回滚自动化；完整执行仍受授权边界约束。
-8. CI 定义扩展到 Node/OS/架构和三浏览器矩阵；Workflow 文件存在不计作远端 PASS。
-9. 基础/应用/数据库镜像 digest 固定与本地扫描已推进；Scanner 阈值仍失败，不声称供应链完成。
+7. 数据库追加 Schema 不变量、真实四列 Upsert、两阶段查询、四类计划探针、10K–10M、逻辑恢复指纹、扩展升级和 DDL 回滚自动化；已认证实现提交 `cd3211f` 的托管完整 run 已 PASS。
+8. CI 扩展到 Node/OS/架构和三浏览器矩阵，并由已认证实现提交 `cd3211f` 的远端 run 9/9 jobs 实际认证。
+9. 基础/应用/数据库镜像 digest 固定、源码 revision 绑定和实际运行已完成；Scanner 阈值仍失败，不声称供应链完成。
 
 ## 交付判定
 
-当前源码具备由后续 Codex 读取设计、选择 Work Item、安装、开发、执行本地/浏览器/数据库门禁和记录证据的完整入口。本轮按用户要求通过 Git commit/push 和远端 PR 交付，不生成新的源码交付包；远端 push/CI 的最终结果必须在完成时由实际仓库状态补录。
+当前源码具备由后续 Codex 读取设计、选择 Work Item、安装、开发、执行本地/浏览器/数据库门禁和记录证据的完整入口。`cd3211f` 已在远端 PR 由 quality/portable/browser/database workflows 实际认证；本轮最终治理同步仍按用户要求通过 Git commit/push 交付，不生成新的源码交付包。
 
-生产发布不得引用本报告中的本地 PASS 代替数据库完整 run-id、具体身份平台、Load/Soak、镜像阈值/签名、HA/PITR、跨平台托管执行和组织批准。完整待办见 `docs/29_UNFINISHED_WORK_REGISTER.md`。
+生产发布不得引用 G4、容器运行或跨平台 PASS 代替具体身份平台、Load/Soak、镜像阈值/签名、HA/PITR 和组织批准。完整待办见 `docs/29_UNFINISHED_WORK_REGISTER.md`。

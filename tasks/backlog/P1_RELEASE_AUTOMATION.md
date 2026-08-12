@@ -1,6 +1,6 @@
 # P1-RELEASE-001 — Release 自动化
 
-Work 状态：`IN_PROGRESS`。Gate 状态：`PARTIAL`（0.3.0/1.4.0 本地版本/Changelog/Gate metadata 已 PASS；外部 CI、Owner 批准和正式发布待办）。
+Work 状态：`IN_PROGRESS`。Gate 状态：`PARTIAL`（0.3.0/1.4.0 版本/Changelog/Gate metadata 与已认证实现提交 `cd3211f` 的远端 CI 已 PASS；Owner 批准和正式发布待办）。
 
 ## 目标
 
@@ -21,4 +21,5 @@ Work 状态：`IN_PROGRESS`。Gate 状态：`PARTIAL`（0.3.0/1.4.0 本地版本
 - 4 个策略测试覆盖源码阻断、生产门禁绕过和候选分类。
 - 用户明确要求本轮不生成新 ZIP、Manifest、Release Summary、SHA256SUMS，也不执行全新目录解压/frozen install/static/content audit；`G7_RELEASE_PACKAGE=NOT_RUN` 且不阻塞本轮完成。
 - 历史 0.2.0/模板 1.3.0 包证据保留为历史，不认证当前 0.3.0/1.4.0。
-- 未完成：仓库 commit/tag 绑定、托管 CI required check、Release Owner 批准、Registry/npm 发布和正式 Release Notes 发布。
+- 已认证实现提交 `cd3211f` 已绑定远端 quality/database run；后续纯治理提交不得冒充该实现认证 revision。
+- 未完成：Tag、托管 CI required-check policy、Release Owner 批准、Registry/npm 发布和正式 Release Notes 发布。

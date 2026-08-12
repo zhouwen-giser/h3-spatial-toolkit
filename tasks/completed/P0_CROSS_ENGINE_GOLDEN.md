@@ -1,6 +1,6 @@
 # P0-GOLDEN-001 — h3-js/h3-pg 跨引擎 Golden
 
-Work 状态：`COMPLETE_LOCAL`。Gate 状态：`PASS`（cross-engine slice；聚合 G4 仍为 `PARTIAL`）。
+Work 状态：`COMPLETE`（2026-08-13）。Gate 状态：`PASS`。
 
 ## 目标
 
@@ -20,4 +20,4 @@ Point/Parent/Boundary/Polygon 集合一致；允许差异有 ADR、可复现输�
 - `database/fixtures/h3-cross-engine-golden.json` 固定 6 个 Point/Hierarchy/Boundary 与 4 个 Polygon 集合案例。
 - 覆盖 Resolution 0/15、Pentagon、南北极、Antimeridian、hole 和 MultiPolygon。
 - `pnpm check:golden` 防止期望值随依赖或脚本漂移；Node 侧 11 个测试 PASS。
-- 2026-08-13 Windows Docker/PostGIS 实机对照 11/11 PASS。完整 G4 仍需在获授权的 run-scoped runner 中重新绑定最终镜像身份；本项 PASS 不提升聚合 G4。
+- 2026-08-13 Windows Docker/PostGIS 实机对照 11/11 PASS；随后 certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的托管 run `31642261871` 在完整 G4 run-id 内重新验证 11/11 并绑定最终运行镜像身份，G4 PASS。

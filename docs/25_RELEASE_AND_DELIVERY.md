@@ -39,8 +39,8 @@
 | Release Owner/CODEOWNERS | BLOCKED | P1-GOV-OWNER-001 |
 | Changelog/Gate metadata 自动校验 | 0.3.0/1.4.0 COMPLETE_LOCAL；外部 CI/批准待办 | P1-RELEASE-001 |
 | 源码 ZIP/Manifest/Checksum/Summary | NOT_RUN；本轮用户明确排除 | G7_RELEASE_PACKAGE |
-| 数据库升级/回滚 | PARTIAL：本地切片通过；完整 run-scoped G4 待授权 | P1-DB-MIGRATION-001 |
-| 正式部署和回滚 | NOT_RUN | P1-DEPLOY-DR-001 |
+| 数据库升级/回滚 | G4 PASS：已认证实现提交 `cd3211f` 的完整 run；目标 HA/PITR 平台仍 PARTIAL | P1-DB-MIGRATION-001 |
+| 正式部署和回滚 | PARTIAL：已认证实现提交 `cd3211f` 的 container runtime PASS；双副本/HA/DR NOT_RUN | P1-DEPLOY-DR-001 |
 
 ## 5. 发布判定
 
@@ -49,4 +49,4 @@
 - `RELEASE_CANDIDATE`：全部生产必需子门禁通过但尚待 Release Owner 批准。
 - `PRODUCTION_READY`：所有 Gate、Owner 和批准齐备。
 
-当前模板的本地 source Gate 已由 `pnpm acceptance:local` 通过；只有最终 commit Git push 成功并在远端可见后才能完成本轮 `SOURCE_TEMPLATE_READY` 交付，仍不能标为 `PRODUCTION_READY`。PR 是否合并、Tag/Release 是否创建以及部署是否执行必须由对应授权和实际远端状态决定，不能从 push 推断。
+已认证实现提交 `cd3211f` 的本地与远端 quality/cross-platform/database Gate 已通过，满足当前 `SOURCE_TEMPLATE_READY` 证据边界；后续纯治理提交不冒充该实现认证 revision。项目仍不能标为 `PRODUCTION_READY`。PR 是否合并、Tag/Release 是否创建以及部署是否执行必须由对应授权和实际远端状态决定，不能从 push 推断。

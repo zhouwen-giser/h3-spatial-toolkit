@@ -2,7 +2,7 @@
 
 ## 1. 计划目标
 
-以当前 `0.3.0` / Codex 模板 `1.4.0` 本地强化基线为起点，把系统推进到可认证的生产级共享空间基础服务。当前优先把已分别验证的数据库切片收敛为一份获授权的 run-scoped G4 证据，同时将平台中立鉴权接入具体 IdP/租户/Gateway，并让已定义的跨平台 CI 在托管 Runner 上真实执行；随后补异步大任务、Load/Soak、HA/DR 和生产发布。
+以当前 `0.3.0` / Codex 模板 `1.4.0` 强化基线为起点，把系统推进到可认证的生产级共享空间基础服务。certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 run-scoped G4 与托管跨平台矩阵已经完成；当前优先将平台中立鉴权接入具体 IdP/租户/Gateway，处置镜像漏洞并建立签名/provenance，随后补异步大任务、Load/Soak、HA/DR 和生产发布。
 
 ## 2. 角色建议
 
@@ -20,7 +20,7 @@
 
 | 迭代 | 建议投入 | 目标 | 退出条件 |
 |---|---:|---|---|
-| I0 | 1–3 人日 + 授权等待 | 收敛完整 run-scoped 数据库认证 | G4 PASS |
+| I0 | 已完成 | certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的完整 run-scoped 数据库认证 | G4 PASS |
 | I1 | 已完成（本轮） | 同步 API 生产硬化 | G1/G2 强化项 PASS |
 | I2 | 6–10 人日 | 具体 IdP/租户/Gateway、镜像供应链和平台观测 | G5 PASS |
 | I3 | 10–15 人日 | 异步大任务平台 | Async Gate PASS |
@@ -36,9 +36,9 @@
 | 完成口径 | 还需投入 | 主要内容 | 置信度 |
 |---|---:|---|---|
 | 本地源码模板 | 0–1 人日 | 当前源码 Gate 和真实浏览器矩阵已通过；处理最终评审/远端 CI。用户已明确排除本轮新源码 ZIP 交付审计 | 高 |
-| 数据库支持的受控候选 | 1–3 人日 + 授权等待 | 获批执行严格 runner、审阅同一 run-id 下的最终镜像/规模/计划/恢复证据 | 中高 |
-| 生产同步服务 | 18–31 人日 | 上述 + 具体 IdP/Tenant/Gateway、平台 OTel/SLO、Load、镜像漏洞处置/签名、HA/DR、CI/Owner/发布 | 中低 |
-| 含异步大任务的完整目标 | 28–46 人日 | 生产同步服务 + Job/Worker/Result Store | 中低 |
+| 数据库支持的受控候选 | 已完成 | certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 同一 run-id 的最终镜像/规模/计划/恢复证据 PASS | 高 |
+| 生产同步服务 | 17–28 人日 | 具体 IdP/Tenant/Gateway、平台 OTel/SLO、Load、镜像漏洞处置/签名、HA/DR、CI 治理/Owner/发布 | 中低 |
+| 含异步大任务的完整目标 | 27–43 人日 | 生产同步服务 + Job/Worker/Result Store | 中低 |
 
 单人串行约为 5–9 周；3 人并行且目标平台已就绪时约 2–4 周。估算减少来自严格数据库 runner、真实浏览器矩阵、可比较 Benchmark gate 和本地 fail-closed 鉴权边界。最大不确定性不在 H3 算法，而在破坏性本地认证授权、IdP/租户模型、镜像漏洞处置、目标平台接入、RTO/RPO 和组织批准。若这些决策尚未完成，日历周期会明显长于编码人日。
 
@@ -56,7 +56,7 @@
 4. 验证模板已修正的四列 Upsert conflict target。
 5. 记录扩展版本、镜像 digest、构建日志、执行环境、100K/1M/10M 计划、逻辑恢复指纹和生命周期结果。
 
-当前进展：严格 Schema/Upsert、13 个 Adapter、四类计划探针、100K/1M/10M、扩展升级和 DDL 回滚均已作为本地切片通过。完整 runner 会重建本地合成认证库并创建/删除隔离生命周期数据库，正等待用户明确授权。
+完成记录：certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的托管 run `31642261871` 已将严格 Schema/Upsert、13 个 Adapter、四类计划探针、100K/1M/10M、扩展升级、DDL 回滚和逻辑恢复绑定为同一 run-id 的 56 artifacts，G4 PASS。
 
 验收：`pnpm acceptance:database` 在同一 run-id 下完整通过；证据写入 `output/acceptance/database/runs/<run-id>/`，聚合 Gate 才能由 `PARTIAL` 升为 `PASS`。
 
@@ -64,7 +64,7 @@
 
 依赖：P0-DB-CERT-001。
 
-数据集：东京已知点、Resolution 0/15、Pentagon、极区、Antimeridian、Polygon hole、MultiPolygon。Node 期望值和 PostGIS runner 已在模板 v1.4.0 预置；本地数据库对照 11/11 已通过，剩余工作是随完整 G4 run-id 重新绑定最终镜像证据。
+数据集：东京已知点、Resolution 0/15、Pentagon、极区、Antimeridian、Polygon hole、MultiPolygon。Node 期望值和 PostGIS runner 已在模板 v1.4.0 预置；本地数据库对照 11/11 已通过，certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的完整 G4 run-id 又重新验证 11/11，并绑定最终运行镜像证据。
 
 验收：Point/Parent/Boundary/Polygon 集合在定义的容差和集合语义内一致；差异有 ADR。
 
@@ -80,7 +80,7 @@
 - 验证 H3 B-tree、Geometry GiST、时间索引和 Parent partial index。
 - 建立 100K/1M/10M 数据规模结果。
 
-当前进展：四类计划断言与 100K/1M/10M 本地切片已通过。验收仍要求完整 G4 run-id 内没有 Sequential Scan 异常或未解释的回退。
+完成记录：四类计划断言与 100K/1M/10M 本地切片已通过；certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的完整 G4 run-id 已确认没有 Sequential Scan 异常或未解释的回退。
 
 ## 5. I1 — 同步接口硬化
 
@@ -187,7 +187,7 @@ flowchart TD
     R -.-> O["I5 可选引擎"]
 ```
 
-I1 已在数据库认证之前获准并行完成；I0 仍是生产工作的首要阻塞项。I0 完成后 I2/I3 可并行，但 G7 生产发布必须等待二者及 I4 全部通过。
+I1 已在数据库认证之前获准并行完成；I0 现已完成，I2/I3 可并行。G7 生产发布仍必须等待 I2/I3 及 I4 全部通过。
 
 ## 11. 变更控制
 

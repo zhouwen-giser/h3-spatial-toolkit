@@ -15,17 +15,18 @@
 | Browser | Chromium 151、Firefox 153、WebKit 26.5；WebGL/SVG/键盘/Focus/回流/Axe 9/9 PASS |
 | Benchmark | 1 次预热 + 3 次记录的 median 门禁；Windows Node 22 exact-environment comparison 9/9 PASS；历史 Linux 记录 `NOT_COMPARABLE` |
 | Auth | 本地注入 contract fail closed；具体 OIDC/JWKS/Gateway/持久 Tenant 为 PARTIAL |
-| 数据库 | 严格 runner 已实现且个别切片通过至 10M；完整 run-scoped G4 等待本地合成库重建授权，PARTIAL |
-| 供应链 | npm audit 0；Source SBOM 145 components / 134 external packages；License 检查 146 production packages；镜像扫描 3 Critical + 19 High，阈值 FAIL；签名/provenance 未执行 |
-| 交付 | 当前轮以 Git commit/push/远端 PR 为交付边界；新源码 ZIP/Manifest/Checksum/Summary 和解压内容复验依用户要求 NOT_RUN |
+| 数据库 | 已认证实现提交 `cd3211f` 的托管 run-scoped G4 PASS：PostgreSQL 17.10 / PostGIS 3.5.7 / h3+h3_postgis 4.5.0，100K/1M/10M、计划、升级、回滚和逻辑恢复同一 run-id 完成 |
+| 跨平台 | 已认证实现提交 `cd3211f` 的 GitHub-hosted quality/portable/browser 9/9 jobs PASS：Ubuntu x64、Windows x64、macOS arm64、Linux arm64，Node 22/24 |
+| 供应链 | npm audit 0；Source SBOM 145 components / 134 external packages；License 检查 146 production packages；已认证实现提交 `cd3211f` 的镜像扫描 3 Critical + 19 High，阈值 FAIL；签名/provenance 未执行 |
+| 交付 | `cd3211f` 已 push 且远端 quality/database runs 成功；当前治理同步仍须按用户要求 commit/push。新源码 ZIP/Manifest/Checksum/Summary 和解压内容复验继续 NOT_RUN |
 
 ## 当前工作
 
-`P0-DB-CERT-001` 的 Work 状态为 `REVIEW`，Gate 状态为 `PARTIAL`。当前 Windows/Docker 环境已分别通过：append-only Schema 不变量与负例、真实四列 Upsert、两阶段查询、PostGIS Adapter 13/13、跨引擎 Golden 11/11、H3/GiST/time/parent 计划探针、100K/1M/10M、扩展 4.2.3→4.5.0 升级和事务 DDL rollback。严格 runner 已把最终镜像身份、完整规模、计划、两表逻辑恢复指纹和生命周期结果收敛到独立 run-id。
+`P0-DB-CERT-001` 已以 `COMPLETE/PASS` 关闭。GitHub Actions run [`31642261871`](https://github.com/zhouwen-giser/h3-spatial-toolkit/actions/runs/31642261871) 在已认证实现提交 `cd3211f` 上完成 56 项同 run-id 证据：Migration 重复执行、严格 Schema/Upsert/exact-filter 断言、PostGIS Adapter 13/13、跨引擎 Golden 11/11、H3/GiST/time/parent 的 10K–10M 索引计划、4.2.3→4.5.0 扩展升级、SQLSTATE 23505 DDL rollback、backup SHA-256 与两表非空逻辑恢复指纹。`G4_DATABASE=PASS` 不替代托管 HA/PITR/Failover。
 
-尚未执行一次完整 run-scoped 认证：该命令会 truncate/reload 仅绑定 `127.0.0.1:55432` 的本地合成认证库，并创建/删除隔离生命周期数据库，正在等待用户明确批准。个别切片不能拼接成 G4 PASS。
+GitHub Actions run [`31642176184`](https://github.com/zhouwen-giser/h3-spatial-toolkit/actions/runs/31642176184) 的 2 个 quality、6 个 portable 和 1 个 browser job 全部成功，`G6_CROSS_PLATFORM=PASS`。绑定已认证实现提交 `cd3211f` 的 API runtime smoke 与托管数据库容器健康认证使 `G6_CONTAINER_RUNTIME=PASS`；这两个子门禁仍不提升聚合 Deployment/Recovery。
 
-本轮并行完成了 API/CLI contract 强化、平台中立 Auth/Tenant 信任边界、真实三浏览器可访问性矩阵、可比较 Benchmark gate、CI 跨平台定义和镜像 digest/scan。G5/G6/G7 仍按各自缺口保持 `PARTIAL/NOT_RUN/BLOCKED`，不会因本地实现或 Workflow 文件存在而升级。
+当前主 Work Item 切换到 `P1-SUPPLY-001`（`IN_PROGRESS/PARTIAL`）。API/PostgreSQL 镜像已绑定 `cd3211f` 并实际重扫，但 Docker Scout 仍报告 API 2 Critical + 2 High、PostgreSQL 1 Critical + 17 High，总计 3 Critical + 19 High；无 suppression，签名/provenance 未执行，因此 `G5_SBOM_IMAGE_SIGNING` 保持 `PARTIAL`。
 
 ## 门禁状态
 
@@ -38,24 +39,24 @@
 | G2 Browser/Accessibility | PASS | Chromium 151 / Firefox 153 / WebKit 26.5；9/9；Axe critical/serious 0 |
 | G3 Performance | PASS | Windows Node 22 同环境 median3 9/9 在 20% 阈值内；并发负载失败记录保留，静默独立复验通过；历史 Linux 明确 NOT_COMPARABLE |
 | G3 Load/Soak | NOT_RUN | 需要目标并发/长稳/故障注入环境和授权 |
-| G4 Database | PARTIAL | 严格切片通过；完整 run-scoped runner 等待重建本地合成认证库的明确授权 |
+| G4 Database | PASS | 已认证实现提交 `cd3211f` 的托管 run `31642261871`：同一 run-id 的镜像身份、断言、13/13 integration、10M 计划、升级/回滚、backup checksum 与逻辑恢复共 56 artifacts PASS |
 | G5 Auth/Tenant | PARTIAL | 本地 injected authenticator/Principal/Tenant/Scope fail closed；具体 IdP/JWKS/Gateway/持久隔离未完成 |
-| G5 Image/Signing | PARTIAL | source-label 绑定前扫描：API 2 Critical + 2 High，PostgreSQL 1 Critical + 17 High；总计 3 Critical + 19 High，阈值 FAIL；不能绑定当前 commit；签名/provenance NOT_RUN |
-| G6 Deployment/Recovery | PARTIAL | 本地布局、容器候选和 graceful shutdown 有切片；HA/PITR/Failover/Load 未认证 |
-| G6 Cross-platform | PARTIAL | Workflow 定义 Node/OS/arch/browser 矩阵；远端托管执行尚未全部成功 |
+| G5 Image/Signing | PARTIAL | 已认证实现提交 `cd3211f` 的扫描：API 2 Critical + 2 High，PostgreSQL 1 Critical + 17 High；总计 3 Critical + 19 High，阈值 FAIL；签名/provenance NOT_RUN |
+| G6 Container Runtime | PASS | 已认证实现提交 `cd3211f` 的 API image readiness/non-root/runtime hygiene PASS；独立 PostgreSQL runtime image 在完整 G4 中 healthy |
+| G6 Deployment/Recovery | PARTIAL | Container runtime 与 graceful shutdown 子门禁 PASS；双副本 rollout、HA/PITR/Failover/Load 未认证 |
+| G6 Cross-platform | PASS | 已认证实现提交 `cd3211f` 的托管 run `31642176184`：Ubuntu x64 quality、Windows x64/macOS arm64/Linux arm64 portable Node 22/24、Linux 三浏览器共 9/9 jobs PASS |
 | G7 Release Metadata | PASS | `acceptance:local` 已对 0.3.0/1.4.0 版本、Changelog 和 Gate policy 执行当前检查 |
 | G7 Release Package | NOT_RUN | 用户明确排除新 ZIP/Manifest/Checksum/Summary、解压 frozen install/static 和内容审计 |
-| G7 Production Release | BLOCKED | 依赖 G3 Load、完整 G4、具体 G5、G6、Owner 和批准链 |
+| G7 Production Release | BLOCKED | 依赖 G3 Load、具体 G5、G6 HA/Recovery、Owner 和批准链；G4 与跨平台 PASS 不解除这些条件 |
 
 ## 下一步
 
-1. 获得明确授权后执行一次完整 `P0-DB-CERT-001` run-scoped runner，并只按同一 run-id 的结果决定 G4。
-2. 固化当前 API/PostgreSQL 镜像最终 Scanner 计数和处置；达到策略阈值前 G5 image 不得 PASS。
-3. 在远端 PR 上执行并审阅 Linux/macOS/Windows、Node 22/24、x64/arm64 和 Browser jobs；Workflow 定义不算通过。
-4. 选定 OIDC/JWKS、Tenant persistence、Gateway 和 OTel 平台，完成目标环境认证。
-5. 在目标平台完成 Load/Soak、HA/PITR/Failover、签名/provenance、Owner/required checks 和生产批准。
-6. 每一轮修改均 commit 并 push；完成前验证最终 commit 已在远端分支/PR 可见。
+1. 处置已认证实现提交 `cd3211f` 镜像的 3 Critical + 19 High；达到政策阈值并完成 Registry 签名/provenance 前 G5 image 不得 PASS。
+2. 选定 OIDC/JWKS、Tenant persistence、Gateway 和 OTel 平台，完成目标环境认证。
+3. 在目标平台完成 Load/Soak、双副本 rollout、HA/PITR/Failover 和 RTO/RPO 演练。
+4. 配置并审阅 required checks、branch protection、Owner/批准链与正式发布流程。
+5. 每一轮修改均 commit 并 push；完成前验证最终 commit 已在远端分支/PR 可见。
 
 状态词汇：Gate 只使用 `PASS/PARTIAL/NOT_RUN/BLOCKED`；Work Item 只使用 `PLANNED/READY/IN_PROGRESS/REVIEW/COMPLETE_LOCAL/COMPLETE/DEFERRED/BLOCKED`。状态不能靠静态定义或历史证据升级。
 
-当前是等待远端 push/CI 固化的 `SOURCE_TEMPLATE_READY` 候选，不是 `PRODUCTION_READY`。
+当前分类是由已认证实现提交 `cd3211f` 的远端 CI 与数据库 run 支撑、并由后续纯治理提交同步的 `SOURCE_TEMPLATE_READY`，不是 `PRODUCTION_READY`。

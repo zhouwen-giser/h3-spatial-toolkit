@@ -45,7 +45,7 @@
 | 可观测性 | Fastify 结构化日志、认证头脱敏、低基数 Prometheus 指标 | OTel exporter、Trace、SLO、告警和审计 |
 | 安全 | 输入/结果限额、语义校验、脱敏、源码 SBOM/许可清单、缺省本地模式和 fail-closed 注入鉴权契约 | OIDC/JWKS 或 mTLS、持久租户隔离、Gateway rate limit、无未处置扫描项、镜像签名 |
 | 大任务 | 未实现 | Job API + Worker + 对象存储 |
-| 运行布局 | 26.0 MB production-only API deploy、non-root Dockerfile；本地 API/PostgreSQL 镜像已 build/scan，但 source-label 绑定前扫描以 3 Critical + 19 High 失败 | 绑定当前 commit 后重扫、处置漏洞、固定发布 digest 并完成集群运行认证 |
+| 运行布局 | 26.0 MB production-only API deploy、non-root Dockerfile；certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 API/PostgreSQL runtime PASS，扫描以 3 Critical + 19 High 失败 | 处置漏洞、固定发布 digest/签名/provenance 并完成集群运行认证 |
 | OLAP/离线 | 未实现 | DuckDB/ClickHouse Adapter，按负载证据引入 |
 
 ## 3. 范围与边界
@@ -587,7 +587,7 @@ Job 状态固定为 `PENDING → RUNNING → SUCCEEDED | FAILED | CANCELLED | EX
 
 `resolution` 用于显式契约与查询，无论 Cell 已编码 Resolution 都必须保留。生产增加约束 `h3_get_resolution(cell)=resolution`。固定 Res 7 的 Parent 表达式索引只适用于 `resolution≥7` 的行。
 
-`aggregate.sql` 的 `ON CONFLICT` 目标已与四列主键完全一致，并有事务内重复执行、更新值和回滚断言。完整 G4 仍需由一次 run-scoped runner 将该断言与最终镜像、规模、计划和恢复证据绑定。
+`aggregate.sql` 的 `ON CONFLICT` 目标已与四列主键完全一致，并有事务内重复执行、更新值和回滚断言。certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的完整 run-scoped runner 已将该断言与最终镜像、规模、计划和恢复证据绑定，G4 PASS。
 
 ### 13.4 两阶段空间查询
 
@@ -816,7 +816,7 @@ Web Demo 是验收工作台，不是生产 GIS 平台：
 | Geometry | Polygon/Hole/MultiPolygon、Antimeridian、Pole、Pentagon | 已实现基线 |
 | API | Schema、端点、稳定错误、限额、脱敏、readiness、metrics | 已实现并有 abuse/telemetry tests |
 | CLI/IO | 参数、JSON/CSV、编译产物冒烟 | 已实现 |
-| PostGIS Integration | 扩展版本、Point/Hierarchy/Boundary/Polygon、EXPLAIN、恢复 | 13/13 Adapter 和严格切片已执行；完整 run-scoped runner 待授权，G4 PARTIAL |
+| PostGIS Integration | 扩展版本、Point/Hierarchy/Boundary/Polygon、EXPLAIN、恢复 | certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 run `31642261871`：13/13 Adapter、10M 计划、升级/回滚和逻辑恢复完整执行，G4 PASS |
 | Cross-engine Golden | h3-js vs h3-pg | Node Fixture/再生校验与 DB 对照 11/11 PASS |
 | Browser/A11y | WebGL、强制 SVG、键盘/Focus、缩放、Axe | Chromium/Firefox/WebKit 9/9 PASS |
 | Load/Soak | 并发、内存、P95/P99 | 待目标环境执行 |
@@ -871,7 +871,7 @@ docker compose up -d --build
 2. ~~在 Docker 环境执行扩展、迁移、Smoke、13 个 PostGIS Adapter 和 11 个跨引擎 Golden 用例。~~ 已完成本地切片。
 3. ~~为 `spatial_feature.h3_cell` 与 Point Geometry/Resolution 一致性增加约束和负例。~~ 已完成本地切片。
 4. ~~为 H3 B-tree、Geometry GiST、时间和 Parent 索引增加可失败计划断言，并执行至 10M。~~ 已完成本地切片。
-5. 在明确授权后执行一次完整 run-scoped runner，把最终镜像身份、上述断言、逻辑备份/恢复指纹和生命周期结果绑定为同一份 G4 证据。
+5. ~~执行完整 run-scoped runner，把最终镜像身份、上述断言、逻辑备份/恢复指纹和生命周期结果绑定为同一份 G4 证据。~~ certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的托管 run `31642261871` 已完成。
 
 ### P1：生产上线前
 

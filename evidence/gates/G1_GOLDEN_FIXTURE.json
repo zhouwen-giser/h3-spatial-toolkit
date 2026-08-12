@@ -21,6 +21,6 @@
   ],
   "notes": [
     "G1 PASS certifies the current frozen h3-js golden fixture check.",
-    "A prior real local database slice passed cross-engine Golden 11/11 and the PostGIS Adapter 13/13; those results are recorded under G4_DATABASE=PARTIAL and do not substitute for the complete run-scoped G4 certification."
+    "A prior real local database slice passed cross-engine Golden 11/11 and the PostGIS Adapter 13/13; certified implementation revision cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3 subsequently repeated those checks inside the complete run-scoped G4_DATABASE=PASS certification."
   ]
 }
