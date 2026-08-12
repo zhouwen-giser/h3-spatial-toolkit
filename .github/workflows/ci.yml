@@ -33,7 +33,7 @@ jobs:
       - if: matrix.node == 24
         run: pnpm benchmark:diagnostic
       - if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: local-quality-node-${{ matrix.node }}
           path: |
@@ -44,7 +44,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
       - if: matrix.node == 24
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: benchmark-node-24
           path: benchmark/results/latest.json
@@ -110,7 +110,7 @@ jobs:
       - name: Run API and CLI acceptance
         run: corepack pnpm acceptance:api
       - if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: portable-${{ matrix.runner.name }}-node-${{ matrix.node }}
           path: |
@@ -140,7 +140,7 @@ jobs:
       - name: Run browser functional and accessibility acceptance
         run: corepack pnpm acceptance:browser
       - if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: browser-acceptance
           path: output/acceptance/browser/
