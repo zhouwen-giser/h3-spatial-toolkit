@@ -1,0 +1,41 @@
+{
+  "gate": "G4_DATABASE",
+  "status": "PARTIAL",
+  "executedAt": "2026-08-12T19:11:22Z",
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "docker": "29.6.1",
+    "compose": "5.2.0",
+    "postgres": "17",
+    "postgis": "3.5.2",
+    "h3": "4.5.0",
+    "h3Postgis": "4.5.0"
+  },
+  "commands": ["docker compose up -d --build", "pnpm acceptance:database"],
+  "summary": {
+    "composeHealthy": true,
+    "migrationRepeated": true,
+    "fixtureRows": 10000,
+    "crossEngineTestsPassed": 11,
+    "crossEngineTestsFailed": 0,
+    "explainArtifacts": 2,
+    "restoredFeatureRows": 10000
+  },
+  "artifacts": [
+    "output/acceptance/environment/capabilities.json",
+    "output/acceptance/database/extension-versions.txt",
+    "output/acceptance/database/smoke-test.log",
+    "output/acceptance/database/fixture-load.log",
+    "output/acceptance/database/integration-test.log",
+    "output/acceptance/database/explain-two-stage.txt",
+    "output/acceptance/database/explain-aggregate.txt",
+    "output/acceptance/database/backup-SHA256SUMS.txt",
+    "output/acceptance/database/restore-verification.txt"
+  ],
+  "notes": [
+    "PostgreSQL was bound to 127.0.0.1:55432; no production or external database was used.",
+    "This is not G4 PASS. Cell/resolution and geometry/cell invariants, executable aggregate upsert, enforced H3/time/parent index plans, 100K/1M/10M scale, logical source/restore checksums, and upgrade/rollback remain unverified."
+  ]
+}

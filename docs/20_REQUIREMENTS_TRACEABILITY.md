@@ -13,7 +13,7 @@
 | FR-007 Flow | `packages/flow` | `analysis.test.ts`、API hardening tests | G1/G2 | PASS；endpoint/总点限额已实现 |
 | FR-008 IO/Schema | `packages/io`、`schema/` | `cli-io.test.ts` | G0/G1 | PASS |
 | FR-009 REST/CLI/SDK | `apps/api`、`apps/cli` | API hardening tests、API/CLI Smoke | G2 | 0.2.0 CONTRACT PASS |
-| FR-010 PostGIS | `packages/postgis`、`database/` | Golden/integration/smoke/EXPLAIN/restore | G4 | Node Fixture/runner PASS；DB NOT RUN |
+| FR-010 PostGIS | `packages/postgis`、`database/` | Golden/integration/smoke/EXPLAIN/restore | G4 | Docker 10K/Golden 11/11/basic restore PASS；完整 G4 PARTIAL |
 | FR-011 Web Demo | `apps/web-demo` | build/browser matrix | G2/G6 | Build PASS；浏览器矩阵待完成 |
 | FR-012 Benchmark | `benchmark/` | 10K–10M | G3 | BASELINE PASS |
 
@@ -21,7 +21,7 @@
 
 | NFR | 目标 | 设计/任务 | Gate | 当前状态 |
 |---|---|---|---|---|
-| NFR-001 正确性 | 坐标、Resolution、跨引擎一致 | 8–10、13 章；P0-GOLDEN | G1/G4 | Node PASS；DB NOT_RUN |
+| NFR-001 正确性 | 坐标、Resolution、跨引擎一致 | 8–10、13 章；P0-GOLDEN | G1/G4 | Node PASS；DB Golden 11/11；严格 Schema/规模 PARTIAL |
 | NFR-002 性能 | 10K–10M 可复验、同步有上限 | 14 章；P1-LOAD-SOAK | G3 | 单机 PASS；同步限额 PASS；Load NOT_RUN |
 | NFR-003 可用性 | API 99.9% 目标、优雅停机 | 7、15、17 章；P1-DEPLOY-DR | G6/G7 | PARTIAL |
 | NFR-004 安全 | 身份、租户、限额、供应链 | 16 章；P1-SEC-OBS/P1-SUPPLY | G5 | 限额/脱敏 PASS；身份/租户/供应链平台 BLOCKED |

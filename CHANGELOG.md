@@ -22,10 +22,17 @@
 
 - 软件版本维持 `0.2.0`，Codex 模板版本升级到 `1.3.0`。
 - 本地验收聚合更多静态、契约和供应链检查。
+- Docker build context 排除宿主依赖与临时产物，构建阶段显式使用非交互 CI 模式。
+- 数据库认证 runner 兼容 Windows Git Bash，并将认证 PostgreSQL 安全绑定到 `127.0.0.1:55432`。
+
+### Fixed
+
+- 修复宿主 `node_modules` 进入 Docker context 导致镜像内 `pnpm install` 中止。
+- 修复 Git Bash 将容器 `/dev/stdin` 路径重写为 Windows 路径，以及 runner 误连宿主 PostgreSQL 5432 的问题。
 
 ### Known limitations
 
-- 数据库、真实浏览器、OIDC/租户、负载/Soak、HA/恢复、跨平台、外部 CI 和签名仍未认证。
+- 数据库仅完成 10K/Golden/基础恢复的 PARTIAL 认证；真实浏览器矩阵、OIDC/租户、负载/Soak、HA/恢复、完整跨平台、外部 CI 和签名仍未认证。
 
 ## [0.2.0] - 2026-08-12
 

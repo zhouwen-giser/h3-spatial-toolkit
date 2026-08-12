@@ -1,4 +1,5 @@
 FROM node:24-bookworm-slim AS build
+ENV CI=true
 WORKDIR /app
 RUN corepack enable
 COPY . .

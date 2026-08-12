@@ -8,11 +8,11 @@
 
 | Work Item | 领域 | 当前状态 | 需要的环境/决策 | 目标 Gate |
 |---|---|---|---|---|
-| P0-DB-CERT-001 | PostGIS/H3 实机认证 | READY/NOT_RUN | Docker + Compose；客户端来自认证镜像 | G4 |
-| P0-GOLDEN-001 | h3-js/h3-pg 跨引擎 | PARTIAL | Node Fixture/runner PASS；Docker DB 执行待办 | G4 |
+| P0-DB-CERT-001 | PostGIS/H3 实机认证 | REVIEW/PARTIAL | 10K/Golden/basic restore PASS；Schema/index/scale/lifecycle 待补 | G4 |
+| P0-GOLDEN-001 | h3-js/h3-pg 跨引擎 | COMPLETE_LOCAL | Windows Docker DB 11/11；完整 G4 由 P0 其余项阻塞 | G4 |
 | P1-DB-MIGRATION-001 | Migration/upgrade/rollback | NOT_RUN | Target DB | G4/G6 |
 | P1-API-HARDEN-001 | Error/limits/semantic validation | COMPLETE_LOCAL | 已完成；生产负载仍由独立项认证 | G1/G2 |
-| P1-BROWSER-A11Y-001 | 浏览器/WebGL/SVG/A11y | NOT_RUN | Real browsers | G2 |
+| P1-BROWSER-A11Y-001 | 浏览器/WebGL/SVG/A11y | NOT_RUN | Chromium-family 已安装；Firefox/WebKit 与 harness 待办 | G2 |
 | P1-WEB-BUNDLE-001 | Web Demo 分包/预算 | REVIEW_LOCAL | 动态拆包与预算 PASS；真实 Browser 待办 | G2/G3 |
 | P1-SHELL-QUALITY-001 | Shell 静态/运行矩阵 | PARTIAL | Bash baseline PASS；shellcheck + target shells 待办 | G0/G6 |
 | P1-LOAD-SOAK-001 | 并发/Soak/Chaos | NOT_RUN | Target cluster | G3/G6 |

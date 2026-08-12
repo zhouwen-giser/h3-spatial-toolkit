@@ -3,9 +3,10 @@
   "project": "h3-spatial-toolkit",
   "templateVersion": "1.3.0",
   "baselineVersion": "0.2.0",
-  "updatedAt": "2026-08-12T00:00:00Z",
-  "activePhase": "I1_DATABASE_CERTIFICATION",
+  "updatedAt": "2026-08-12T19:11:22Z",
+  "activePhase": "I0_DATABASE_CERTIFICATION",
   "activeWorkItem": "P0-DB-CERT-001",
+  "activeWorkItemStatus": "REVIEW",
   "completedWorkItems": [
     "MVP-CORE-001",
     "MVP-GEOMETRY-001",
@@ -45,7 +46,7 @@
     "G2_BROWSER_ACCESSIBILITY": "NOT_RUN",
     "G3_PERFORMANCE": "PASS",
     "G3_LOAD_SOAK": "NOT_RUN",
-    "G4_DATABASE": "NOT_RUN",
+    "G4_DATABASE": "PARTIAL",
     "G5_SECURITY": "PARTIAL",
     "G5_DEPENDENCY_AUDIT": "PASS",
     "G5_LICENSE_POLICY": "PASS",
@@ -65,8 +66,8 @@
     "G7_PRODUCTION_RELEASE": "BLOCKED"
   },
   "blockers": [
-    "Docker and Compose are required to certify PostgreSQL H3/PostGIS; database client tools run inside the certified image",
-    "No real browser runtime is available for WebGL, SVG fallback and accessibility certification",
+    "G4 is PARTIAL: 10K smoke, 11 cross-engine cases and basic restore pass; schema invariants, enforced index plans, 100K/1M/10M scale and upgrade/rollback remain",
+    "Chromium-family browsers are installed but Firefox/WebKit and a repeatable accessibility harness are not yet available",
     "OIDC issuer, tenant model and deployment platform are not selected",
     "HA, backup/PITR, image scanning and signing require a target platform"
   ]

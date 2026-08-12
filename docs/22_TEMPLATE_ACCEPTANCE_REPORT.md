@@ -1,12 +1,12 @@
 # Codex 开发模板验收报告
 
-执行日期：2026-08-12。软件版本：`0.2.0`；模板版本：`1.3.0`。
+执行日期：2026-08-13。软件版本：`0.2.0`；模板版本：`1.3.0`。
 
 ## 总结
 
 **模板状态：`SOURCE_TEMPLATE_READY`；项目生产状态：`BLOCKED`。**
 
-当前 Work 环境已真实完成本地源码、契约、API/CLI、单机性能和可复现源码包门禁。没有 Docker/Compose、真实浏览器、OIDC/tenant、目标集群、HA/恢复平台和 Registry/signing，因此相关状态严格保留为 `NOT_RUN/BLOCKED/PARTIAL`。数据库客户端已收敛到认证镜像内，不要求本地安装 psql。
+当前 Work 环境已真实完成本地源码、契约、API/CLI 和单机性能历史门禁；2026-08-13 又在 Windows Docker Desktop 执行了数据库 10K/Golden/基础恢复切片。严格 G4、真实完整浏览器矩阵、OIDC/tenant、目标集群、HA/恢复平台和 Registry/signing 仍严格保留为 `NOT_RUN/BLOCKED/PARTIAL`。数据库客户端来自认证镜像，不要求本地安装 psql。
 
 ## 模板内容验收
 
@@ -45,7 +45,7 @@
 |---|---|---|
 | G2 Browser/WebGL/A11y | NOT_RUN | 无 Chromium/Firefox/WebKit；需真实浏览器证据 |
 | G3 Load/Soak/Chaos | NOT_RUN | 需目标集群、SLO、代表性数据和故障注入授权 |
-| G4 PostgreSQL H3/PostGIS | NOT_RUN | 当前环境无 Docker/Compose；镜像内客户端尚无法执行 |
+| G4 PostgreSQL H3/PostGIS | PARTIAL | PostGIS 3.5.2、H3/H3 PostGIS 4.5.0、10K、Golden 11/11、基础恢复通过；严格 Schema/index/scale/upgrade 尚未完成 |
 | G5 Auth/Tenant | BLOCKED | OIDC issuer、tenant model、Gateway 未选定 |
 | G5 SBOM/Image scan/sign | PARTIAL | Source SBOM PASS；镜像清单、Scanner、Registry、签名身份和 provenance NOT_RUN |
 | G6 Container/HA/Recovery | NOT_RUN | 需部署与数据库平台、RTO/RPO 和演练 |

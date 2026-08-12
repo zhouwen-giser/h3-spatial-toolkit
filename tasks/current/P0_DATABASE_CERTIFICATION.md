@@ -1,6 +1,6 @@
 # P0-DB-CERT-001 — PostgreSQL H3/PostGIS 目标环境认证
 
-状态：`READY/NOT_RUN`（Golden、证据脚本、EXPLAIN 和恢复流程已预置；当前 Work 环境缺少 Docker，不能伪造执行）。
+状态：`REVIEW/PARTIAL`（2026-08-13 Windows Docker 实机已通过当前 10K/Golden/基础恢复自动化；严格 G4 剩余项尚未完成）。
 
 ## 目标
 
@@ -44,4 +44,13 @@
 
 ## 阻塞处理
 
-如果环境缺少 Docker/Compose 或不允许 native extension build，保持 `NOT_RUN` 并报告具体缺口，不改用静态检查声称通过。当前环境探测结果为 Docker/Compose 不可用。
+如果环境缺少 Docker/Compose 或不允许 native extension build，保持 `NOT_RUN` 并报告具体缺口，不改用静态检查声称通过。
+
+## 2026-08-13 实机进展
+
+- Windows x64 / Node 22.14.0 / Docker 29.6.1 / Compose 5.2.0。
+- API/PostgreSQL 镜像构建和容器健康检查通过；PostgreSQL 仅发布到 `127.0.0.1:55432`。
+- PostGIS 3.5.2、H3 4.5.0、H3 PostGIS 4.5.0；Migration 重复执行和 SQL Smoke 通过。
+- 10K Fixture、两类 EXPLAIN、跨引擎 Golden 11/11、custom-format dump/restore 10K count 通过。
+- 已知剩余：Schema 写入一致性、真实 aggregate Upsert、查询正确性/计划断言、100K/1M/10M、源/恢复逻辑 checksum、升级/回滚。
+- 当前证据：`evidence/gates/G4_DATABASE.json`；详细运行日志在忽略提交的 `output/acceptance/database/`。
