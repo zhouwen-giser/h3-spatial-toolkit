@@ -1,10 +1,24 @@
 {
   "gate": "G6_GRACEFUL_SHUTDOWN_LOCAL",
   "status": "PASS",
-  "executedAt": "2026-08-12T07:04:00Z",
-  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "executedAt": "2026-08-12T21:04:55Z",
+  "environment": {
+    "node": "v22.14.0",
+    "pnpm": "11.16.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
   "commands": ["pnpm acceptance:api"],
-  "summary": { "signal": "SIGTERM", "deadlineMs": 3000, "exitCode": 0, "exitSignal": null },
+  "summary": {
+    "shutdownTrigger": "test-ipc",
+    "deadlineMs": 3000,
+    "exitCode": 0,
+    "exitSignal": null
+  },
   "artifacts": ["apps/api/src/server.ts", "scripts/api-cli-smoke.mjs"],
-  "notes": ["Loopback compiled server only; container drain, rolling update and shutdown under load remain NOT_RUN"]
+  "notes": [
+    "The Windows x64 run exercised the shared graceful-shutdown path through the test-ipc trigger.",
+    "The smoke script sends SIGTERM on POSIX, but that POSIX branch was not executed in this run.",
+    "Loopback compiled server only; container drain, rolling update and shutdown under load remain NOT_RUN."
+  ]
 }

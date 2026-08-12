@@ -1,5 +1,5 @@
 import type { GeoPoint, ResolutionInput } from "@h3-toolkit/core";
-import { resolveResolution } from "@h3-toolkit/core";
+import { assertCell, resolveResolution } from "@h3-toolkit/core";
 import { Pool, type PoolConfig } from "pg";
 import type * as GeoJSON from "geojson";
 
@@ -27,8 +27,9 @@ export class PostgisH3Adapter {
     return result.rows.map((row) => row.cell);
   }
 
-  async cellToGeometry(cell: string): Promise<GeoJSON.Polygon> {
-    const result = await this.pool.query<{ geometry: GeoJSON.Polygon }>(
+  async cellToGeometry(cell: string): Promise<GeoJSON.Polygon | GeoJSON.MultiPolygon> {
+    assertCell(cell);
+    const result = await this.pool.query<{ geometry: GeoJSON.Polygon | GeoJSON.MultiPolygon }>(
       "SELECT ST_AsGeoJSON(h3_cell_to_boundary_geometry($1::h3index))::json AS geometry",
       [cell]
     );
@@ -36,6 +37,7 @@ export class PostgisH3Adapter {
   }
 
   async cellToParent(cell: string, input: ResolutionInput): Promise<string> {
+    assertCell(cell);
     const result = await this.pool.query<{ parent: string }>(
       "SELECT h3_cell_to_parent($1::h3index, $2)::text AS parent",
       [cell, resolveResolution(input)]

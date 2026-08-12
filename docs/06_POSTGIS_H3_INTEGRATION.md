@@ -1,6 +1,6 @@
 # PostGIS / H3 集成设计
 
-模板 v1.3.0 已预置可再生的 `h3-cross-engine-golden.json`、PostGIS 对照测试、10K 认证 Fixture、两类 EXPLAIN 和 custom-format Backup/Restore。`pnpm acceptance:database` 会把证据写入 `output/acceptance/database/`；当前 Work 环境没有 Docker，因此这些数据库结果仍为 `NOT_RUN`。
+模板 v1.4.0 已预置可再生的 `h3-cross-engine-golden.json`、PostGIS 对照测试、严格 Schema/Upsert 断言、四类索引计划探针、10K–10M 规模、扩展升级、DDL 回滚和带逻辑指纹的 custom-format Backup/Restore。`pnpm acceptance:database` 会把每次完整执行写入独立的 `output/acceptance/database/runs/<run-id>/`。2026-08-13 已认证实现提交 `cd3211f` 的 GitHub-hosted run `31642261871` 已将全部检查收敛为同一 run-id 的 56 个 artifacts，G4 `PASS`。
 
 ## 职责边界
 
@@ -42,4 +42,4 @@ SQL 在 `database/sql/two_stage_filter.sql`。此模式只有在 feature 表保�
 - `packages/postgis` 提供 Point↔H3、Geometry→Cells、Cell→Geometry Adapter。
 - `scripts/verify-database.sh` 运行 SQL smoke 与 Vitest integration。
 
-当前执行环境无 Docker/Compose，因此上述数据库门禁状态为 **NOT RUN (environment blocked)**。认证脚本使用容器内的 `psql/pg_dump/pg_restore`，本地 psql 不再是执行前提。
+认证脚本使用容器内的 `psql/pg_dump/pg_restore`，本地 psql 不是执行前提。Windows 本地数据库仅绑定 loopback 端口 `55432`；托管 workflow 使用一次性 Compose 数据库和显式 reset guard。已认证实现提交 `cd3211f` 的完整 G4 已通过；它仍不能声明托管 HA/PITR/Failover 或生产就绪。

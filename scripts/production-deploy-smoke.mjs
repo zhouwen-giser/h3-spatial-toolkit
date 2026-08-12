@@ -4,6 +4,7 @@ import { mkdtemp, readFile, readdir, rm, stat } from "node:fs/promises";
 import { createServer } from "node:net";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
+import { pnpmInvocation } from "./platform-command.mjs";
 
 const root = resolve(process.cwd());
 const directory = await mkdtemp(resolve(tmpdir(), "h3-api-production-deploy-"));
@@ -18,16 +19,20 @@ try {
   assert.doesNotMatch(dockerfile, /COPY --from=build \/app\/node_modules/);
   assert.match(dockerfile, /^USER node$/m);
 
-  execFileSync(
-    "pnpm",
-    ["--config.inject-workspace-packages=true", "--filter", "@h3-toolkit/api", "deploy", "--prod", directory],
-    {
-      cwd: root,
-      encoding: "utf8",
-      stdio: "pipe",
-      maxBuffer: 16 * 1024 * 1024
-    }
-  );
+  const invocation = pnpmInvocation([
+    "--config.inject-workspace-packages=true",
+    "--filter",
+    "@h3-toolkit/api",
+    "deploy",
+    "--prod",
+    directory
+  ]);
+  execFileSync(invocation.command, invocation.args, {
+    cwd: root,
+    encoding: "utf8",
+    stdio: "pipe",
+    maxBuffer: 16 * 1024 * 1024
+  });
   const packageJson = JSON.parse(await readFile(resolve(directory, "package.json"), "utf8"));
   assert.equal(packageJson.name, "@h3-toolkit/api");
   await stat(resolve(directory, "dist/server.js"));
@@ -38,10 +43,19 @@ try {
 
   const port = await freePort();
   let logs = "";
+  const serverEnvironment = {
+    ...process.env,
+    NODE_ENV: "production",
+    HOST: "127.0.0.1",
+    PORT: String(port)
+  };
+  if (process.platform === "win32") serverEnvironment.H3_TOOLKIT_TEST_SHUTDOWN_IPC = "YES";
   child = spawn(process.execPath, ["dist/server.js"], {
     cwd: directory,
-    env: { ...process.env, NODE_ENV: "production", HOST: "127.0.0.1", PORT: String(port) },
-    stdio: ["ignore", "pipe", "pipe"]
+    env: serverEnvironment,
+    // Keep IPC exclusive to the Windows fallback. On POSIX the real
+    // SIGTERM path must be able to drain and exit without an open channel.
+    stdio: process.platform === "win32" ? ["ignore", "pipe", "pipe", "ipc"] : ["ignore", "pipe", "pipe"]
   });
   child.stdout.on("data", (chunk) => {
     logs += chunk;
@@ -53,7 +67,8 @@ try {
   const readiness = await response.json();
   assert.equal(readiness.status, "ready");
   const exitPromise = new Promise((resolveExit) => child.once("exit", (code, signal) => resolveExit({ code, signal })));
-  child.kill("SIGTERM");
+  if (process.platform === "win32") child.send("shutdown");
+  else child.kill("SIGTERM");
   const outcome = await Promise.race([
     exitPromise,
     new Promise((resolveTimeout) => setTimeout(() => resolveTimeout(null), 3000))
@@ -69,6 +84,7 @@ try {
         devDependenciesExcluded: true,
         readiness: true,
         gracefulShutdown: true,
+        shutdownTrigger: process.platform === "win32" ? "test-ipc" : "SIGTERM",
         containerUser: "node"
       },
       null,

@@ -9,6 +9,17 @@ import { cellsToGeoJSON, geometryToCells, type Polygonal } from "@h3-toolkit/geo
 import { parseCsv, toCsv } from "@h3-toolkit/io";
 import { gridDisk } from "@h3-toolkit/neighborhood";
 
+const aggregateOperations = [
+  "count",
+  "sum",
+  "average",
+  "min",
+  "max",
+  "weightedAverage",
+  "density",
+  "distinctCount"
+] as const satisfies readonly AggregateOperation[];
+
 export interface CliIo {
   read(path: string): Promise<string>;
   write(path: string, content: string): Promise<void>;
@@ -45,13 +56,9 @@ export async function runCli(argv: string[], io: CliIo = defaultIo): Promise<num
         result = gridDisk(stringArg(args, "cell"), args.k === undefined ? 1 : Number(args.k));
         break;
       case "aggregate": {
+        const operation = aggregateOperationArg(args);
         const records = await readRecords(stringArg(args, "input"), io);
-        result = aggregate(
-          records,
-          (args.operation ?? "count") as AggregateOperation,
-          resolutionArg(args),
-          args.metric
-        );
+        result = aggregate(records, operation, resolutionArg(args), args.metric);
         break;
       }
       case "coverage": {
@@ -124,6 +131,14 @@ function numberArg(args: Record<string, string>, key: string): number {
 function resolutionArg(args: Record<string, string>): ResolutionInput {
   const value = stringArg(args, "resolution");
   return /^\d+$/.test(value) ? Number(value) : (value as ResolutionInput);
+}
+
+function aggregateOperationArg(args: Record<string, string>): AggregateOperation {
+  const operation = args.operation ?? "count";
+  if (!(aggregateOperations as readonly string[]).includes(operation)) {
+    throw new Error(`--operation must be one of ${aggregateOperations.join(", ")}`);
+  }
+  return operation as AggregateOperation;
 }
 
 async function readJson<T>(path: string, io: CliIo): Promise<T> {

@@ -2,7 +2,7 @@
 
 ## 1. 测试目标
 
-测试不仅证明算法正向输出，还要证明坐标、尺度、边界、兼容性、资源约束、安全、迁移、恢复和发布包的行为。每个 `PASS` 必须能定位到命令和证据。
+测试不仅证明算法正向输出，还要证明坐标、尺度、边界、兼容性、资源约束、安全、迁移、恢复和发布元数据的行为。每个 `PASS` 必须能定位到命令和证据。本轮用户明确排除了新源码包生成与解压复验，因此包门禁记为 `NOT_RUN`，不以历史包证据替代。
 
 ## 2. 测试层次
 
@@ -10,23 +10,24 @@
 |---|---|---:|---|
 | Project Contract/Docs/Repository | Node 本地 | 是 | PASS |
 | Format/Lint/Type | Node 本地 | 是 | PASS |
-| Unit/Geometry/Analysis/API/Golden/SBOM/Release Policy | Vitest | 是 | PASS：84 tests |
+| Unit/Geometry/Analysis/API/Auth/Golden/SBOM/Release Policy | Vitest | 是 | 当前相关 suites PASS；最终总数由聚合门禁固化 |
 | JSON Schema/OpenAPI Compatibility | Node/Ajv/Swagger Parser | 是 | PASS |
 | API/CLI compiled smoke | 本地 loopback | 是 | PASS |
-| Web bundle budget | Vite/Node | 是 | PASS；Browser 另行认证 |
+| Web bundle budget | Vite/Node | 是 | PASS |
+| Real Browser/WebGL/SVG/A11y | Playwright/Axe | 是 | Chromium 151、Firefox 153、WebKit 26.5：9/9 PASS |
 | Local telemetry controls | Fastify inject/loopback | 是 | PASS；平台 OTel/SLO 另行认证 |
-| Golden fixture generation | h3-js/Node | 是 | PASS；PostGIS 对照待 Docker |
+| Golden fixture generation | h3-js/Node/PostGIS | 是 | Node 再生 PASS；本地 DB 对照 11/11 PASS |
 | SBOM/License graph | pnpm/CycloneDX | 是 | PASS；镜像供应链待 Registry |
 | Production API layout | pnpm deploy/loopback | 是 | PASS：26.0 MB、无 devDependencies；Docker runtime 待办 |
 | Dependency/License/Secret | 本地 lock/install tree | 是 | PASS |
-| Benchmark 10K–10M | 当前 Linux/Node | 是 | PASS |
-| Release metadata/reproducibility/content | Node/zip/unzip | 是 | PASS |
-| PostgreSQL H3/PostGIS | Docker/Compose；镜像内 psql | 否 | `NOT_RUN` |
-| Real Browser/WebGL/A11y | Chromium/Firefox/WebKit | 否 | `NOT_RUN` |
-| OIDC/Tenant/Rate Limit | 身份与 Gateway | 否 | `BLOCKED` |
+| Benchmark 10K–10M | 当前 Windows/Node 22 | 是 | 1 warmup + 3 recorded、median gate；静默 exact-environment 9/9 PASS；并发 FAIL 留档；历史 Linux NOT_COMPARABLE |
+| Release metadata | Node | 是 | 当前 0.3.0/1.4.0 `acceptance:local` 检查 PASS |
+| Release package/reproducibility/content | Node/zip/unzip | 用户排除 | `NOT_RUN`；历史 0.2.0/1.3.0 不适用 |
+| PostgreSQL H3/PostGIS | Docker/Compose；镜像内 psql | 是（托管认证） | certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的完整 run-scoped runner PASS；G4 `PASS` |
+| Auth/Tenant/Rate Limit | 注入边界 + 身份/Gateway | 部分 | 本地 fail-closed contract PASS；具体 OIDC/JWKS/Gateway `PARTIAL` |
 | Load/Soak/Chaos | 目标集群 | 否 | `NOT_RUN` |
 | HA/Backup/PITR/Upgrade | 目标数据库平台 | 否 | `NOT_RUN` |
-| Cross-platform | Linux/macOS/Windows + Node 22/24 | 仅 Linux Node 24 | `PARTIAL` |
+| Cross-platform | Linux/macOS/Windows + Node 22/24 + x64/arm64 | Windows 本地 + GitHub-hosted runners | certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 quality/portable/browser 9/9 jobs PASS；G6 Cross-platform `PASS` |
 
 ## 3. 本地自动门禁
 
@@ -41,11 +42,12 @@ pnpm check:golden
 pnpm check:supply-chain
 pnpm audit --prod
 pnpm acceptance:api
+pnpm acceptance:browser
 pnpm benchmark
-pnpm check:release
+pnpm check:release-metadata
 ```
 
-`acceptance:local` 聚合第一组质量检查；数据库、浏览器、身份和部署测试不能被其替代。
+`acceptance:local` 聚合第一组质量检查；数据库、具体 IdP/Gateway、跨平台和部署测试不能被其替代。`pnpm check:release` 仍可作为独立能力保留，但本轮按用户要求不执行，也不属于当前完成条件。
 
 ## 4. Contract Tests
 
@@ -64,15 +66,15 @@ Benchmark 负责单机算法回归；Load/Soak 负责并发、GC、连接池、�
 
 ### 安全
 
-本地可执行依赖审计、License Policy、Secret Pattern 和恶意输入单测。OIDC、跨租户、Gateway rate limit、容器/基础镜像扫描必须在目标环境执行。
+本地可执行依赖审计、License Policy、Secret Pattern、恶意输入和注入 authenticator/Principal/Scope/Tenant 契约测试。具体 OIDC/JWKS、持久跨租户、Gateway rate limit 和 Registry 签名仍必须在目标环境执行；镜像扫描虽可本地执行，但只有达到批准阈值或有正式处置才能通过。
 
 ### 可访问性
 
-目标至少覆盖键盘操作、Focus、语义标签、对比度、缩放、无 WebGL fallback、Chromium/Firefox/WebKit。Vite build 通过不等于浏览器或 WCAG 验收通过。
+当前矩阵覆盖键盘操作、Focus、语义标签、200% 等效缩放、正常 WebGL、强制 SVG fallback、Chromium/Firefox/WebKit，并用 Axe 阻断 critical/serious。Vite build 通过仍不等于浏览器或 WCAG 验收通过；本轮 PASS 来自真实 Playwright 9/9 运行。
 
 ### 数据库
 
-必须真实执行 Migration、幂等、rollback/forward-fix、Golden、EXPLAIN、备份恢复和扩展升级。SQL 静态检查只能提前发现结构错误。
+必须真实执行 Migration、幂等、rollback/forward-fix、Golden、EXPLAIN、规模、备份恢复和扩展升级。个别切片通过不等于一份完整 run-scoped G4 证据；已认证实现提交 `cd3211f` 的托管严格 runner 已在一次性 Compose 数据库完整执行并通过。SQL 静态检查只能提前发现结构错误，未来数据库相关实现变更仍须以新 run-id 重新认证。
 
 ## 6. Flaky Test Policy
 

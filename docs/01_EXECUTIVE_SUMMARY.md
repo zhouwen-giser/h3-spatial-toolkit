@@ -1,6 +1,6 @@
 # 执行摘要
 
-> 本文记录初始 `0.1.0` 方案和 42-test PoC；当前 `0.2.0` / 模板 `1.3.0` 状态以 `PROJECT_STATUS.md` 与 `docs/22_TEMPLATE_ACCEPTANCE_REPORT.md` 为准。
+> 本文记录初始 `0.1.0` 方案和 42-test PoC；当前 `0.3.0` / 模板 `1.4.0` 状态以 `PROJECT_STATUS.md` 与 `docs/22_TEMPLATE_ACCEPTANCE_REPORT.md` 为准。
 
 ## 结论
 

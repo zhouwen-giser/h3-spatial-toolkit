@@ -44,7 +44,7 @@ pnpm check:shell
 - 设计包含 FR-001–FR-012，追踪矩阵覆盖全部需求。
 - Markdown fence、相对链接和必需章节有效，不引用瞬态沙箱路径。
 - JSON、版本、依赖 pin、任务结构、Secret/key 文件、可执行脚本和 PASS 证据引用符合仓库政策。
-- Bash 脚本通过 syntax、portable shebang、strict-mode、可执行位和危险构造基线；ShellCheck 缺失时保持专项任务 `PARTIAL`。
+- Bash 脚本通过 syntax、portable shebang、strict-mode、可执行位和危险构造基线；本轮已通过固定 Docker `ShellCheck v0.11.0` 实际执行。若其它环境缺少 native/Docker ShellCheck，必须保持对应专项结果 `PARTIAL/NOT_RUN`。
 
 子门禁：`G0_TEMPLATE_CONTRACT`、`G0_DOCUMENTATION`、`G0_REPOSITORY_POLICY`、`G0_SHELL_BASELINE`。证据为命令、环境、退出码和 `evidence/gates/` 摘要。
 
@@ -174,7 +174,7 @@ pnpm acceptance:database
 | Scale | 100K/1M/10M 数据量测试 |
 | Lifecycle | 备份、恢复、扩展升级和回滚演练 |
 
-当前脚本已经自动化扩展版本、Migration 重复执行、Smoke、10K Fixture、两类 EXPLAIN、Cross-engine Golden、custom-format backup/restore 和 count/checksum 证据。10K 仅用于流程认证，100K/1M/10M 性能与升级/回滚仍需目标环境补充。
+当前脚本已经自动化扩展版本、Migration 重复执行、Smoke、严格 Schema/Upsert/exact-filter 断言、Cross-engine Golden、Adapter integration、10K/100K/1M/10M 四类索引计划、扩展升级、事务 DDL rollback、custom-format backup SHA-256 与两表逻辑恢复指纹。certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的托管 run `31642261871` 已完整执行并以 56 个 artifacts 通过 G4；未来数据库相关源码变化仍必须以新 run-id 重新认证。
 
 证据目录建议：
 
@@ -190,7 +190,7 @@ output/acceptance/database/
 └── restore-rehearsal.md
 ```
 
-当前模板默认状态为 `NOT_RUN`，只有实际输出上述证据后才能改为 PASS。
+只有同一待认证实现 revision 的 run-id 实际输出上述证据且聚合命令退出码为 0 才能改为 PASS；本轮 certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 PASS 不替代 G6 HA/PITR/Failover。
 
 ## 8. G5 — Security and Supply Chain
 
@@ -221,7 +221,7 @@ pnpm check:supply-chain
 
 阻断条件：Critical/High 漏洞无处置、鉴权绕过、跨租户访问、Secret 泄露或资源限额可被绕过。
 
-`G5_SBOM_SOURCE` 只证明 npm 生产依赖的 CycloneDX 1.6 inventory 与许可清单可再生。`G5_AUTH_TENANT`、基础/发行镜像扫描、签名与 provenance 必须在真实 IdP/Gateway/Registry 环境执行；源码 SBOM PASS 时 `G5_SBOM_IMAGE_SIGNING` 仍只能是 `PARTIAL`。
+`G5_SBOM_SOURCE` 只证明 npm 生产依赖的 CycloneDX 1.6 inventory 与许可清单可再生。certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的容器重扫真实得到 3 Critical + 19 High 且阈值 FAIL；源码绑定和 runtime PASS 不能提升 `G5_SBOM_IMAGE_SIGNING`。`G5_AUTH_TENANT`、漏洞消除/正式处置、签名与 provenance 必须在真实 IdP/Gateway/Registry 边界完成；源码 SBOM PASS 时 `G5_SBOM_IMAGE_SIGNING` 仍只能是 `PARTIAL`。
 
 ## 9. G6 — Deployment and Recovery
 
@@ -238,19 +238,21 @@ pnpm check:supply-chain
 
 G6 至少拆分为 `G6_CONTAINER_RUNTIME`、`G6_HA_RECOVERY`、`G6_CROSS_PLATFORM`。Compose/YAML 静态存在只允许聚合状态为 `PARTIAL`，不能产生任何运行子门禁 PASS。
 
+`G6_CONTAINER_RUNTIME` 只证明绑定 certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 API 镜像可启动/readiness、non-root 与 runtime hygiene，以及同一认证实现 revision 的独立 PostgreSQL 镜像在 G4 中 healthy。`G6_CROSS_PLATFORM` 只证明仓库声明的 Node/OS/arch/browser 矩阵实际成功；Firefox 无 WebGL 时允许并必须验证真实 SVG fallback。二者 PASS 不证明漏洞策略、签名、多架构镜像发布、rolling drain、HA、PITR 或 failover，聚合 `G6_DEPLOYMENT` 仍可保持 `PARTIAL`。
+
 `G6_GRACEFUL_SHUTDOWN_LOCAL` 通过编译产物 loopback smoke 验证 SIGTERM 后 Fastify close、3 秒内干净退出和 exit code 0；它不证明容器 drain、负载下关停或滚动发布。
 
 `G6_PRODUCTION_LAYOUT_LOCAL` 验证 production-only pnpm deploy、无开发依赖、50 MiB 预算、non-root Dockerfile、readiness 和关停；它不证明 Docker 镜像能够在目标平台构建或通过扫描。
 
-## 10. G7 — Source Package 与 Production Release
+## 10. G7 — Release Metadata、可选 Source Package 与 Production Release
 
-当前 Work 可执行源码包门禁：
+当前 Work 的必要交付门禁为版本/Changelog/Gate metadata 与 Git commit/push/远端可见性：
 
 ```bash
-pnpm check:release
+pnpm check:release-metadata
 ```
 
-`G7_RELEASE_METADATA` 校验 Project/Template 版本、Changelog、源码必需 Gate 和生产 Gate 不得绕过。`G7_RELEASE_PACKAGE` 验证固定时间戳 Manifest、文件 SHA-256、两次 ZIP 哈希一致、Release Summary、解压完整性和敏感/生成文件排除。二者只允许状态升级为 `SOURCE_TEMPLATE_READY`。
+`G7_RELEASE_METADATA` 校验 Project/Template 版本、Changelog、源码必需 Gate 和生产 Gate 不得绕过。本轮用户要求每轮修改 commit/push，并明确排除新源码 ZIP、`SHA256SUMS`、`MANIFEST.json`、Release Summary、全新目录解压/frozen install/static 和交付包内容审计；因此 `G7_RELEASE_PACKAGE=NOT_RUN` 且不阻塞本轮 `SOURCE_TEMPLATE_READY` 判断。仓库可以保留 `pnpm check:release` 作为未来可选能力，但历史包证据不得认证当前版本。
 
 `G7_PRODUCTION_RELEASE` 只在 G0–G6 全部 PASS 后评审。Production Release 必须另外包含：
 
@@ -260,14 +262,14 @@ pnpm check:release
 - 测试、覆盖率、Benchmark、数据库、Security、Deployment 证据。
 - SBOM、License Notice、镜像 digest/签名。
 - Release Notes、已知限制、Runbook、Rollback。
-- `MANIFEST.json` 与 `SHA256SUMS`。
+- 与正式分发介质匹配的完整性/来源元数据；如果未来选择源码包交付，再按批准流程生成 Manifest 与 Checksum。
 
 最终判定：
 
 | 状态 | 含义 |
 |---|---|
 | `PASS` | 本 Gate 全部验收项通过 |
-| `CONDITIONAL_PASS` | 仅允许受控环境，条件和截止时间明确 |
+| `PARTIAL` | 仅部分验收项已有真实证据；剩余条件、适用环境和截止时间写入说明，不计为 PASS |
 | `NOT_RUN` | 环境/时机未执行，不代表失败或通过 |
 | `BLOCKED` | 已知失败或上游 Gate 未满足 |
 

@@ -1,19 +1,31 @@
 {
   "gate": "G1_LOCAL_QUALITY",
   "status": "PASS",
-  "executedAt": "2026-08-12T06:58:50Z",
-  "environment": { "node": "v24.14.0", "pnpm": "11.16.0", "platform": "linux", "arch": "x64", "cpus": 9 },
+  "executedAt": "2026-08-12T21:02:57Z",
+  "environment": {
+    "node": "v22.14.0",
+    "pnpm": "11.16.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 16
+  },
   "commands": ["pnpm acceptance:local"],
   "summary": {
-    "testsPassed": 84,
-    "testsSkipped": 11,
-    "testSuitesSkipped": 1,
-    "skippedReason": "PostGIS integration cases require TEST_DATABASE_URL from the unavailable Docker/Compose environment",
-    "lineCoveragePercent": 94.33,
+    "testFilesPassed": 16,
+    "testFilesSkipped": 1,
+    "testsPassed": 131,
+    "testsSkipped": 13,
+    "skippedReason": "PostGIS integration cases require TEST_DATABASE_URL and remain governed by G4 rather than G1",
+    "statementCoveragePercent": 93.16,
+    "lineCoveragePercent": 94.73,
     "branchCoveragePercent": 89,
+    "functionCoveragePercent": 93.58,
     "builds": 11,
     "knownProductionVulnerabilities": 0
   },
   "artifacts": ["coverage/coverage-summary.json"],
-  "notes": ["PostGIS integration remains skipped and does not count as a database PASS; local psql is not required"]
+  "notes": [
+    "16 test files passed and 1 PostGIS integration file was skipped; 131 tests passed and 13 database tests were skipped.",
+    "The database skips do not count as a G4 PASS; local psql is not required for the separately governed database runner."
+  ]
 }

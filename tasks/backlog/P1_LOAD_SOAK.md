@@ -1,6 +1,6 @@
 # P1-LOAD-SOAK-001 — 并发、长稳与故障注入
 
-状态：`NOT_RUN`。
+Work 状态：`READY`。Gate 状态：`NOT_RUN`。
 
 ## 目标
 

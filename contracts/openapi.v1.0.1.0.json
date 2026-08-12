@@ -1,0 +1,445 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "H3 Spatial Toolkit API",
+    "version": "0.1.0",
+    "description": "Standard H3 indexing, geometry, aggregation, coverage and flow API."
+  },
+  "components": {
+    "schemas": {}
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "engine": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/h3/index": {
+      "post": {
+        "tags": ["Index"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["points", "resolution"],
+                "properties": {
+                  "points": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 100000,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["longitude", "latitude"],
+                      "properties": {
+                        "longitude": {
+                          "type": "number",
+                          "minimum": -180,
+                          "maximum": 180
+                        },
+                        "latitude": {
+                          "type": "number",
+                          "minimum": -90,
+                          "maximum": 90
+                        }
+                      }
+                    }
+                  },
+                  "resolution": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 15
+                      },
+                      {
+                        "type": "string",
+                        "enum": ["GLOBAL", "REGIONAL", "CITY", "DISTRICT", "STREET", "FINE"]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/h3/polygon/cover": {
+      "post": {
+        "tags": ["Geometry"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["geometry", "resolution"],
+                "properties": {
+                  "geometry": {
+                    "type": "object",
+                    "required": ["type", "coordinates"]
+                  },
+                  "resolution": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 15
+                      },
+                      {
+                        "type": "string",
+                        "enum": ["GLOBAL", "REGIONAL", "CITY", "DISTRICT", "STREET", "FINE"]
+                      }
+                    ]
+                  },
+                  "output": {
+                    "type": "string",
+                    "enum": ["cells", "geojson"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/h3/neighbors": {
+      "post": {
+        "tags": ["Neighborhood"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["cell"],
+                "properties": {
+                  "cell": {
+                    "type": "string"
+                  },
+                  "radius": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1000,
+                    "default": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/h3/aggregate": {
+      "post": {
+        "tags": ["Analysis"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["records", "operation", "resolution"],
+                "properties": {
+                  "records": {
+                    "type": "array",
+                    "maxItems": 100000,
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "operation": {
+                    "type": "string",
+                    "enum": ["count", "sum", "average", "min", "max", "weightedAverage", "density", "distinctCount"]
+                  },
+                  "resolution": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 15
+                      },
+                      {
+                        "type": "string",
+                        "enum": ["GLOBAL", "REGIONAL", "CITY", "DISTRICT", "STREET", "FINE"]
+                      }
+                    ]
+                  },
+                  "metric": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/h3/coverage": {
+      "post": {
+        "tags": ["Analysis"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["area", "resolution"],
+                "properties": {
+                  "area": {
+                    "type": "object",
+                    "required": ["type", "coordinates"]
+                  },
+                  "resolution": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 15
+                      },
+                      {
+                        "type": "string",
+                        "enum": ["GLOBAL", "REGIONAL", "CITY", "DISTRICT", "STREET", "FINE"]
+                      }
+                    ]
+                  },
+                  "visitedCells": {
+                    "type": "array",
+                    "maxItems": 100000,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "visitedPoints": {
+                    "type": "array",
+                    "maxItems": 100000,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["longitude", "latitude"],
+                      "properties": {
+                        "longitude": {
+                          "type": "number",
+                          "minimum": -180,
+                          "maximum": 180
+                        },
+                        "latitude": {
+                          "type": "number",
+                          "minimum": -90,
+                          "maximum": 90
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/h3/flow": {
+      "post": {
+        "tags": ["Analysis"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["trajectories", "resolution"],
+                "properties": {
+                  "trajectories": {
+                    "type": "array",
+                    "maxItems": 100000,
+                    "items": {
+                      "type": "array",
+                      "minItems": 2,
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": ["longitude", "latitude"],
+                        "properties": {
+                          "longitude": {
+                            "type": "number",
+                            "minimum": -180,
+                            "maximum": 180
+                          },
+                          "latitude": {
+                            "type": "number",
+                            "minimum": -90,
+                            "maximum": 90
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "resolution": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 15
+                      },
+                      {
+                        "type": "string",
+                        "enum": ["GLOBAL", "REGIONAL", "CITY", "DISTRICT", "STREET", "FINE"]
+                      }
+                    ]
+                  },
+                  "directed": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {}
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Index"
+    },
+    {
+      "name": "Geometry"
+    },
+    {
+      "name": "Neighborhood"
+    },
+    {
+      "name": "Analysis"
+    }
+  ]
+}

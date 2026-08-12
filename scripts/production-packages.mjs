@@ -1,9 +1,11 @@
 import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { pnpmInvocation } from "./platform-command.mjs";
 
 export async function collectProductionPackages(root = process.cwd()) {
-  const output = execFileSync("pnpm", ["list", "-r", "--prod", "--depth", "Infinity", "--json"], {
+  const invocation = pnpmInvocation(["list", "-r", "--prod", "--depth", "Infinity", "--json"]);
+  const output = execFileSync(invocation.command, invocation.args, {
     cwd: root,
     encoding: "utf8",
     maxBuffer: 32 * 1024 * 1024

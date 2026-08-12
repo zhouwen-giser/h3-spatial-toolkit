@@ -2,7 +2,7 @@
   "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:82244561-0251-5f6d-81b9-2f124844c4bc",
+  "serialNumber": "urn:uuid:7bf0ad24-950f-59bd-8b8e-52e078273833",
   "version": 1,
   "metadata": {
     "timestamp": "2026-08-12T00:00:00.000Z",
@@ -17,11 +17,11 @@
     },
     "component": {
       "type": "application",
-      "bom-ref": "pkg:npm/h3-spatial-toolkit@0.2.0",
+      "bom-ref": "pkg:npm/h3-spatial-toolkit@0.3.0",
       "group": "",
       "name": "h3-spatial-toolkit",
-      "version": "0.2.0",
-      "purl": "pkg:npm/h3-spatial-toolkit@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/h3-spatial-toolkit@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -374,11 +374,11 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/aggregation@0.3.0",
       "group": "h3-toolkit",
       "name": "aggregation",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/aggregation@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -393,11 +393,11 @@
     },
     {
       "type": "application",
-      "bom-ref": "pkg:npm/%40h3-toolkit/api@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/api@0.3.0",
       "group": "h3-toolkit",
       "name": "api",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/api@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/api@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -412,11 +412,11 @@
     },
     {
       "type": "application",
-      "bom-ref": "pkg:npm/%40h3-toolkit/cli@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/cli@0.3.0",
       "group": "h3-toolkit",
       "name": "cli",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/cli@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/cli@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -431,11 +431,11 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/%40h3-toolkit/core@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/core@0.3.0",
       "group": "h3-toolkit",
       "name": "core",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/core@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/core@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -450,11 +450,11 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/coverage@0.3.0",
       "group": "h3-toolkit",
       "name": "coverage",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/coverage@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -469,11 +469,11 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/%40h3-toolkit/flow@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/flow@0.3.0",
       "group": "h3-toolkit",
       "name": "flow",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/flow@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/flow@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -488,11 +488,11 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/geometry@0.3.0",
       "group": "h3-toolkit",
       "name": "geometry",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/geometry@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -507,11 +507,11 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/%40h3-toolkit/io@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/io@0.3.0",
       "group": "h3-toolkit",
       "name": "io",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/io@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/io@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -526,11 +526,11 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/neighborhood@0.3.0",
       "group": "h3-toolkit",
       "name": "neighborhood",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/neighborhood@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -545,11 +545,11 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/%40h3-toolkit/postgis@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/postgis@0.3.0",
       "group": "h3-toolkit",
       "name": "postgis",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/postgis@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/postgis@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -564,11 +564,11 @@
     },
     {
       "type": "application",
-      "bom-ref": "pkg:npm/%40h3-toolkit/web-demo@0.2.0",
+      "bom-ref": "pkg:npm/%40h3-toolkit/web-demo@0.3.0",
       "group": "h3-toolkit",
       "name": "web-demo",
-      "version": "0.2.0",
-      "purl": "pkg:npm/%40h3-toolkit/web-demo@0.2.0",
+      "version": "0.3.0",
+      "purl": "pkg:npm/%40h3-toolkit/web-demo@0.3.0",
       "licenses": [
         {
           "expression": "Apache-2.0"
@@ -2926,87 +2926,87 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/aggregation@0.3.0",
       "dependsOn": [
-        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/%40h3-toolkit/core@0.3.0",
         "pkg:npm/h3-js@4.5.0"
       ]
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/api@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/api@0.3.0",
       "dependsOn": [
         "pkg:npm/%40fastify/swagger-ui@6.1.1",
         "pkg:npm/%40fastify/swagger@9.8.1",
-        "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
-        "pkg:npm/%40h3-toolkit/core@0.2.0",
-        "pkg:npm/%40h3-toolkit/coverage@0.2.0",
-        "pkg:npm/%40h3-toolkit/flow@0.2.0",
-        "pkg:npm/%40h3-toolkit/geometry@0.2.0",
-        "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+        "pkg:npm/%40h3-toolkit/aggregation@0.3.0",
+        "pkg:npm/%40h3-toolkit/core@0.3.0",
+        "pkg:npm/%40h3-toolkit/coverage@0.3.0",
+        "pkg:npm/%40h3-toolkit/flow@0.3.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.3.0",
+        "pkg:npm/%40h3-toolkit/neighborhood@0.3.0",
         "pkg:npm/fastify@5.11.3",
         "pkg:npm/h3-js@4.5.0"
       ]
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/cli@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/cli@0.3.0",
       "dependsOn": [
-        "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
-        "pkg:npm/%40h3-toolkit/core@0.2.0",
-        "pkg:npm/%40h3-toolkit/coverage@0.2.0",
-        "pkg:npm/%40h3-toolkit/flow@0.2.0",
-        "pkg:npm/%40h3-toolkit/geometry@0.2.0",
-        "pkg:npm/%40h3-toolkit/io@0.2.0",
-        "pkg:npm/%40h3-toolkit/neighborhood@0.2.0"
+        "pkg:npm/%40h3-toolkit/aggregation@0.3.0",
+        "pkg:npm/%40h3-toolkit/core@0.3.0",
+        "pkg:npm/%40h3-toolkit/coverage@0.3.0",
+        "pkg:npm/%40h3-toolkit/flow@0.3.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.3.0",
+        "pkg:npm/%40h3-toolkit/io@0.3.0",
+        "pkg:npm/%40h3-toolkit/neighborhood@0.3.0"
       ]
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/core@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/core@0.3.0",
       "dependsOn": []
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/coverage@0.3.0",
       "dependsOn": [
-        "pkg:npm/%40h3-toolkit/core@0.2.0",
-        "pkg:npm/%40h3-toolkit/geometry@0.2.0"
+        "pkg:npm/%40h3-toolkit/core@0.3.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.3.0"
       ]
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/flow@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/flow@0.3.0",
       "dependsOn": [
-        "pkg:npm/%40h3-toolkit/core@0.2.0"
+        "pkg:npm/%40h3-toolkit/core@0.3.0"
       ]
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/geometry@0.3.0",
       "dependsOn": []
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/io@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/io@0.3.0",
       "dependsOn": [
-        "pkg:npm/%40h3-toolkit/core@0.2.0"
+        "pkg:npm/%40h3-toolkit/core@0.3.0"
       ]
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/neighborhood@0.3.0",
       "dependsOn": [
-        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/%40h3-toolkit/core@0.3.0",
         "pkg:npm/h3-js@4.5.0"
       ]
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/postgis@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/postgis@0.3.0",
       "dependsOn": [
-        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/%40h3-toolkit/core@0.3.0",
         "pkg:npm/pg@8.23.0"
       ]
     },
     {
-      "ref": "pkg:npm/%40h3-toolkit/web-demo@0.2.0",
+      "ref": "pkg:npm/%40h3-toolkit/web-demo@0.3.0",
       "dependsOn": [
         "pkg:npm/%40deck.gl/core@9.3.9",
         "pkg:npm/%40deck.gl/layers@9.3.9",
         "pkg:npm/%40deck.gl/react@9.3.9",
-        "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.3.0",
         "pkg:npm/h3-js@4.5.0",
         "pkg:npm/react-dom@19.2.8",
         "pkg:npm/react@19.2.8"
@@ -3280,7 +3280,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:npm/h3-spatial-toolkit@0.2.0",
+      "ref": "pkg:npm/h3-spatial-toolkit@0.3.0",
       "dependsOn": [
         "pkg:npm/%40deck.gl/core@9.3.9",
         "pkg:npm/%40deck.gl/layers@9.3.9",
@@ -3300,17 +3300,17 @@
         "pkg:npm/%40floating-ui/core@1.8.0",
         "pkg:npm/%40floating-ui/dom@1.8.0",
         "pkg:npm/%40floating-ui/utils@0.2.12",
-        "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
-        "pkg:npm/%40h3-toolkit/api@0.2.0",
-        "pkg:npm/%40h3-toolkit/cli@0.2.0",
-        "pkg:npm/%40h3-toolkit/core@0.2.0",
-        "pkg:npm/%40h3-toolkit/coverage@0.2.0",
-        "pkg:npm/%40h3-toolkit/flow@0.2.0",
-        "pkg:npm/%40h3-toolkit/geometry@0.2.0",
-        "pkg:npm/%40h3-toolkit/io@0.2.0",
-        "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
-        "pkg:npm/%40h3-toolkit/postgis@0.2.0",
-        "pkg:npm/%40h3-toolkit/web-demo@0.2.0",
+        "pkg:npm/%40h3-toolkit/aggregation@0.3.0",
+        "pkg:npm/%40h3-toolkit/api@0.3.0",
+        "pkg:npm/%40h3-toolkit/cli@0.3.0",
+        "pkg:npm/%40h3-toolkit/core@0.3.0",
+        "pkg:npm/%40h3-toolkit/coverage@0.3.0",
+        "pkg:npm/%40h3-toolkit/flow@0.3.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.3.0",
+        "pkg:npm/%40h3-toolkit/io@0.3.0",
+        "pkg:npm/%40h3-toolkit/neighborhood@0.3.0",
+        "pkg:npm/%40h3-toolkit/postgis@0.3.0",
+        "pkg:npm/%40h3-toolkit/web-demo@0.3.0",
         "pkg:npm/%40loaders.gl/core@4.4.4",
         "pkg:npm/%40loaders.gl/images@4.4.4",
         "pkg:npm/%40loaders.gl/loader-utils@4.4.4",

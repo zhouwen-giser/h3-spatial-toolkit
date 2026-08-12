@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-12T19:55:53.867Z",
+  "methodology": {
+    "mode": "diagnostic",
+    "warmupRuns": 0,
+    "recordedRuns": 1,
+    "statistic": "single"
+  },
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 16,
+    "h3Js": "4.5.0",
+    "cpuModel": "11th gen intel(r) core(tm) i7-11800h @ 2.30ghz",
+    "osRelease": "10.0.26200",
+    "memoryBucket": "16-31GiB"
+  },
+  "pointToH3": [
+    {
+      "records": 10000,
+      "durationMs": 52.52,
+      "recordsPerSecond": 190420,
+      "microsecondsPerRecord": 5.25,
+      "rssDeltaMb": 5.6,
+      "uniqueCells": 10000,
+      "checksum": 777629
+    },
+    {
+      "records": 100000,
+      "durationMs": 141.47,
+      "recordsPerSecond": 706853,
+      "microsecondsPerRecord": 1.41,
+      "rssDeltaMb": 9.57,
+      "uniqueCells": 26095,
+      "checksum": 7772288
+    },
+    {
+      "records": 1000000,
+      "durationMs": 1299.21,
+      "recordsPerSecond": 769700,
+      "microsecondsPerRecord": 1.3,
+      "rssDeltaMb": 1.78,
+      "uniqueCells": 26095,
+      "checksum": 77705513
+    },
+    {
+      "records": 10000000,
+      "durationMs": 14101.67,
+      "recordsPerSecond": 709136,
+      "microsecondsPerRecord": 1.41,
+      "rssDeltaMb": -4.48,
+      "uniqueCells": 26095,
+      "checksum": 777037763
+    }
+  ],
+  "aggregation": [
+    {
+      "records": 1000000,
+      "durationMs": 1466.08,
+      "recordsPerSecond": 682090,
+      "rssDeltaMb": 0.23,
+      "groups": 3815,
+      "total": 1000000
+    },
+    {
+      "records": 10000000,
+      "durationMs": 16661.34,
+      "recordsPerSecond": 600192,
+      "rssDeltaMb": 0.27,
+      "groups": 3815,
+      "total": 10000000
+    }
+  ],
+  "polygonToCells": [
+    {
+      "name": "small",
+      "resolution": 9,
+      "cells": 64,
+      "durationMs": 14.08
+    },
+    {
+      "name": "medium",
+      "resolution": 9,
+      "cells": 25945,
+      "durationMs": 136.35
+    },
+    {
+      "name": "large",
+      "resolution": 9,
+      "cells": 647905,
+      "durationMs": 1941.57
+    }
+  ],
+  "guidance": {
+    "nodeInMemoryCeiling": "Use streaming/chunking from 1M records; move repeatable shared queries or datasets beyond 10M to PostgreSQL/OLAP.",
+    "interpretation": "Throughput is machine-specific. Batch limits are governed by memory, response size and timeout, not only H3 computation speed."
+  },
+  "gate": {
+    "status": "NOT_COMPARABLE",
+    "correctness": {
+      "status": "PASS",
+      "failures": []
+    },
+    "performance": {
+      "status": "NOT_COMPARABLE",
+      "environmentKey": "node=v22.14.0;platform=win32;arch=x64;cpus=16;h3Js=4.5.0;cpuModel=11th gen intel(r) core(tm) i7-11800h @ 2.30ghz;osRelease=10.0.26200;memoryBucket=16-31GiB",
+      "baselineId": null,
+      "tolerancePercent": 20,
+      "reason": "Historical single-sample result is diagnostic and cannot certify the performance gate.",
+      "comparisons": [
+        {
+          "scenario": "pointToH3:10000",
+          "baselineDurationMs": 60.31,
+          "actualDurationMs": 52.52,
+          "allowedDurationMs": 72.37,
+          "durationChangePercent": -12.92,
+          "baselineRecordsPerSecond": 165823,
+          "actualRecordsPerSecond": 190420,
+          "throughputChangePercent": 14.83,
+          "status": "PASS"
+        },
+        {
+          "scenario": "pointToH3:100000",
+          "baselineDurationMs": 174.16,
+          "actualDurationMs": 141.47,
+          "allowedDurationMs": 208.99,
+          "durationChangePercent": -18.77,
+          "baselineRecordsPerSecond": 574171,
+          "actualRecordsPerSecond": 706853,
+          "throughputChangePercent": 23.11,
+          "status": "PASS"
+        },
+        {
+          "scenario": "pointToH3:1000000",
+          "baselineDurationMs": 2143.67,
+          "actualDurationMs": 1299.21,
+          "allowedDurationMs": 2572.4,
+          "durationChangePercent": -39.39,
+          "baselineRecordsPerSecond": 466490,
+          "actualRecordsPerSecond": 769700,
+          "throughputChangePercent": 65,
+          "status": "PASS"
+        },
+        {
+          "scenario": "pointToH3:10000000",
+          "baselineDurationMs": 20755.74,
+          "actualDurationMs": 14101.67,
+          "allowedDurationMs": 24906.89,
+          "durationChangePercent": -32.06,
+          "baselineRecordsPerSecond": 481794,
+          "actualRecordsPerSecond": 709136,
+          "throughputChangePercent": 47.19,
+          "status": "PASS"
+        },
+        {
+          "scenario": "aggregation:1000000",
+          "baselineDurationMs": 1705.09,
+          "actualDurationMs": 1466.08,
+          "allowedDurationMs": 2046.11,
+          "durationChangePercent": -14.02,
+          "baselineRecordsPerSecond": 586481,
+          "actualRecordsPerSecond": 682090,
+          "throughputChangePercent": 16.3,
+          "status": "PASS"
+        },
+        {
+          "scenario": "aggregation:10000000",
+          "baselineDurationMs": 14416.18,
+          "actualDurationMs": 16661.34,
+          "allowedDurationMs": 17299.42,
+          "durationChangePercent": 15.57,
+          "baselineRecordsPerSecond": 693665,
+          "actualRecordsPerSecond": 600192,
+          "throughputChangePercent": -13.48,
+          "status": "PASS"
+        },
+        {
+          "scenario": "polygonToCells:small",
+          "baselineDurationMs": 12.93,
+          "actualDurationMs": 14.08,
+          "allowedDurationMs": 15.52,
+          "durationChangePercent": 8.89,
+          "status": "PASS"
+        },
+        {
+          "scenario": "polygonToCells:medium",
+          "baselineDurationMs": 119,
+          "actualDurationMs": 136.35,
+          "allowedDurationMs": 142.8,
+          "durationChangePercent": 14.58,
+          "status": "PASS"
+        },
+        {
+          "scenario": "polygonToCells:large",
+          "baselineDurationMs": 1783.7,
+          "actualDurationMs": 1941.57,
+          "allowedDurationMs": 2140.44,
+          "durationChangePercent": 8.85,
+          "status": "PASS"
+        }
+      ],
+      "regressions": []
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "gate": "G6_CROSS_PLATFORM",
+  "status": "PASS",
+  "executedAt": "2026-08-12T21:26:12Z",
+  "environment": {
+    "sourceRevision": "cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3",
+    "provider": "GitHub-hosted runners"
+  },
+  "commands": [
+    "pnpm acceptance:local && pnpm acceptance:api",
+    "portable acceptance subset on Windows x64, macOS arm64 and Linux arm64 with Node 22 and 24",
+    "pnpm acceptance:browser"
+  ],
+  "summary": {
+    "workflowRunId": 31642176184,
+    "startedAt": "2026-08-12T21:21:56Z",
+    "completedAt": "2026-08-12T21:26:12Z",
+    "jobsPassed": 9,
+    "jobsFailed": 0,
+    "quality": ["ubuntu-x64-node-22", "ubuntu-x64-node-24"],
+    "portable": [
+      "windows-x64-node-22",
+      "windows-x64-node-24",
+      "macos-arm64-node-22",
+      "macos-arm64-node-24",
+      "linux-arm64-node-22",
+      "linux-arm64-node-24"
+    ],
+    "browser": ["ubuntu-x64-node-24-chromium-firefox-webkit"]
+  },
+  "artifacts": ["https://github.com/zhouwen-giser/h3-spatial-toolkit/actions/runs/31642176184"],
+  "notes": [
+    "All nine jobs completed successfully against the exact source revision.",
+    "The portable jobs performed frozen install, environment capture, contract/docs/repository/release checks, format, lint, Golden, source supply-chain, typecheck, tests, build, contracts, licenses, production audit and API/CLI acceptance.",
+    "This gate does not certify container multi-architecture publication, required-check policy or branch protection."
+  ]
+}

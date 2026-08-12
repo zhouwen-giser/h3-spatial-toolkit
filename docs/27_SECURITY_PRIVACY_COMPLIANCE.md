@@ -52,4 +52,4 @@ H3 Cell 仍能反推出近似位置，不能因为使用 Cell 而自动视为非
 
 ## 6. 状态声明
 
-当前 G5=`PARTIAL`。本地 audit/146-component license/source SBOM/secret、同步资源门禁、错误/日志脱敏和指标标签测试可以在本 Work 环境真实执行；Auth/Tenant、container SBOM/Image scan/signing/provenance、数据治理和目标平台安全测试均保留为待办。
+当前 G5=`PARTIAL`。本地 npm audit 为 0；Source SBOM 为 145 components / 134 external packages；License 检查覆盖 146 production packages；同步资源门禁、错误/日志脱敏、指标标签和平台中立 Auth contract 已真实执行。已认证实现提交 `cd3211f` 的容器 SBOM/扫描为 API 2 Critical + 2 High、PostgreSQL 1 Critical + 17 High，合计 3 Critical + 19 High，阈值 FAIL；源码绑定和 runtime PASS 不提升安全 Gate。具体 IdP/Tenant、镜像漏洞处置、signing/provenance、数据治理和目标平台安全测试仍保留为待办。

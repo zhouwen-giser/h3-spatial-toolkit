@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-12T19:54:43.999Z",
+  "methodology": {
+    "mode": "diagnostic",
+    "warmupRuns": 0,
+    "recordedRuns": 1,
+    "statistic": "single"
+  },
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 16,
+    "h3Js": "4.5.0",
+    "cpuModel": "11th gen intel(r) core(tm) i7-11800h @ 2.30ghz",
+    "osRelease": "10.0.26200",
+    "memoryBucket": "16-31GiB"
+  },
+  "pointToH3": [
+    {
+      "records": 10000,
+      "durationMs": 60.31,
+      "recordsPerSecond": 165823,
+      "microsecondsPerRecord": 6.03,
+      "rssDeltaMb": 5.06,
+      "uniqueCells": 10000,
+      "checksum": 777629
+    },
+    {
+      "records": 100000,
+      "durationMs": 174.16,
+      "recordsPerSecond": 574171,
+      "microsecondsPerRecord": 1.74,
+      "rssDeltaMb": 9.61,
+      "uniqueCells": 26095,
+      "checksum": 7772288
+    },
+    {
+      "records": 1000000,
+      "durationMs": 2143.67,
+      "recordsPerSecond": 466490,
+      "microsecondsPerRecord": 2.14,
+      "rssDeltaMb": 1.83,
+      "uniqueCells": 26095,
+      "checksum": 77705513
+    },
+    {
+      "records": 10000000,
+      "durationMs": 20755.74,
+      "recordsPerSecond": 481794,
+      "microsecondsPerRecord": 2.08,
+      "rssDeltaMb": -5.29,
+      "uniqueCells": 26095,
+      "checksum": 777037763
+    }
+  ],
+  "aggregation": [
+    {
+      "records": 1000000,
+      "durationMs": 1705.09,
+      "recordsPerSecond": 586481,
+      "rssDeltaMb": -0.11,
+      "groups": 3815,
+      "total": 1000000
+    },
+    {
+      "records": 10000000,
+      "durationMs": 14416.18,
+      "recordsPerSecond": 693665,
+      "rssDeltaMb": 0.45,
+      "groups": 3815,
+      "total": 10000000
+    }
+  ],
+  "polygonToCells": [
+    {
+      "name": "small",
+      "resolution": 9,
+      "cells": 64,
+      "durationMs": 12.93
+    },
+    {
+      "name": "medium",
+      "resolution": 9,
+      "cells": 25945,
+      "durationMs": 119
+    },
+    {
+      "name": "large",
+      "resolution": 9,
+      "cells": 647905,
+      "durationMs": 1783.7
+    }
+  ],
+  "guidance": {
+    "nodeInMemoryCeiling": "Use streaming/chunking from 1M records; move repeatable shared queries or datasets beyond 10M to PostgreSQL/OLAP.",
+    "interpretation": "Throughput is machine-specific. Batch limits are governed by memory, response size and timeout, not only H3 computation speed."
+  },
+  "gate": {
+    "status": "NOT_COMPARABLE",
+    "correctness": {
+      "status": "PASS",
+      "failures": []
+    },
+    "performance": {
+      "status": "NOT_COMPARABLE",
+      "environmentKey": "node=v22.14.0;platform=win32;arch=x64;cpus=16;h3Js=4.5.0;cpuModel=11th gen intel(r) core(tm) i7-11800h @ 2.30ghz;osRelease=10.0.26200;memoryBucket=16-31GiB",
+      "baselineId": null,
+      "tolerancePercent": 20,
+      "comparisons": [],
+      "regressions": [],
+      "reason": "No baseline matches every declared environment field."
+    }
+  }
+}

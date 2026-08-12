@@ -3,7 +3,7 @@
 | 项目 | 内容 |
 |---|---|
 | 文档版本 | V1.0 |
-| 对应软件基线 | `h3-spatial-toolkit@0.2.0` |
+| 对应软件基线 | `h3-spatial-toolkit@0.3.0` |
 | 编制日期 | 2026-08-11 |
 | 架构结论 | TypeScript Toolkit + 可选 PostgreSQL/PostGIS/H3 Adapter |
 | 状态 | 详细设计基线；生产化扩展项单独标注 |
@@ -16,7 +16,7 @@
 2. Node.js、PostgreSQL/H3、Web Demo 和未来异步计算之间如何分工。
 3. 坐标、Resolution、Schema、错误和版本如何保持一致。
 4. 点索引、Polygon 覆盖、邻域、聚合、Coverage 和 Flow 的处理流程是什么。
-5. 当前 `0.2.0` 已实现什么，生产部署前还必须补什么。
+5. 当前 `0.3.0` 已实现什么，生产部署前还必须补什么。
 
 除特别标记为“目标设计”或“Phase 1/2”外，本文描述均与当前源码一致。
 
@@ -35,17 +35,17 @@
 
 ### 2.2 当前实现与目标状态
 
-| 能力 | 当前 `0.2.0` | 生产目标 |
+| 能力 | 当前 `0.3.0` | 生产目标 |
 |---|---|---|
 | TypeScript SDK | 已实现 | 保持纯函数和稳定 Schema |
-| REST/OpenAPI | 6 个业务端点、liveness/readiness、统一响应、请求 ID、同步限额已实现 | 增加身份、租户配额和异步作业 |
+| REST/OpenAPI | 6 个业务端点、liveness/readiness、统一响应、请求 ID、同步限额和平台中立鉴权边界已实现 | 接入具体 IdP/JWKS、租户持久化、Gateway 配额和异步作业 |
 | CLI | 已实现 6 个命令 | 增加流式输入、进度、分片输出 |
 | PostGIS/H3 | Docker/DDL/Adapter、Golden 与证据自动化已提供 | 在目标环境完成构建、迁移、计划、恢复和性能认证 |
-| Web Demo | deck.gl 动态加载 + SVG fallback + bundle budget 已实现 | 静态部署和浏览器矩阵验证 |
+| Web Demo | deck.gl 动态加载 + SVG fallback + bundle budget；Chromium/Firefox/WebKit 的 WebGL/SVG/键盘/缩放/Axe 9/9 通过 | 静态生产部署与跨平台持续矩阵 |
 | 可观测性 | Fastify 结构化日志、认证头脱敏、低基数 Prometheus 指标 | OTel exporter、Trace、SLO、告警和审计 |
-| 安全 | 输入/结果限额、语义校验、脱敏、源码 SBOM/许可清单 | OIDC/mTLS、租户隔离、Gateway rate limit、镜像扫描/签名 |
+| 安全 | 输入/结果限额、语义校验、脱敏、源码 SBOM/许可清单、缺省本地模式和 fail-closed 注入鉴权契约 | OIDC/JWKS 或 mTLS、持久租户隔离、Gateway rate limit、无未处置扫描项、镜像签名 |
 | 大任务 | 未实现 | Job API + Worker + 对象存储 |
-| 运行布局 | 26.0 MB production-only API deploy、non-root Dockerfile | 实际镜像 build/scan/digest 和集群运行认证 |
+| 运行布局 | 26.0 MB production-only API deploy、non-root Dockerfile；certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 API/PostgreSQL runtime PASS，扫描以 3 Critical + 19 High 失败 | 处置漏洞、固定发布 digest/签名/provenance 并完成集群运行认证 |
 | OLAP/离线 | 未实现 | DuckDB/ClickHouse Adapter，按负载证据引入 |
 
 ## 3. 范围与边界
@@ -448,6 +448,7 @@ Adapter 负责：
 | Body | 10 MiB | Gateway 与服务一致配置 |
 | Timeout | 30s | 同步接口硬超时；异步任务独立 |
 | Batch | 默认 100,000 | 按租户、端点和 Resolution 动态限制 |
+| 身份 | `local` 默认不启用；`required` 必须注入已验证 Principal 的 authenticator | 接入具体 OIDC/JWKS 或 mTLS，统一 Gateway 与服务端 Scope |
 
 目标成功响应：
 
@@ -456,7 +457,7 @@ Adapter 负责：
   "data": [],
   "meta": {
     "requestId": "01J...",
-    "toolkitVersion": "0.2.0",
+    "toolkitVersion": "0.3.0",
     "engine": "h3-js",
     "engineVersion": "4.5.0",
     "durationMs": 28.1,
@@ -496,7 +497,7 @@ Adapter 负责：
   "meta": {
     "requestId": "01J...",
     "durationMs": 1.2,
-    "toolkitVersion": "0.2.0",
+    "toolkitVersion": "0.3.0",
     "engine": "h3-js",
     "engineVersion": "4.5.0",
     "warnings": []
@@ -513,11 +514,15 @@ Adapter 负责：
 | `BATCH_LIMIT_EXCEEDED` | 413 | 输入数量超限 |
 | `RESULT_CELL_LIMIT_EXCEEDED` | 413 | 预计/实际 Cell 超限 |
 | `GRID_PATH_UNAVAILABLE` | 422 | H3 无法给出可靠路径 |
-| `REQUEST_TIMEOUT` | 408 | 同步计算超时 |
+| `REQUEST_TIMEOUT` | 408 | HTTP 请求接收超时；当前同步 CPU handler 不可抢占 |
 | `DATABASE_UNAVAILABLE` | 503 | 数据库 Adapter 不可用 |
+| `AUTHENTICATION_REQUIRED` / `AUTHENTICATION_FAILED` | 401 | 缺少或无效身份；不回显验证细节 |
+| `AUTHORIZATION_DENIED` | 403 | 已验证 Principal 缺少端点 Scope |
 | `INTERNAL_ERROR` | 500 | 未知错误；不暴露堆栈 |
 
 错误 Handler 已读取 `H3ToolkitError.code`，加入 Request ID、稳定 HTTP 分类和 details allow-list。未知错误固定为 `INTERNAL_ERROR`，不向调用方回显原始消息、堆栈、SQL、内部路径、Cell 或坐标。
+
+`REQUEST_TIMEOUT_MS` 当前接线到 Fastify `requestTimeout`，只能约束请求接收阶段。同步 H3 计算期间事件循环无法触发硬超时，因此计算截止时间仍是未完成项；生产实现应使用 worker thread/可分块 deadline 或由 Gateway 终止并明确 503/504 契约，不能把接收超时证据冒充计算超时。
 
 ### 11.4 异步 Job API（目标设计）
 
@@ -565,11 +570,11 @@ Job 状态固定为 `PENDING → RUNNING → SUCCEEDED | FAILED | CANCELLED | EX
 | `h3_cell` | h3index | 查询/聚合主 Cell |
 | `observed_at` | timestamptz | 事件时间，可空 |
 
-索引：Geometry GiST、H3 B-tree、observed_at B-tree。生产补充：
+索引：Geometry GiST、H3 B-tree、observed_at B-tree。追加 Migration 已对 Point 写入强制 Geometry/Cell 一致性并拒绝空 Point，同时保留通用 Geometry 的明确边界。生产还需：
 
 - 按 `feature_type` 和时间范围决定是否分区。
-- 写入服务统一从 Geometry/Point 计算 `h3_cell`，拒绝调用方提供不一致值。
-- 增加 `CHECK (h3_get_resolution(h3_cell)=configured_resolution)` 或把 Resolution 显式存储。
+- 写入服务继续统一从 Geometry/Point 计算 `h3_cell`；数据库约束作为最终防线。
+- 多 Resolution 业务若需要固定 Resolution，再增加配置化约束或显式列；当前 Point 约束验证 Cell 与 Geometry 计算结果一致。
 - `properties` 高频过滤字段应升为类型化列，避免所有查询扫描 JSONB。
 
 ### 13.3 `h3_metric`
@@ -582,7 +587,7 @@ Job 状态固定为 `PENDING → RUNNING → SUCCEEDED | FAILED | CANCELLED | EX
 
 `resolution` 用于显式契约与查询，无论 Cell 已编码 Resolution 都必须保留。生产增加约束 `h3_get_resolution(cell)=resolution`。固定 Res 7 的 Parent 表达式索引只适用于 `resolution≥7` 的行。
 
-当前实现注意项：`aggregate.sql` 的 `ON CONFLICT` 目标应与四列主键完全一致，数据库认证前必须修正并加入 SQL 回归测试。
+`aggregate.sql` 的 `ON CONFLICT` 目标已与四列主键完全一致，并有事务内重复执行、更新值和回滚断言。certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的完整 run-scoped runner 已将该断言与最终镜像、规模、计划和恢复证据绑定，G4 PASS。
 
 ### 13.4 两阶段空间查询
 
@@ -633,15 +638,17 @@ sequenceDiagram
 
 ### 14.1 已测基线
 
-测试环境：Node `v24.14.0`、Linux、9 CPU。以下只用于容量起点，不是跨机器 SLO：
+当前可比较环境：Windows x64、Node `v22.14.0`、16 CPUs、h3-js 4.5.0、CPU/OS/内存档位完整匹配。以下验证与同环境基线逐项比较，阈值为 20%；它仍只用于容量起点，不是跨机器 SLO：
 
 | 场景 | 数据量 | 实测吞吐/耗时 |
 |---|---:|---:|
-| Point→H3 | 10M | 902,312 records/s，11,082.64ms |
-| Streaming-style aggregation | 10M | 935,776 records/s，10,686.31ms |
-| Small Polygon Res 9 | 64 cells | 9.09ms |
-| Medium Polygon Res 9 | 25,945 cells | 94.63ms |
-| Large Polygon Res 9 | 647,905 cells | 1,570.71ms |
+| Point→H3 | 10M | 709,136 records/s，14,101.67ms；比较 PASS |
+| Streaming-style aggregation | 10M | 600,192 records/s，16,661.34ms；比较 PASS |
+| Small Polygon Res 9 | 64 cells | 14.08ms；比较 PASS |
+| Medium Polygon Res 9 | 25,945 cells | 136.35ms；比较 PASS |
+| Large Polygon Res 9 | 647,905 cells | 1,941.57ms；比较 PASS |
+
+9 个同环境场景全部在阈值内。历史 Linux Node 24 记录缺少 CPU 型号、OS release 和内存档位，明确标记为 `NOT_COMPARABLE`，不得作为跨机器回归 PASS。
 
 ### 14.2 建议同步预算
 
@@ -711,13 +718,13 @@ flowchart TD
 | 错误回显泄露 | 生产隐藏 stack、SQL、连接信息和内部路径 |
 | 依赖/镜像供应链 | lockfile、audit、SBOM、镜像扫描、签名、digest pin |
 
-### 16.2 身份与授权（目标设计）
+### 16.2 身份与授权
 
-- 人机访问使用 OIDC JWT；服务间使用 mTLS 或短期服务凭据。
-- Scope 建议：`h3:read`、`h3:analyze`、`h3:job`、`h3:admin`。
-- 租户 ID 只能从可信身份声明获取，不接受 body 覆盖。
-- API、Job、结果下载均执行租户隔离和审计。
-- `/health` 可匿名但只返回最低信息；readiness 可限制为集群内部访问。
+- 当前默认 `local` 模式保持本地开发兼容；`required` 模式没有注入 authenticator 时启动即失败。
+- authenticator 只接收 Authorization、requestId、method 和 route，并只能返回已经验证的 `subject`、`tenantId`、`scopes`；租户 ID 不从 Header 或 Body 采信。
+- 六个业务端点分别要求 `h3:index`、`h3:polygon:cover`、`h3:neighbors`、`h3:aggregate`、`h3:coverage`、`h3:flow`；Metrics 要求 `h3:metrics:read`。`/health` 与 `/ready` 保持最低信息的公开探针。
+- 401/403 稳定失败、异常 authenticator、畸形 Principal、Scope 缺失和租户来源已有本地契约测试。
+- 生产仍须接入具体 OIDC/JWKS 或服务间 mTLS，验证过期/撤销/轮换，并把 Principal 传播到数据库/Job/结果下载的租户隔离与审计边界。
 
 ## 17. 可观测性设计
 
@@ -795,7 +802,8 @@ Web Demo 是验收工作台，不是生产 GIS 平台：
 - WebGL 可用时用 deck.gl `PolygonLayer`；失败自动切换 SVG。
 - 支持 Resolution 5–12、东京样例、Cell 数和前十条结果展示。
 - 不向第三方地图服务发送坐标。
-- 已用 dynamic import 拆分 deck.gl；Entry 404,532 bytes、DeckMap async 632,091 bytes、总 JavaScript 1,036,690 bytes，均由自动预算约束。
+- 已用 dynamic import 拆分 deck.gl；Entry 405,176 bytes（gzip 126,346）、DeckMap async 632,091 bytes（gzip 181,874）、总 JavaScript 1,037,334 bytes，均由自动预算约束。
+- 2026-08-13 在 Windows Playwright 实机完成 Chromium 151、Firefox 153、WebKit 26.5 的 9/9 矩阵：正常 deck.gl/WebGL、强制 SVG、键盘/Focus、Resolution/Clear/Reset、200% 等效缩放回流均通过，Axe critical/serious 为 0。
 - 后续可增加 Polygon 文件导入、不同 Resolution 对比、性能计时和导出，但必须保留结果上限。
 
 ## 20. 测试设计
@@ -808,8 +816,9 @@ Web Demo 是验收工作台，不是生产 GIS 平台：
 | Geometry | Polygon/Hole/MultiPolygon、Antimeridian、Pole、Pentagon | 已实现基线 |
 | API | Schema、端点、稳定错误、限额、脱敏、readiness、metrics | 已实现并有 abuse/telemetry tests |
 | CLI/IO | 参数、JSON/CSV、编译产物冒烟 | 已实现 |
-| PostGIS Integration | 扩展版本、Point/Hierarchy/Boundary/Polygon、EXPLAIN、恢复 | Runner 存在；环境未执行 |
-| Cross-engine Golden | h3-js vs h3-pg | Node Fixture/再生校验 PASS；DB 对照未执行 |
+| PostGIS Integration | 扩展版本、Point/Hierarchy/Boundary/Polygon、EXPLAIN、恢复 | certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 run `31642261871`：13/13 Adapter、10M 计划、升级/回滚和逻辑恢复完整执行，G4 PASS |
+| Cross-engine Golden | h3-js vs h3-pg | Node Fixture/再生校验与 DB 对照 11/11 PASS |
+| Browser/A11y | WebGL、强制 SVG、键盘/Focus、缩放、Axe | Chromium/Firefox/WebKit 9/9 PASS |
 | Load/Soak | 并发、内存、P95/P99 | 待目标环境执行 |
 | Security | 恶意 Geometry、限额、鉴权、依赖/镜像 | 本地输入/SBOM/许可 PASS；身份/镜像平台待实现 |
 
@@ -858,16 +867,16 @@ docker compose up -d --build
 
 ### P0：数据库认证前
 
-1. 修正 `database/sql/aggregate.sql` 的 Upsert conflict target，使其与 `(cell, metric, bucket, bucket_start)` 一致。
-2. 在 Docker 环境执行扩展安装、迁移、Smoke 和 PostGIS Integration Test。
-3. 为 `spatial_feature.h3_cell` 与 Geometry/Resolution 一致性增加写入规则和测试。
-4. 对两阶段查询执行 `EXPLAIN (ANALYZE, BUFFERS)`，证明索引实际命中。
-5. 增加 h3-js/h3-pg Golden Dataset。
+1. ~~修正 `database/sql/aggregate.sql` 的四列 Upsert，并加入重复执行/更新断言。~~ 已完成本地切片。
+2. ~~在 Docker 环境执行扩展、迁移、Smoke、13 个 PostGIS Adapter 和 11 个跨引擎 Golden 用例。~~ 已完成本地切片。
+3. ~~为 `spatial_feature.h3_cell` 与 Point Geometry/Resolution 一致性增加约束和负例。~~ 已完成本地切片。
+4. ~~为 H3 B-tree、Geometry GiST、时间和 Parent 索引增加可失败计划断言，并执行至 10M。~~ 已完成本地切片。
+5. ~~执行完整 run-scoped runner，把最终镜像身份、上述断言、逻辑备份/恢复指纹和生命周期结果绑定为同一份 G4 证据。~~ certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的托管 run `31642261871` 已完成。
 
 ### P1：生产上线前
 
 1. ~~统一错误码、Request ID、结构化 details 和错误脱敏。~~ 已于 2026-08-12 完成。
-2. 增加 OIDC/mTLS、租户配额、rate limit 和审计。
+2. 在已完成的平台中立 fail-closed 鉴权边界上接入 OIDC/JWKS 或 mTLS、持久租户隔离、Gateway 配额和审计。
 3. ~~增加 Polygon/Neighbor/Flow 总结果硬上限和计算前估算。~~ 已于 2026-08-12 完成。
 4. ~~验证 Coverage visited Cell 和 Flow origin/destination Resolution。~~ 已于 2026-08-12 完成。
 5. 实现 OTel 指标/Trace、readiness、DB statement timeout。
@@ -911,7 +920,7 @@ docker compose up -d --build
 
 ## 25. 最终生产判定
 
-当前 `0.2.0` 可以作为：
+当前 `0.3.0` 可以作为：
 
 - 可复用 H3 TypeScript SDK；
 - REST/CLI 协议原型；
@@ -919,6 +928,6 @@ docker compose up -d --build
 - PostGIS/H3 目标环境认证的完整起点；
 - 态势分析系统的空间网格基础层。
 
-当前不能无条件宣称 Production-Ready，原因不是 H3 基础算法缺失，而是数据库扩展尚未在目标环境实机认证，且身份、租户、异步大任务、平台级 OTel/SLO、备份恢复和安全供应链门禁仍待完成。
+当前不能无条件宣称 Production-Ready，原因不是 H3 基础算法或本地浏览器能力缺失，而是完整数据库 run-scoped 认证尚待授权，具体 IdP/JWKS、持久租户隔离、异步大任务、平台级 OTel/SLO、Load/Soak、HA/PITR 和达到策略阈值的镜像供应链门禁仍待完成。
 
 推荐按照 I0→I4 顺序实施。完成 I0 后可进入受控内部环境；完成 I1/I2 后可承载有身份和限额的生产同步流量；完成 I3/I4 后再开放大规模共享分析服务。

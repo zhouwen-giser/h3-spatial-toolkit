@@ -1,4 +1,12 @@
-import { LOG_LEVELS, type AppOptions, type LogLevel } from "./policy.js";
+import type { AppOptions } from "./app.js";
+import {
+  AUTH_MODES,
+  resolveAuthentication,
+  type Authenticator,
+  type AuthenticationOptions,
+  type AuthMode
+} from "./auth.js";
+import { LOG_LEVELS, type LogLevel } from "./policy.js";
 
 export interface ServerConfig {
   host: string;
@@ -6,7 +14,20 @@ export interface ServerConfig {
   app: AppOptions;
 }
 
-export function loadServerConfig(environment: NodeJS.ProcessEnv = process.env): ServerConfig {
+export interface ServerDependencies {
+  authenticator?: Authenticator;
+}
+
+export function loadServerConfig(
+  environment: NodeJS.ProcessEnv = process.env,
+  dependencies: ServerDependencies = {}
+): ServerConfig {
+  const authentication: AuthenticationOptions = {
+    mode: authMode(environment.AUTH_MODE),
+    ...(dependencies.authenticator === undefined ? {} : { authenticator: dependencies.authenticator })
+  };
+  resolveAuthentication(authentication);
+
   return {
     host: environment.HOST ?? "127.0.0.1",
     port: integer(environment, "PORT", 3000, 1, 65_535),
@@ -23,9 +44,18 @@ export function loadServerConfig(environment: NodeJS.ProcessEnv = process.env): 
       maxDistinctValues: integer(environment, "MAX_DISTINCT_VALUES", 50_000, 1),
       bodyLimitBytes: integer(environment, "BODY_LIMIT_BYTES", 10 * 1024 * 1024, 1),
       requestTimeoutMs: integer(environment, "REQUEST_TIMEOUT_MS", 30_000, 1),
-      allowedResolutions: resolutions(environment.ALLOWED_RESOLUTIONS)
+      allowedResolutions: resolutions(environment.ALLOWED_RESOLUTIONS),
+      authentication
     }
   };
+}
+
+function authMode(raw: string | undefined): AuthMode {
+  if (raw === undefined) return "local";
+  if (!(AUTH_MODES as readonly string[]).includes(raw)) {
+    throw new Error(`AUTH_MODE must be one of ${AUTH_MODES.join(", ")}`);
+  }
+  return raw as AuthMode;
 }
 
 function boolean(environment: NodeJS.ProcessEnv, name: string, fallback: boolean): boolean {

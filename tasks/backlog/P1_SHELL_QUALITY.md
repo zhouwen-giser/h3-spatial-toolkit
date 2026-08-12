@@ -1,6 +1,6 @@
 # P1-SHELL-QUALITY-001 — Shell 脚本专项检查
 
-状态：`PARTIAL`（Bash syntax/strict mode/危险构造基线 PASS；ShellCheck 和目标 Shell 矩阵仍未执行）。
+Work 状态：`REVIEW`。Gate 状态：`PARTIAL`（G0 本地 ShellCheck/Bash 子门禁 PASS；G6 目标 OS shell 仍由跨平台项跟踪）。
 
 ## 目标
 
@@ -19,4 +19,5 @@
 
 - `pnpm check:shell` 对全部版本化 Shell 脚本执行 `bash -n`、shebang、`set -euo pipefail`、可执行位和危险动态执行检查。
 - 数据库认证脚本已自动化证据目录、Migration 幂等、Smoke、Fixture、EXPLAIN、Golden、Backup/Restore。
-- 当前环境仍无 `shellcheck`，因此本任务保持 `PARTIAL`，不把自定义检查替代为 ShellCheck PASS。
+- `pnpm check:shell` 在 Windows 使用可发现的 Git Bash，并通过 native 或固定 digest 的 ShellCheck 容器执行实际 ShellCheck；当前本地检查 PASS。
+- certified implementation revision `cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3` 的 Linux/macOS/Windows 托管跨平台矩阵已由 `P1-CROSS-PLATFORM-001` 和远端 CI 认证为 9/9 jobs PASS；本 Work Item 仍保持 `REVIEW/PARTIAL`，直至支持的 Shell 范围与专项关闭评审完成。

@@ -1,0 +1,74 @@
+{
+  "gate": "G4_DATABASE",
+  "status": "PASS",
+  "executedAt": "2026-08-12T21:29:12.763Z",
+  "environment": {
+    "runId": "gha-31642261871-1-cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3",
+    "sourceRevision": "cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3",
+    "platform": "linux",
+    "arch": "x86_64",
+    "node": "v24.18.0",
+    "pnpm": "11.16.0",
+    "docker": "28.0.4",
+    "compose": "2.38.2",
+    "postgres": "17.10",
+    "postgis": "3.5.7",
+    "h3": "4.5.0",
+    "h3Postgis": "4.5.0"
+  },
+  "commands": ["docker compose up -d --build", "pnpm acceptance:database"],
+  "summary": {
+    "result": "certification-run-completed",
+    "artifactCount": 56,
+    "composeHealthy": true,
+    "migrationRepeated": true,
+    "strictScaleRows": [100000, 1000000, 10000000],
+    "crossEngineTestsPassed": 11,
+    "adapterIntegrationTestsPassed": 13,
+    "certificationAssertions": {
+      "negative": 3,
+      "positive": 2,
+      "upsert": 2,
+      "exactFilter": 1
+    },
+    "extensionUpgrade": {
+      "from": "4.2.3",
+      "to": "4.5.0",
+      "preservedRows": 3,
+      "preservedIndexes": 4
+    },
+    "migrationRollback": {
+      "injectedSqlState": "23505",
+      "failedObjectsAbsent": true
+    },
+    "plan10m": {
+      "h3": { "actualRows": 209, "executionTimeMs": 0.44 },
+      "gist": { "actualRows": 1, "executionTimeMs": 0.452 },
+      "time": { "actualRows": 1, "executionTimeMs": 0.197 },
+      "parent": { "actualRows": 181, "executionTimeMs": 0.154 }
+    },
+    "backupSha256Verified": true,
+    "logicalRestoreParity": {
+      "algorithm": "postgres-hashtextextended-seed-0-xor-and-sum-v1",
+      "spatialFeature": {
+        "count": 10000000,
+        "xor": "-2340661357109139916",
+        "sum": "-7565848930525692823636"
+      },
+      "h3Metric": {
+        "count": 56,
+        "xor": "7107034855823968447",
+        "sum": "70549442509268631665"
+      }
+    }
+  },
+  "artifacts": [
+    "https://github.com/zhouwen-giser/h3-spatial-toolkit/actions/runs/31642261871",
+    "database-certification-evidence/output/acceptance/database/runs/gha-31642261871-1-cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3/run-summary.json"
+  ],
+  "notes": [
+    "The GitHub-hosted certification used the workflow's disposable Compose database and completed upload, log capture and docker compose down -v successfully.",
+    "Image identity, certified implementation revision cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3, schema and upsert assertions, 10K through 10M plans, Golden and adapter tests, extension upgrade, transactional rollback, backup checksum and non-empty logical restore parity were bound to one run ID.",
+    "This PASS is the G4 database gate only; target-platform HA, PITR and failover remain G6_HA_RECOVERY=NOT_RUN."
+  ]
+}

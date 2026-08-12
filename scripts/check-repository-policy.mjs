@@ -1,11 +1,31 @@
 import { lstat, readFile, readdir } from "node:fs/promises";
+import { spawnSync } from "node:child_process";
 import { basename, extname, relative, resolve } from "node:path";
 
 const root = resolve(process.cwd());
-const ignored = new Set(["node_modules", ".git", "dist", "coverage", "release", "MANIFEST.json"]);
+const ignored = new Set([
+  "node_modules",
+  ".pnpm-store",
+  ".git",
+  "dist",
+  "coverage",
+  "output",
+  "release",
+  "MANIFEST.json"
+]);
 const files = await collect(root);
 const failures = [];
-const allowedStatuses = new Set(["PASS", "PARTIAL", "NOT_RUN", "BLOCKED", "PENDING"]);
+const allowedStatuses = new Set(["PASS", "PARTIAL", "NOT_RUN", "BLOCKED"]);
+const allowedWorkItemStatuses = new Set([
+  "PLANNED",
+  "READY",
+  "IN_PROGRESS",
+  "REVIEW",
+  "COMPLETE_LOCAL",
+  "COMPLETE",
+  "DEFERRED",
+  "BLOCKED"
+]);
 
 for (const path of files.filter((path) => extname(path) === ".json")) {
   try {
@@ -85,6 +105,9 @@ for (const [gate, status] of Object.entries(state.gates ?? {})) {
     }
   }
 }
+if (!allowedWorkItemStatuses.has(state.activeWorkItemStatus)) {
+  failures.push(`project-state: invalid active work item status ${state.activeWorkItemStatus}`);
+}
 
 const activeTask = String(state.activeWorkItem ?? "");
 const currentTasks = files.filter((path) => rel(path).startsWith("tasks/current/") && path.endsWith(".md"));
@@ -100,9 +123,14 @@ for (const path of files.filter(
     if (!content.includes(heading)) failures.push(`${rel(path)}: missing ${heading}`);
 }
 
-for (const path of ["scripts/run-acceptance.sh", "scripts/verify-database.sh"]) {
-  const mode = (await lstat(resolve(root, path))).mode;
-  if ((mode & 0o111) === 0) failures.push(`${path}: must be executable`);
+const shellScripts = ["scripts/run-acceptance.sh", "scripts/verify-database.sh"];
+const trackedModes = gitModes(shellScripts);
+for (const path of shellScripts) {
+  if (trackedModes.get(path) !== "100755") failures.push(`${path}: Git mode must be 100755`);
+  if (process.platform !== "win32") {
+    const mode = (await lstat(resolve(root, path))).mode;
+    if ((mode & 0o111) === 0) failures.push(`${path}: worktree file must be executable`);
+  }
 }
 
 for (const forbidden of [".DS_Store", "Thumbs.db"])
@@ -135,6 +163,26 @@ function rel(path) {
 }
 function message(error) {
   return error instanceof Error ? error.message : String(error);
+}
+function gitModes(paths) {
+  const result = spawnSync("git", ["ls-files", "--stage", "--", ...paths], {
+    cwd: root,
+    encoding: "utf8"
+  });
+  if (result.status !== 0) {
+    failures.push(`git ls-files --stage failed (${message(result.error ?? result.stderr)})`);
+    return new Map();
+  }
+  return new Map(
+    result.stdout
+      .trim()
+      .split(/\r?\n/)
+      .filter(Boolean)
+      .map((line) => {
+        const [metadata, path] = line.split("\t", 2);
+        return [path.replaceAll("\\", "/"), metadata.split(" ", 1)[0]];
+      })
+  );
 }
 function finish(summary, errors) {
   if (errors.length) {

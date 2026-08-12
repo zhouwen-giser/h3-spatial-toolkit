@@ -1,15 +1,36 @@
-EXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)
-WITH query_area AS (
-  SELECT ST_GeomFromText(
-    'POLYGON((139.76 35.67,139.79 35.67,139.79 35.70,139.76 35.70,139.76 35.67))',
-    4326
-  ) AS geom
-),
-candidate_cells AS (
-  SELECT h3_polygon_to_cells(geom, 9) AS cell FROM query_area
+\set ON_ERROR_STOP on
+
+-- Invoke with exactly one psql variable:
+--   -v plan_h3=1  verifies the H3 coarse-candidate B-tree path.
+--   -v plan_gist=1 verifies the exact PostGIS GiST path.
+-- The probe row is selected through the primary key so the same statements
+-- work for the 10K fixture and every strict scale fixture.
+\if :{?plan_h3}
+EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
+WITH probe AS MATERIALIZED (
+  SELECT h3_cell
+  FROM spatial_feature
+  ORDER BY id
+  LIMIT 1
 )
-SELECT f.id
-FROM spatial_feature f
-JOIN candidate_cells c ON f.h3_cell = c.cell
-CROSS JOIN query_area q
-WHERE ST_Intersects(f.geom, q.geom);
+SELECT feature.id
+FROM spatial_feature AS feature
+CROSS JOIN probe
+WHERE feature.h3_cell = probe.h3_cell;
+\elif :{?plan_gist}
+EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
+WITH probe AS MATERIALIZED (
+  SELECT ST_Expand(geom, 0.00001) AS geom
+  FROM spatial_feature
+  ORDER BY id
+  LIMIT 1
+)
+SELECT feature.id
+FROM spatial_feature AS feature
+CROSS JOIN probe
+WHERE feature.geom && probe.geom
+  AND ST_Intersects(feature.geom, probe.geom);
+\else
+\echo 'Set plan_h3 or plan_gist when running explain_two_stage.sql'
+\quit 2
+\endif

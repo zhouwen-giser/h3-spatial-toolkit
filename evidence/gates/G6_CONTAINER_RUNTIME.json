@@ -1,0 +1,43 @@
+{
+  "gate": "G6_CONTAINER_RUNTIME",
+  "status": "PASS",
+  "executedAt": "2026-08-12T21:31:26.818Z",
+  "environment": {
+    "sourceRevision": "cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3",
+    "platform": "linux/amd64",
+    "localHost": "Windows x64 / Docker Desktop 29.6.1",
+    "databaseHost": "GitHub-hosted Linux x86_64 / Docker 28.0.4"
+  },
+  "commands": [
+    "node scripts/container-runtime-smoke.mjs h3-spatial-toolkit-api:latest",
+    "docker compose up -d --build && pnpm acceptance:database"
+  ],
+  "summary": {
+    "api": {
+      "imageId": "sha256:3255ba1b1b0abaa26805f8ad606f45f70ef2ac38c8026ec5ed69625d5a3406ee",
+      "sourceRevisionBound": true,
+      "configuredUser": "node",
+      "readiness": "PASS",
+      "packageManagersAbsent": ["npm", "npx", "corepack", "pnpm", "pnpx", "yarn", "yarnpkg"]
+    },
+    "postgres": {
+      "localScannedImageId": "sha256:5fc63f730dc7bfe9540656bce7142b8acce5a4d943958272876996e6b9c74d3e",
+      "certifiedRuntimeImageId": "sha256:5f8df285e962170e13376e0c8fba4eb33bf22714d877b39efaed7e27e9394b2b",
+      "sourceRevisionBound": true,
+      "health": "PASS",
+      "postgres": "17.10",
+      "postgis": "3.5.7",
+      "h3": "4.5.0",
+      "h3Postgis": "4.5.0"
+    }
+  },
+  "artifacts": [
+    "output/acceptance/container-supply-chain/summary.json",
+    "https://github.com/zhouwen-giser/h3-spatial-toolkit/actions/runs/31642261871"
+  ],
+  "notes": [
+    "The API image built from certified implementation revision cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3 became ready, ran non-root and contained no runtime package-manager commands; an independently built PostgreSQL image from the same revision was healthy throughout the complete G4 run.",
+    "The local Scout build and hosted G4 build have different local manifest/image IDs, which is expected for independent builds; both passed the exact cd3211f OCI revision-label guard and are recorded separately.",
+    "This subgate does not certify vulnerability policy, signing, multi-architecture image publication, rolling updates, drain under load, HA, PITR or failover."
+  ]
+}

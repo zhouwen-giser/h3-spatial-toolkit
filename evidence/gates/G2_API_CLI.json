@@ -1,16 +1,23 @@
 {
   "gate": "G2_API_CLI",
   "status": "PASS",
-  "executedAt": "2026-08-12T07:04:00Z",
-  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "executedAt": "2026-08-12T21:04:55Z",
+  "environment": {
+    "node": "v22.14.0",
+    "pnpm": "11.16.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
   "commands": ["pnpm acceptance:api"],
   "summary": {
     "apiPaths": 9,
-    "cliScenarios": ["point", "polygon-csv"],
+    "cliScenarios": ["point", "polygon-csv", "neighbors", "aggregate", "coverage", "flow", "aggregate-invalid"],
     "readiness": true,
     "metrics": true,
     "loopbackPort": 3310
   },
   "artifacts": ["scripts/api-cli-smoke.mjs"],
-  "notes": ["Real browser/WebGL/accessibility remains NOT_RUN"]
+  "notes": [
+    "This evidence covers the compiled API and CLI smoke suite on Windows x64; browser and production-environment behavior are tracked by separate gates."
+  ]
 }

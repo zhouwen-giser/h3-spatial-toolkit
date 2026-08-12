@@ -3,6 +3,7 @@ import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import { readFile, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { compareOpenApi } from "./openapi-compatibility.mjs";
 
 const root = resolve(process.cwd());
 const failures = [];
@@ -24,22 +25,7 @@ try {
 
 if (current.info?.version !== (await parse(resolve(root, "package.json"))).version)
   failures.push("OpenAPI version differs from package version");
-for (const [path, pathItem] of Object.entries(baseline.paths ?? {})) {
-  if (!current.paths?.[path]) {
-    failures.push(`OpenAPI breaking change: removed path ${path}`);
-    continue;
-  }
-  for (const method of ["get", "post", "put", "patch", "delete"]) {
-    if (!pathItem[method]) continue;
-    const next = current.paths[path][method];
-    if (!next) {
-      failures.push(`OpenAPI breaking change: removed ${method.toUpperCase()} ${path}`);
-      continue;
-    }
-    compareRequest(path, method, pathItem[method], next);
-    compareResponses(path, method, pathItem[method], next);
-  }
-}
+failures.push(...compareOpenApi(baseline, current));
 
 const ajv = new Ajv2020({ allErrors: true, strict: true });
 addFormats(ajv);
@@ -102,53 +88,6 @@ finish(
   failures
 );
 
-function compareRequest(path, method, before, after) {
-  if (before.requestBody?.required && !after.requestBody?.required)
-    failures.push(`${method.toUpperCase()} ${path}: request body no longer required`);
-  const oldSchema = before.requestBody?.content?.["application/json"]?.schema;
-  const newSchema = after.requestBody?.content?.["application/json"]?.schema;
-  if (oldSchema && !newSchema) failures.push(`${method.toUpperCase()} ${path}: removed JSON request schema`);
-  else if (oldSchema && newSchema)
-    compareSchema(oldSchema, newSchema, `${method.toUpperCase()} ${path} request`, "request");
-}
-function compareResponses(path, method, before, after) {
-  for (const [status, response] of Object.entries(before.responses ?? {})) {
-    const next = after.responses?.[status];
-    if (!next) {
-      failures.push(`${method.toUpperCase()} ${path}: removed response ${status}`);
-      continue;
-    }
-    const oldSchema = response.content?.["application/json"]?.schema;
-    const newSchema = next.content?.["application/json"]?.schema;
-    if (oldSchema && !newSchema)
-      failures.push(`${method.toUpperCase()} ${path}: removed JSON response schema ${status}`);
-    else if (oldSchema && newSchema)
-      compareSchema(oldSchema, newSchema, `${method.toUpperCase()} ${path} response ${status}`, "response");
-  }
-}
-function compareSchema(before, after, at, mode) {
-  if (before.type && after.type !== before.type) failures.push(`${at}: type changed ${before.type} -> ${after.type}`);
-  if (before.enum && !before.enum.every((value) => after.enum?.includes(value)))
-    failures.push(`${at}: enum value removed`);
-  if (mode === "request") {
-    const addedRequired = (after.required ?? []).filter((key) => !(before.required ?? []).includes(key));
-    if (addedRequired.length) failures.push(`${at}: new required fields ${addedRequired.join(",")}`);
-  } else {
-    const removedRequired = (before.required ?? []).filter((key) => !(after.required ?? []).includes(key));
-    if (removedRequired.length) failures.push(`${at}: required response fields removed ${removedRequired.join(",")}`);
-  }
-  for (const [name, schema] of Object.entries(before.properties ?? {})) {
-    if (!after.properties?.[name]) failures.push(`${at}: property removed ${name}`);
-    else compareSchema(schema, after.properties[name], `${at}.${name}`, mode);
-  }
-  if (before.items && after.items) compareSchema(before.items, after.items, `${at}[]`, mode);
-  for (const key of ["minimum", "minItems", "minLength"])
-    if (mode === "request" && before[key] !== undefined && after[key] > before[key])
-      failures.push(`${at}: ${key} narrowed`);
-  for (const key of ["maximum", "maxItems", "maxLength"])
-    if (mode === "request" && before[key] !== undefined && after[key] < before[key])
-      failures.push(`${at}: ${key} narrowed`);
-}
 async function parse(path) {
   return JSON.parse(await readFile(path, "utf8"));
 }

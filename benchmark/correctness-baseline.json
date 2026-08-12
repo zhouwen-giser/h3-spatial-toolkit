@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "h3Js": "4.5.0",
+  "pointToH3": {
+    "10000": { "uniqueCells": 10000, "checksum": 777629 },
+    "100000": { "uniqueCells": 26095, "checksum": 7772288 },
+    "1000000": { "uniqueCells": 26095, "checksum": 77705513 },
+    "10000000": { "uniqueCells": 26095, "checksum": 777037763 }
+  },
+  "aggregation": {
+    "1000000": { "groups": 3815, "total": 1000000 },
+    "10000000": { "groups": 3815, "total": 10000000 }
+  },
+  "polygonToCells": {
+    "small": { "resolution": 9, "cells": 64 },
+    "medium": { "resolution": 9, "cells": 25945 },
+    "large": { "resolution": 9, "cells": 647905 }
+  }
+}

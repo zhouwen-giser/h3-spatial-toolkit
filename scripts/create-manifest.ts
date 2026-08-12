@@ -3,7 +3,7 @@ import { readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 
 const root = resolve(process.cwd());
-const ignored = new Set(["node_modules", ".git", "dist", "MANIFEST.json", "SHA256SUMS"]);
+const ignored = new Set(["node_modules", ".pnpm-store", ".git", "dist", "MANIFEST.json", "SHA256SUMS"]);
 
 async function filesIn(directory: string): Promise<string[]> {
   const entries = await readdir(directory, { withFileTypes: true });

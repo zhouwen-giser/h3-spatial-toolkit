@@ -1,6 +1,6 @@
 # P1-WEB-BUNDLE-001 — Web Demo 分包与预算
 
-状态：`REVIEW`（构建与预算 PASS；真实浏览器回归 `NOT_RUN`）。
+Work 状态：`COMPLETE_LOCAL`。Gate 状态：`PASS`（构建/预算与本地真实浏览器范围）。
 
 ## 目标
 
@@ -17,8 +17,9 @@
 
 ## 当前证据
 
-- Entry：404,532 bytes / gzip 126,103 bytes，预算 450,000 / 150,000。
+- Entry：405,176 bytes / gzip 126,346 bytes，预算 450,000 / 150,000。
 - Async DeckMap：632,091 bytes / gzip 181,874 bytes，预算 650,000 / 200,000。
-- Total JavaScript：1,036,690 bytes，预算 1,100,000。
+- Total JavaScript：1,037,334 bytes，预算 1,100,000。
 - `pnpm --filter @h3-toolkit/web-demo build`：PASS，无 Vite chunk warning。
-- 未完成：Chromium/Firefox/WebKit 的 WebGL、SVG fallback 和交互回归；由 `P1-BROWSER-A11Y-001` 解锁。
+- Chromium 151、Firefox 153、WebKit 26.5 的 WebGL、强制 SVG、交互和 200% 等效回流 9/9 PASS；Axe critical/serious 0。
+- 远端/跨平台持续矩阵由 `P1-CI-CERT-001` 和 `P1-CROSS-PLATFORM-001` 跟踪，不阻止本地 Work Item 完成。

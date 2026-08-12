@@ -26,7 +26,7 @@ Fastify 在运行时生成 OpenAPI，UI 位于 `/documentation`，JSON 位于 `/
   "meta": {
     "requestId": "req-1",
     "durationMs": 1.234,
-    "toolkitVersion": "0.2.0",
+    "toolkitVersion": "0.3.0",
     "engine": "h3-js",
     "engineVersion": "4.5.0",
     "warnings": []
@@ -48,7 +48,7 @@ Fastify 在运行时生成 OpenAPI，UI 位于 `/documentation`，JSON 位于 `/
   "meta": {
     "requestId": "req-2",
     "durationMs": 0.812,
-    "toolkitVersion": "0.2.0",
+    "toolkitVersion": "0.3.0",
     "engine": "h3-js",
     "engineVersion": "4.5.0",
     "warnings": []
@@ -60,7 +60,7 @@ Fastify 在运行时生成 OpenAPI，UI 位于 `/documentation`，JSON 位于 `/
 |---:|---|---|
 | 400 | JSON Schema/请求结构错误 | `REQUEST_VALIDATION_FAILED` |
 | 404 | 路由不存在 | `ROUTE_NOT_FOUND` |
-| 408 | 请求超时 | `REQUEST_TIMEOUT` |
+| 408 | HTTP 请求接收超时 | `REQUEST_TIMEOUT` |
 | 413 | Body/计算/结果资源门禁 | `*_LIMIT_EXCEEDED` |
 | 422 | H3 与业务语义错误 | `INVALID_H3_CELL`、`CELL_RESOLUTION_MISMATCH` |
 | 500 | 未知内部错误 | `INTERNAL_ERROR` |
@@ -72,7 +72,7 @@ Fastify 在运行时生成 OpenAPI，UI 位于 `/documentation`，JSON 位于 `/
 | 环境变量 | 默认值 | 作用 |
 |---|---:|---|
 | `BODY_LIMIT_BYTES` | 10 MiB | HTTP body 字节上限 |
-| `REQUEST_TIMEOUT_MS` | 30000 | Fastify 请求超时 |
+| `REQUEST_TIMEOUT_MS` | 30000 | Fastify 接收请求体超时；不是同步 CPU 计算硬截止时间 |
 | `MAX_BATCH_RECORDS` | 100000 | Point/record/trajectory/visit 数组上限 |
 | `MAX_FLOW_POINTS` | 100000 | 所有 trajectories 的总点数上限 |
 | `MAX_RESULT_CELLS` | 250000 | Cell/Metric/Flow 结果数量上限 |
@@ -83,8 +83,11 @@ Fastify 在运行时生成 OpenAPI，UI 位于 `/documentation`，JSON 位于 `/
 | `ALLOWED_RESOLUTIONS` | 0–15 | REST 允许的 H3 Resolution allow-list |
 | `METRICS_ENABLED` | true | 是否暴露 Prometheus `/metrics` |
 | `LOG_LEVEL` | info | Pino 结构化日志级别 |
+| `AUTH_MODE` | local | `required` 仅在部署组合注入 authenticator 时允许启动 |
 
 环境变量必须是安全范围内的整数；非法、空或越界值导致服务启动失败，不能静默退回默认值。完整样例见 `.env.example`。
+
+当前同步 H3 handler 是单线程 CPU 计算，事件循环定时器不能在计算期间抢占它；因此本地限额负责把工作量封顶，但 `REQUEST_TIMEOUT_MS` 不能被宣称为计算超时。真正的计算硬截止需 worker/chunk deadline 或 Gateway 终止能力，继续登记为生产缺口。
 
 Polygon 在调用 H3 前按坐标数和球面 bounding area 估算输出规模，在计算后再次检查真实 Cell 数。估算接近阈值时通过 `meta.warnings` 返回提示；超限响应可给出较低的推荐 Resolution。估算是保护门禁，不是精确面积分析。
 

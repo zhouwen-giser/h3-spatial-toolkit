@@ -1,0 +1,25 @@
+{
+  "gate": "G5_AUTH_TENANT",
+  "status": "PARTIAL",
+  "executedAt": "2026-08-12T20:38:36Z",
+  "environment": { "node": "v22.14.0", "platform": "win32", "arch": "x64" },
+  "commands": ["vitest run test/api-auth.test.ts"],
+  "summary": {
+    "testFilesPassed": 1,
+    "testsPassed": 11,
+    "testsFailed": 0,
+    "defaultLocalMode": true,
+    "requiredModeFailsStartupWithoutAuthenticator": true,
+    "principalValidationFailsClosed": true,
+    "tenantDerivedOnlyFromVerifiedPrincipal": true,
+    "stable401And403": true,
+    "businessScopes": 6,
+    "metricsScope": 1,
+    "concreteIdentityProviderIntegrated": false
+  },
+  "artifacts": ["apps/api/src/auth.ts", "test/api-auth.test.ts", "apps/api/openapi.json"],
+  "notes": [
+    "This PARTIAL record certifies only the platform-neutral injected-authenticator boundary and local fail-closed contract.",
+    "Concrete OIDC/JWKS or mTLS, expiry/revocation/key rotation, Gateway policy, persistent tenant isolation, database/job propagation and target-environment security tests remain unverified."
+  ]
+}

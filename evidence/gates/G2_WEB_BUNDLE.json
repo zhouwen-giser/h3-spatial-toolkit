@@ -1,17 +1,20 @@
 {
   "gate": "G2_WEB_BUNDLE",
   "status": "PASS",
-  "executedAt": "2026-08-12T06:19:00Z",
-  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
-  "commands": ["pnpm --filter @h3-toolkit/web-demo build"],
+  "executedAt": "2026-08-12T21:02:57Z",
+  "environment": { "node": "v22.14.0", "platform": "win32", "arch": "x64" },
+  "commands": ["pnpm acceptance:local", "pnpm --filter @h3-toolkit/web-demo build"],
   "summary": {
-    "entryBytes": 404532,
-    "entryGzipBytes": 126103,
+    "entryBytes": 405176,
+    "entryGzipBytes": 126346,
     "deckAsyncBytes": 632091,
     "deckAsyncGzipBytes": 181874,
-    "totalJavaScriptBytes": 1036690,
+    "totalJavaScriptBytes": 1037334,
     "budgetViolations": 0
   },
   "artifacts": ["apps/web-demo/BUNDLE_BUDGET.json", "apps/web-demo/scripts/check-bundle-budget.mjs"],
-  "notes": ["Build and bundle budget only; real browser, WebGL, fallback and accessibility remain NOT_RUN"]
+  "notes": [
+    "This gate certifies the build and bundle budgets.",
+    "Real WebGL, forced SVG fallback and accessibility are separately certified by G2_BROWSER_ACCESSIBILITY=PASS."
+  ]
 }

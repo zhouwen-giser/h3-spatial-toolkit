@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "tolerancePercent": 20,
+  "matchingFields": ["node", "platform", "arch", "cpus", "h3Js", "cpuModel", "osRelease", "memoryBucket"],
+  "baselines": [
+    {
+      "id": "linux-x64-node-v24.14.0-h3-4.5.0-9cpu-2026-08-11",
+      "recordedAt": "2026-08-11T00:00:00.000Z",
+      "source": "docs/10_BENCHMARK_REPORT.md",
+      "methodology": {
+        "mode": "diagnostic",
+        "warmupRuns": 0,
+        "recordedRuns": 1,
+        "statistic": "single"
+      },
+      "environment": {
+        "node": "v24.14.0",
+        "platform": "linux",
+        "arch": "x64",
+        "cpus": 9,
+        "h3Js": "4.5.0",
+        "cpuModel": "unknown",
+        "osRelease": "unknown",
+        "memoryBucket": "unknown"
+      },
+      "pointToH3": {
+        "10000": {
+          "durationMs": 29.22,
+          "recordsPerSecond": 342174
+        },
+        "100000": {
+          "durationMs": 112.35,
+          "recordsPerSecond": 890073
+        },
+        "1000000": {
+          "durationMs": 1135.14,
+          "recordsPerSecond": 880946
+        },
+        "10000000": {
+          "durationMs": 11082.64,
+          "recordsPerSecond": 902312
+        }
+      },
+      "aggregation": {
+        "1000000": {
+          "durationMs": 1046.5,
+          "recordsPerSecond": 955566
+        },
+        "10000000": {
+          "durationMs": 10686.31,
+          "recordsPerSecond": 935776
+        }
+      },
+      "polygonToCells": {
+        "small": {
+          "durationMs": 9.09
+        },
+        "medium": {
+          "durationMs": 94.63
+        },
+        "large": {
+          "durationMs": 1570.71
+        }
+      }
+    },
+    {
+      "id": "win32-x64-node-v22.14.0-h3-4.5.0-i7-11800h-median3-2026-08-13",
+      "recordedAt": "2026-08-12T20:39:39.258Z",
+      "source": "benchmark/results/win32-node22-median-baseline-2026-08-13.json",
+      "environment": {
+        "node": "v22.14.0",
+        "platform": "win32",
+        "arch": "x64",
+        "cpus": 16,
+        "h3Js": "4.5.0",
+        "cpuModel": "11th gen intel(r) core(tm) i7-11800h @ 2.30ghz",
+        "osRelease": "10.0.26200",
+        "memoryBucket": "16-31GiB"
+      },
+      "methodology": {
+        "mode": "certifying",
+        "warmupRuns": 1,
+        "recordedRuns": 3,
+        "statistic": "median"
+      },
+      "pointToH3": {
+        "10000": {
+          "durationMs": 12.33,
+          "recordsPerSecond": 811030
+        },
+        "100000": {
+          "durationMs": 130.6,
+          "recordsPerSecond": 765697
+        },
+        "1000000": {
+          "durationMs": 1494.96,
+          "recordsPerSecond": 668914
+        },
+        "10000000": {
+          "durationMs": 14737,
+          "recordsPerSecond": 678564
+        }
+      },
+      "aggregation": {
+        "1000000": {
+          "durationMs": 1400.95,
+          "recordsPerSecond": 713801
+        },
+        "10000000": {
+          "durationMs": 15200.19,
+          "recordsPerSecond": 657887
+        }
+      },
+      "polygonToCells": {
+        "small": {
+          "durationMs": 4.24
+        },
+        "medium": {
+          "durationMs": 100.68
+        },
+        "large": {
+          "durationMs": 1961.48
+        }
+      }
+    }
+  ]
+}

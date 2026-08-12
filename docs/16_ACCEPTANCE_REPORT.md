@@ -1,6 +1,6 @@
 # Acceptance Report（历史 `0.1.0` 基线）
 
-> 本文保留 2026-08-11 的初始验收记录；当前 `0.2.0` 结果以 `docs/22_TEMPLATE_ACCEPTANCE_REPORT.md` 和 `evidence/gates/` 为准。
+> 本文保留 2026-08-11 的初始验收记录；当前 `0.3.0` 结果以 `docs/22_TEMPLATE_ACCEPTANCE_REPORT.md` 和 `evidence/gates/` 为准。
 
 执行日期：2026-08-11。
 

@@ -1,0 +1,15 @@
+.git
+.pnpm-store
+node_modules
+**/node_modules
+dist
+**/dist
+coverage
+release
+output
+*.zip
+MANIFEST.json
+SHA256SUMS
+.env
+.env.*
+!.env.example

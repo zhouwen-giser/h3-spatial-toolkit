@@ -1,0 +1,60 @@
+{
+  "gate": "G5_SBOM_IMAGE_SIGNING",
+  "status": "PARTIAL",
+  "executedAt": "2026-08-12T21:31:26.818Z",
+  "environment": {
+    "sourceRevision": "cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3",
+    "scanner": "Docker Scout v1.22.0",
+    "scannerPinned": true,
+    "imagePlatform": "linux/amd64"
+  },
+  "commands": ["node scripts/container-supply-chain.mjs --write"],
+  "summary": {
+    "scannerStatus": "FAIL",
+    "severityThreshold": ["CRITICAL", "HIGH"],
+    "suppressions": 0,
+    "sourceRevisionBound": true,
+    "api": {
+      "imageId": "sha256:3255ba1b1b0abaa26805f8ad606f45f70ef2ac38c8026ec5ed69625d5a3406ee",
+      "sizeBytes": 85692855,
+      "sbomComponents": 219,
+      "critical": 2,
+      "high": 2,
+      "fixable": 0,
+      "unfixable": 4,
+      "runtimeInspection": "PASS",
+      "userCheck": "PASS"
+    },
+    "postgres": {
+      "imageId": "sha256:5fc63f730dc7bfe9540656bce7142b8acce5a4d943958272876996e6b9c74d3e",
+      "sizeBytes": 187029916,
+      "sbomComponents": 147,
+      "critical": 1,
+      "high": 17,
+      "fixable": 17,
+      "unfixable": 1,
+      "runtimeInspection": "PASS",
+      "userCheck": "PASS"
+    },
+    "total": {
+      "critical": 3,
+      "high": 19,
+      "fixable": 17,
+      "unfixable": 5
+    },
+    "signing": "NOT_RUN",
+    "provenanceVerification": "NOT_RUN"
+  },
+  "artifacts": [
+    "output/acceptance/container-supply-chain/summary.json",
+    "output/acceptance/container-supply-chain/api.sbom.cdx.json",
+    "output/acceptance/container-supply-chain/api.vulnerabilities.sarif.json",
+    "output/acceptance/container-supply-chain/postgres.sbom.cdx.json",
+    "output/acceptance/container-supply-chain/postgres.vulnerabilities.sarif.json"
+  ],
+  "notes": [
+    "Both scanned images carry certified implementation revision cd3211f956c5c77c06fd52c79c3cb86b8f92e2d3 and pinned base-image identity.",
+    "The policy threshold still failed with 3 Critical and 19 High findings; no suppressions were applied, so source binding does not upgrade this gate.",
+    "Registry identity, immutable publication digest, signing and registry-backed provenance verification remain NOT_RUN."
+  ]
+}

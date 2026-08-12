@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-12T20:42:17.023Z",
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 16,
+    "h3Js": "4.5.0",
+    "cpuModel": "11th gen intel(r) core(tm) i7-11800h @ 2.30ghz",
+    "osRelease": "10.0.26200",
+    "memoryBucket": "16-31GiB"
+  },
+  "methodology": {
+    "mode": "certifying",
+    "warmupRuns": 1,
+    "recordedRuns": 3,
+    "statistic": "median"
+  },
+  "pointToH3": [
+    {
+      "records": 10000,
+      "durationMs": 15.09,
+      "p95DurationMs": 15.41,
+      "recordsPerSecond": 662691,
+      "microsecondsPerRecord": 1.51,
+      "rssDeltaMb": 0.45,
+      "uniqueCells": 10000,
+      "checksum": 777629,
+      "samples": [
+        {
+          "durationMs": 15,
+          "recordsPerSecond": 666667,
+          "microsecondsPerRecord": 1.5,
+          "rssDeltaMb": 0.15,
+          "uniqueCells": 10000,
+          "checksum": 777629
+        },
+        {
+          "durationMs": 15.41,
+          "recordsPerSecond": 648929,
+          "microsecondsPerRecord": 1.54,
+          "rssDeltaMb": 0.45,
+          "uniqueCells": 10000,
+          "checksum": 777629
+        },
+        {
+          "durationMs": 15.09,
+          "recordsPerSecond": 662691,
+          "microsecondsPerRecord": 1.51,
+          "rssDeltaMb": 0.64,
+          "uniqueCells": 10000,
+          "checksum": 777629
+        }
+      ]
+    },
+    {
+      "records": 100000,
+      "durationMs": 121.35,
+      "p95DurationMs": 132.99,
+      "recordsPerSecond": 824063,
+      "microsecondsPerRecord": 1.21,
+      "rssDeltaMb": 2.06,
+      "uniqueCells": 26095,
+      "checksum": 7772288,
+      "samples": [
+        {
+          "durationMs": 132.99,
+          "recordsPerSecond": 751936,
+          "microsecondsPerRecord": 1.33,
+          "rssDeltaMb": 2.06,
+          "uniqueCells": 26095,
+          "checksum": 7772288
+        },
+        {
+          "durationMs": 121.24,
+          "recordsPerSecond": 824810,
+          "microsecondsPerRecord": 1.21,
+          "rssDeltaMb": 1.41,
+          "uniqueCells": 26095,
+          "checksum": 7772288
+        },
+        {
+          "durationMs": 121.35,
+          "recordsPerSecond": 824063,
+          "microsecondsPerRecord": 1.21,
+          "rssDeltaMb": 6.37,
+          "uniqueCells": 26095,
+          "checksum": 7772288
+        }
+      ]
+    },
+    {
+      "records": 1000000,
+      "durationMs": 1411.34,
+      "p95DurationMs": 1526.7,
+      "recordsPerSecond": 708546,
+      "microsecondsPerRecord": 1.41,
+      "rssDeltaMb": 1.77,
+      "uniqueCells": 26095,
+      "checksum": 77705513,
+      "samples": [
+        {
+          "durationMs": 1526.7,
+          "recordsPerSecond": 655008,
+          "microsecondsPerRecord": 1.53,
+          "rssDeltaMb": 1.89,
+          "uniqueCells": 26095,
+          "checksum": 77705513
+        },
+        {
+          "durationMs": 1366.77,
+          "recordsPerSecond": 731652,
+          "microsecondsPerRecord": 1.37,
+          "rssDeltaMb": 1.7,
+          "uniqueCells": 26095,
+          "checksum": 77705513
+        },
+        {
+          "durationMs": 1411.34,
+          "recordsPerSecond": 708546,
+          "microsecondsPerRecord": 1.41,
+          "rssDeltaMb": 1.77,
+          "uniqueCells": 26095,
+          "checksum": 77705513
+        }
+      ]
+    },
+    {
+      "records": 10000000,
+      "durationMs": 18258.81,
+      "p95DurationMs": 20564.47,
+      "recordsPerSecond": 547681,
+      "microsecondsPerRecord": 1.83,
+      "rssDeltaMb": 1.47,
+      "uniqueCells": 26095,
+      "checksum": 777037763,
+      "samples": [
+        {
+          "durationMs": 18258.81,
+          "recordsPerSecond": 547681,
+          "microsecondsPerRecord": 1.83,
+          "rssDeltaMb": 1.47,
+          "uniqueCells": 26095,
+          "checksum": 777037763
+        },
+        {
+          "durationMs": 20564.47,
+          "recordsPerSecond": 486276,
+          "microsecondsPerRecord": 2.06,
+          "rssDeltaMb": 1.34,
+          "uniqueCells": 26095,
+          "checksum": 777037763
+        },
+        {
+          "durationMs": 15682.09,
+          "recordsPerSecond": 637670,
+          "microsecondsPerRecord": 1.57,
+          "rssDeltaMb": 1.49,
+          "uniqueCells": 26095,
+          "checksum": 777037763
+        }
+      ]
+    }
+  ],
+  "aggregation": [
+    {
+      "records": 1000000,
+      "durationMs": 1329.87,
+      "p95DurationMs": 1393.82,
+      "recordsPerSecond": 751953,
+      "rssDeltaMb": 0.23,
+      "groups": 3815,
+      "total": 1000000,
+      "samples": [
+        {
+          "durationMs": 1329.87,
+          "recordsPerSecond": 751953,
+          "rssDeltaMb": 0.24,
+          "groups": 3815,
+          "total": 1000000
+        },
+        {
+          "durationMs": 1281.57,
+          "recordsPerSecond": 780293,
+          "rssDeltaMb": 0.23,
+          "groups": 3815,
+          "total": 1000000
+        },
+        {
+          "durationMs": 1393.82,
+          "recordsPerSecond": 717453,
+          "rssDeltaMb": 0.23,
+          "groups": 3815,
+          "total": 1000000
+        }
+      ]
+    },
+    {
+      "records": 10000000,
+      "durationMs": 14023.94,
+      "p95DurationMs": 14323.66,
+      "recordsPerSecond": 713066,
+      "rssDeltaMb": 0.25,
+      "groups": 3815,
+      "total": 10000000,
+      "samples": [
+        {
+          "durationMs": 14023.94,
+          "recordsPerSecond": 713066,
+          "rssDeltaMb": 0.24,
+          "groups": 3815,
+          "total": 10000000
+        },
+        {
+          "durationMs": 13269.84,
+          "recordsPerSecond": 753589,
+          "rssDeltaMb": 0.27,
+          "groups": 3815,
+          "total": 10000000
+        },
+        {
+          "durationMs": 14323.66,
+          "recordsPerSecond": 698146,
+          "rssDeltaMb": 0.25,
+          "groups": 3815,
+          "total": 10000000
+        }
+      ]
+    }
+  ],
+  "polygonToCells": [
+    {
+      "name": "small",
+      "resolution": 9,
+      "cells": 64,
+      "durationMs": 4.4,
+      "p95DurationMs": 4.7,
+      "samples": [
+        {
+          "cells": 64,
+          "durationMs": 4.7
+        },
+        {
+          "cells": 64,
+          "durationMs": 4.4
+        },
+        {
+          "cells": 64,
+          "durationMs": 2.35
+        }
+      ]
+    },
+    {
+      "name": "medium",
+      "resolution": 9,
+      "cells": 25945,
+      "durationMs": 98.17,
+      "p95DurationMs": 107.73,
+      "samples": [
+        {
+          "cells": 25945,
+          "durationMs": 107.73
+        },
+        {
+          "cells": 25945,
+          "durationMs": 98.17
+        },
+        {
+          "cells": 25945,
+          "durationMs": 78.17
+        }
+      ]
+    },
+    {
+      "name": "large",
+      "resolution": 9,
+      "cells": 647905,
+      "durationMs": 1853.5,
+      "p95DurationMs": 1876.99,
+      "samples": [
+        {
+          "cells": 647905,
+          "durationMs": 1853.5
+        },
+        {
+          "cells": 647905,
+          "durationMs": 1876.99
+        },
+        {
+          "cells": 647905,
+          "durationMs": 1832.11
+        }
+      ]
+    }
+  ],
+  "guidance": {
+    "nodeInMemoryCeiling": "Use streaming/chunking from 1M records; move repeatable shared queries or datasets beyond 10M to PostgreSQL/OLAP.",
+    "interpretation": "Performance is the median of three recorded repetitions after one explicit warmup per scenario; p95 is diagnostic."
+  },
+  "gate": {
+    "status": "FAIL",
+    "correctness": {
+      "status": "PASS",
+      "failures": []
+    },
+    "performance": {
+      "status": "FAIL",
+      "environmentKey": "node=v22.14.0;platform=win32;arch=x64;cpus=16;h3Js=4.5.0;cpuModel=11th gen intel(r) core(tm) i7-11800h @ 2.30ghz;osRelease=10.0.26200;memoryBucket=16-31GiB",
+      "baselineId": "win32-x64-node-v22.14.0-h3-4.5.0-i7-11800h-median3-2026-08-13",
+      "tolerancePercent": 20,
+      "comparisons": [
+        {
+          "scenario": "pointToH3:10000",
+          "baselineDurationMs": 12.33,
+          "actualDurationMs": 15.09,
+          "allowedDurationMs": 14.8,
+          "durationChangePercent": 22.38,
+          "baselineRecordsPerSecond": 811030,
+          "actualRecordsPerSecond": 662691,
+          "throughputChangePercent": -18.29,
+          "status": "FAIL"
+        },
+        {
+          "scenario": "pointToH3:100000",
+          "baselineDurationMs": 130.6,
+          "actualDurationMs": 121.35,
+          "allowedDurationMs": 156.72,
+          "durationChangePercent": -7.08,
+          "baselineRecordsPerSecond": 765697,
+          "actualRecordsPerSecond": 824063,
+          "throughputChangePercent": 7.62,
+          "status": "PASS"
+        },
+        {
+          "scenario": "pointToH3:1000000",
+          "baselineDurationMs": 1494.96,
+          "actualDurationMs": 1411.34,
+          "allowedDurationMs": 1793.95,
+          "durationChangePercent": -5.59,
+          "baselineRecordsPerSecond": 668914,
+          "actualRecordsPerSecond": 708546,
+          "throughputChangePercent": 5.92,
+          "status": "PASS"
+        },
+        {
+          "scenario": "pointToH3:10000000",
+          "baselineDurationMs": 14737,
+          "actualDurationMs": 18258.81,
+          "allowedDurationMs": 17684.4,
+          "durationChangePercent": 23.9,
+          "baselineRecordsPerSecond": 678564,
+          "actualRecordsPerSecond": 547681,
+          "throughputChangePercent": -19.29,
+          "status": "FAIL"
+        },
+        {
+          "scenario": "aggregation:1000000",
+          "baselineDurationMs": 1400.95,
+          "actualDurationMs": 1329.87,
+          "allowedDurationMs": 1681.14,
+          "durationChangePercent": -5.07,
+          "baselineRecordsPerSecond": 713801,
+          "actualRecordsPerSecond": 751953,
+          "throughputChangePercent": 5.34,
+          "status": "PASS"
+        },
+        {
+          "scenario": "aggregation:10000000",
+          "baselineDurationMs": 15200.19,
+          "actualDurationMs": 14023.94,
+          "allowedDurationMs": 18240.23,
+          "durationChangePercent": -7.74,
+          "baselineRecordsPerSecond": 657887,
+          "actualRecordsPerSecond": 713066,
+          "throughputChangePercent": 8.39,
+          "status": "PASS"
+        },
+        {
+          "scenario": "polygonToCells:small",
+          "baselineDurationMs": 4.24,
+          "actualDurationMs": 4.4,
+          "allowedDurationMs": 5.09,
+          "durationChangePercent": 3.77,
+          "status": "PASS"
+        },
+        {
+          "scenario": "polygonToCells:medium",
+          "baselineDurationMs": 100.68,
+          "actualDurationMs": 98.17,
+          "allowedDurationMs": 120.82,
+          "durationChangePercent": -2.49,
+          "status": "PASS"
+        },
+        {
+          "scenario": "polygonToCells:large",
+          "baselineDurationMs": 1961.48,
+          "actualDurationMs": 1853.5,
+          "allowedDurationMs": 2353.78,
+          "durationChangePercent": -5.51,
+          "status": "PASS"
+        }
+      ],
+      "regressions": [
+        "pointToH3:10000: 15.09ms exceeds 14.8ms (baseline 12.33ms, +22.38%)",
+        "pointToH3:10000000: 18258.81ms exceeds 17684.4ms (baseline 14737ms, +23.9%)"
+      ]
+    }
+  }
+}
