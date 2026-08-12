@@ -1,0 +1,17 @@
+{
+  "gate": "G3_PERFORMANCE",
+  "status": "PASS",
+  "executedAt": "2026-08-12T07:04:28Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64", "cpus": 9 },
+  "commands": ["pnpm benchmark"],
+  "summary": {
+    "point10mDurationMs": 17378.97,
+    "point10mRecordsPerSecond": 575408,
+    "aggregation10mDurationMs": 11364.7,
+    "aggregation10mRecordsPerSecond": 879917,
+    "largePolygonCells": 647905,
+    "largePolygonDurationMs": 1740.84
+  },
+  "artifacts": ["benchmark/results/latest.json"],
+  "notes": ["Single-machine algorithm benchmark only; load/soak remains NOT_RUN"]
+}

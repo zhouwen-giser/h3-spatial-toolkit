@@ -1,0 +1,27 @@
+name: Feature request
+description: 提议可验证的新能力或工程改进
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题与目标用户
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 可验证验收标准
+    validations:
+      required: true
+  - type: textarea
+    id: impacts
+    attributes:
+      label: API、数据、安全、性能和运维影响
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 替代方案与非目标

@@ -1,0 +1,10 @@
+{
+  "gate": "G6_GRACEFUL_SHUTDOWN_LOCAL",
+  "status": "PASS",
+  "executedAt": "2026-08-12T07:04:00Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "commands": ["pnpm acceptance:api"],
+  "summary": { "signal": "SIGTERM", "deadlineMs": 3000, "exitCode": 0, "exitSignal": null },
+  "artifacts": ["apps/api/src/server.ts", "scripts/api-cli-smoke.mjs"],
+  "notes": ["Loopback compiled server only; container drain, rolling update and shutdown under load remain NOT_RUN"]
+}

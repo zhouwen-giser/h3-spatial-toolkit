@@ -1,0 +1,19 @@
+{
+  "gate": "G6_PRODUCTION_LAYOUT_LOCAL",
+  "status": "PASS",
+  "executedAt": "2026-08-12T07:04:00Z",
+  "environment": { "node": "v24.14.0", "pnpm": "11.16.0", "platform": "linux", "arch": "x64" },
+  "commands": ["pnpm acceptance:runtime"],
+  "summary": {
+    "deployBytes": 26014477,
+    "maxDeployBytes": 52428800,
+    "devDependenciesExcluded": true,
+    "readiness": true,
+    "gracefulShutdown": true,
+    "containerUser": "node"
+  },
+  "artifacts": ["Dockerfile", "scripts/production-deploy-smoke.mjs"],
+  "notes": [
+    "Production filesystem layout was executed locally; Docker image build, digest, scan and runtime remain NOT_RUN"
+  ]
+}

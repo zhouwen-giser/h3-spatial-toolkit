@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+release/
+MANIFEST.json
+pnpm-lock.yaml
+benchmark/results/
+apps/api/openapi.json
+contracts/openapi.v1.baseline.json
+database/fixtures/h3-cross-engine-golden.json
+sbom/cyclonedx-bom.json
+**/*.md

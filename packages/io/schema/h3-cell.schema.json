@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.h3-toolkit.dev/h3-cell.schema.json",
+  "title": "H3Cell",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["index", "resolution"],
+  "properties": {
+    "index": { "type": "string", "pattern": "^[0-9a-f]{15}$" },
+    "resolution": { "type": "integer", "minimum": 0, "maximum": 15 }
+  }
+}

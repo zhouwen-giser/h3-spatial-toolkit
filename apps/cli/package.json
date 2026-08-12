@@ -1,0 +1,28 @@
+{
+  "name": "@h3-toolkit/cli",
+  "version": "0.2.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "h3": "dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsup src/index.ts --format esm --platform node --out-dir dist --clean"
+  },
+  "dependencies": {
+    "@h3-toolkit/aggregation": "workspace:*",
+    "@h3-toolkit/core": "workspace:*",
+    "@h3-toolkit/coverage": "workspace:*",
+    "@h3-toolkit/flow": "workspace:*",
+    "@h3-toolkit/geometry": "workspace:*",
+    "@h3-toolkit/io": "workspace:*",
+    "@h3-toolkit/neighborhood": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "8.5.1",
+    "tsx": "4.20.6"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "retrievedAt": "2026-08-11",
+  "policy": "Primary sources only for technical claims; runtime observations are recorded separately from documentation evidence.",
+  "sources": [
+    {
+      "id": "h3-release-4.5.0",
+      "type": "release",
+      "url": "https://github.com/uber/h3/releases/tag/v4.5.0",
+      "claim": "H3 Core 4.5.0 released 2026-05-21; reverseDirectedEdge and bidirectional gridPathCells."
+    },
+    {
+      "id": "h3-index",
+      "type": "documentation",
+      "url": "https://h3geo.org/docs/library/index/cell/",
+      "claim": "Cell index is a 64-bit value with resolution 0-15, base cell and hierarchy digits."
+    },
+    {
+      "id": "h3-resolution",
+      "type": "documentation",
+      "url": "https://h3geo.org/docs/core-library/restable/",
+      "claim": "Official average cell area, edge length and cell counts by resolution."
+    },
+    {
+      "id": "h3-traversal",
+      "type": "documentation",
+      "url": "https://h3geo.org/docs/api/traversal/",
+      "claim": "Grid traversal behavior and pentagon/distance limitations."
+    },
+    {
+      "id": "h3-regions",
+      "type": "documentation",
+      "url": "https://h3geo.org/docs/api/regions/",
+      "claim": "Polygon coverage uses cell centroid containment; cells-to-polygon requires uniform, duplicate-free cells."
+    },
+    {
+      "id": "h3-js-release",
+      "type": "release",
+      "url": "https://github.com/uber/h3-js/releases/tag/v4.5.0",
+      "claim": "h3-js 4.5.0 released 2026-07-01 and embeds H3 Core 4.5.0."
+    },
+    {
+      "id": "h3-js-source",
+      "type": "repository",
+      "url": "https://github.com/uber/h3-js",
+      "claim": "Apache-2.0, TypeScript declarations, Node/browser, ESM/CommonJS bundles."
+    },
+    {
+      "id": "h3-py-release",
+      "type": "release",
+      "url": "https://github.com/uber/h3-py/releases/tag/v4.5.0",
+      "claim": "h3-py 4.5.0 released 2026-05-29; antimeridian/pole/global polygon fixes."
+    },
+    {
+      "id": "h3-pg",
+      "type": "repository",
+      "url": "https://github.com/postgis/h3-pg",
+      "claim": "Active canonical repository; Apache-2.0; CI tests PostgreSQL 14-18; h3 and h3_postgis extensions."
+    },
+    {
+      "id": "h3-pg-pgxn",
+      "type": "release",
+      "url": "https://pgxn.org/dist/h3/4.5.0/",
+      "claim": "Stable 4.5.0 release on 2026-06-08 with PostgreSQL and PostGIS extensions."
+    },
+    {
+      "id": "duckdb-h3",
+      "type": "documentation",
+      "url": "https://duckdb.org/community_extensions/extensions/h3.html",
+      "claim": "Community extension installs with INSTALL h3 FROM community; broad H3 scalar API."
+    },
+    {
+      "id": "clickhouse-h3",
+      "type": "documentation",
+      "url": "https://clickhouse.com/docs/reference/functions/regular-functions/geo/h3",
+      "claim": "Native geoToH3, h3ToGeo and H3 manipulation functions."
+    },
+    {
+      "id": "deck-h3",
+      "type": "documentation",
+      "url": "https://deck.gl/docs/api-reference/geo-layers/h3-hexagon-layer",
+      "claim": "H3HexagonLayer supports H3 cell rendering and high-precision handling for pentagons/coarse cells."
+    },
+    {
+      "id": "kepler-h3",
+      "type": "documentation",
+      "url": "https://docs.kepler.gl/docs/user-guides/c-types-of-layers/j-h3",
+      "claim": "Kepler H3 layer consumes hex_id/hexagon_id datasets."
+    },
+    {
+      "id": "qgis-h3",
+      "type": "plugin",
+      "url": "https://plugins.qgis.org/plugins/h3_toolkit/",
+      "claim": "Non-experimental H3 processing provider; plugin 0.2.0 supports H3 v4.x."
+    },
+    {
+      "id": "h3-duckdb-source",
+      "type": "repository",
+      "url": "https://github.com/isaacbrodsky/h3-duckdb",
+      "claim": "Apache-2.0 community extension source."
+    },
+    {
+      "id": "h3-pandas",
+      "type": "repository",
+      "url": "https://github.com/DahnJ/H3-Pandas",
+      "claim": "MIT Pandas/GeoPandas adapter; 0.3.0 supports H3 v4."
+    },
+    {
+      "id": "h3ronpy",
+      "type": "repository",
+      "url": "https://github.com/nmandery/h3ronpy",
+      "claim": "MIT Arrow/Polars/GeoPandas-oriented H3 toolkit; multi-threaded geometry conversion."
+    },
+    {
+      "id": "sedona-h3",
+      "type": "documentation",
+      "url": "https://sedona.apache.org/latest/api/sql/Geometry-Functions/",
+      "claim": "Large-scale Spark/Flink H3 functions; exact geometry remains necessary for precise answers."
+    }
+  ]
+}

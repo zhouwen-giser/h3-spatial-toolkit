@@ -1,0 +1,56 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+      args:
+        H3_PG_VERSION: 4.5.0
+    environment:
+      POSTGRES_DB: h3toolkit
+      POSTGRES_USER: h3
+      POSTGRES_PASSWORD: h3
+    ports:
+      - "5432:5432"
+    volumes:
+      - h3_postgres_data:/var/lib/postgresql/data
+      - ./database/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U h3 -d h3toolkit"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://h3:h3@postgres:5432/h3toolkit
+      PORT: 3000
+      HOST: 0.0.0.0
+      METRICS_ENABLED: "true"
+      LOG_LEVEL: info
+      BODY_LIMIT_BYTES: 10485760
+      MAX_BATCH_RECORDS: 100000
+      MAX_FLOW_POINTS: 100000
+      MAX_RESULT_CELLS: 250000
+      MAX_GEOJSON_BYTES: 10485760
+      MAX_POLYGON_COORDINATES: 50000
+      MAX_NEIGHBOR_RADIUS: 20
+      MAX_DISTINCT_VALUES: 50000
+      ALLOWED_RESOLUTIONS: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+      REQUEST_TIMEOUT_MS: 30000
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/ready').then(r=>{if(!r.ok)process.exit(1)})"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  h3_postgres_data:

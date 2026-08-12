@@ -1,0 +1,3747 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:82244561-0251-5f6d-81b9-2f124844c4bc",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-08-12T00:00:00.000Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "h3-toolkit-supply-chain-generator",
+          "version": "1"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:npm/h3-spatial-toolkit@0.2.0",
+      "group": "",
+      "name": "h3-spatial-toolkit",
+      "version": "0.2.0",
+      "purl": "pkg:npm/h3-spatial-toolkit@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40deck.gl/core@9.3.9",
+      "group": "deck.gl",
+      "name": "core",
+      "version": "9.3.9",
+      "purl": "pkg:npm/%40deck.gl/core@9.3.9",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40deck.gl/layers@9.3.9",
+      "group": "deck.gl",
+      "name": "layers",
+      "version": "9.3.9",
+      "purl": "pkg:npm/%40deck.gl/layers@9.3.9",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40deck.gl/react@9.3.9",
+      "group": "deck.gl",
+      "name": "react",
+      "version": "9.3.9",
+      "purl": "pkg:npm/%40deck.gl/react@9.3.9",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40deck.gl/widgets@9.3.9",
+      "group": "deck.gl",
+      "name": "widgets",
+      "version": "9.3.9",
+      "purl": "pkg:npm/%40deck.gl/widgets@9.3.9",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/accept-negotiator@2.1.0",
+      "group": "fastify",
+      "name": "accept-negotiator",
+      "version": "2.1.0",
+      "purl": "pkg:npm/%40fastify/accept-negotiator@2.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/ajv-compiler@4.0.6",
+      "group": "fastify",
+      "name": "ajv-compiler",
+      "version": "4.0.6",
+      "purl": "pkg:npm/%40fastify/ajv-compiler@4.0.6",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/error@4.2.0",
+      "group": "fastify",
+      "name": "error",
+      "version": "4.2.0",
+      "purl": "pkg:npm/%40fastify/error@4.2.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/fast-json-stringify-compiler@5.1.0",
+      "group": "fastify",
+      "name": "fast-json-stringify-compiler",
+      "version": "5.1.0",
+      "purl": "pkg:npm/%40fastify/fast-json-stringify-compiler@5.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/forwarded@3.0.2",
+      "group": "fastify",
+      "name": "forwarded",
+      "version": "3.0.2",
+      "purl": "pkg:npm/%40fastify/forwarded@3.0.2",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/merge-json-schemas@0.2.1",
+      "group": "fastify",
+      "name": "merge-json-schemas",
+      "version": "0.2.1",
+      "purl": "pkg:npm/%40fastify/merge-json-schemas@0.2.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/proxy-addr@5.1.0",
+      "group": "fastify",
+      "name": "proxy-addr",
+      "version": "5.1.0",
+      "purl": "pkg:npm/%40fastify/proxy-addr@5.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/send@4.1.1",
+      "group": "fastify",
+      "name": "send",
+      "version": "4.1.1",
+      "purl": "pkg:npm/%40fastify/send@4.1.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/static@10.1.3",
+      "group": "fastify",
+      "name": "static",
+      "version": "10.1.3",
+      "purl": "pkg:npm/%40fastify/static@10.1.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/swagger-ui@6.1.1",
+      "group": "fastify",
+      "name": "swagger-ui",
+      "version": "6.1.1",
+      "purl": "pkg:npm/%40fastify/swagger-ui@6.1.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40fastify/swagger@9.8.1",
+      "group": "fastify",
+      "name": "swagger",
+      "version": "9.8.1",
+      "purl": "pkg:npm/%40fastify/swagger@9.8.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40floating-ui/core@1.8.0",
+      "group": "floating-ui",
+      "name": "core",
+      "version": "1.8.0",
+      "purl": "pkg:npm/%40floating-ui/core@1.8.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40floating-ui/dom@1.8.0",
+      "group": "floating-ui",
+      "name": "dom",
+      "version": "1.8.0",
+      "purl": "pkg:npm/%40floating-ui/dom@1.8.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40floating-ui/utils@0.2.12",
+      "group": "floating-ui",
+      "name": "utils",
+      "version": "0.2.12",
+      "purl": "pkg:npm/%40floating-ui/utils@0.2.12",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+      "group": "h3-toolkit",
+      "name": "aggregation",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:npm/%40h3-toolkit/api@0.2.0",
+      "group": "h3-toolkit",
+      "name": "api",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/api@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:npm/%40h3-toolkit/cli@0.2.0",
+      "group": "h3-toolkit",
+      "name": "cli",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/cli@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40h3-toolkit/core@0.2.0",
+      "group": "h3-toolkit",
+      "name": "core",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/core@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+      "group": "h3-toolkit",
+      "name": "coverage",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40h3-toolkit/flow@0.2.0",
+      "group": "h3-toolkit",
+      "name": "flow",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/flow@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+      "group": "h3-toolkit",
+      "name": "geometry",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40h3-toolkit/io@0.2.0",
+      "group": "h3-toolkit",
+      "name": "io",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/io@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+      "group": "h3-toolkit",
+      "name": "neighborhood",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40h3-toolkit/postgis@0.2.0",
+      "group": "h3-toolkit",
+      "name": "postgis",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/postgis@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:npm/%40h3-toolkit/web-demo@0.2.0",
+      "group": "h3-toolkit",
+      "name": "web-demo",
+      "version": "0.2.0",
+      "purl": "pkg:npm/%40h3-toolkit/web-demo@0.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40loaders.gl/core@4.4.4",
+      "group": "loaders.gl",
+      "name": "core",
+      "version": "4.4.4",
+      "purl": "pkg:npm/%40loaders.gl/core@4.4.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40loaders.gl/images@4.4.4",
+      "group": "loaders.gl",
+      "name": "images",
+      "version": "4.4.4",
+      "purl": "pkg:npm/%40loaders.gl/images@4.4.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40loaders.gl/loader-utils@4.4.4",
+      "group": "loaders.gl",
+      "name": "loader-utils",
+      "version": "4.4.4",
+      "purl": "pkg:npm/%40loaders.gl/loader-utils@4.4.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40loaders.gl/schema-utils@4.4.4",
+      "group": "loaders.gl",
+      "name": "schema-utils",
+      "version": "4.4.4",
+      "purl": "pkg:npm/%40loaders.gl/schema-utils@4.4.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40loaders.gl/schema@4.4.4",
+      "group": "loaders.gl",
+      "name": "schema",
+      "version": "4.4.4",
+      "purl": "pkg:npm/%40loaders.gl/schema@4.4.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40loaders.gl/worker-utils@4.4.4",
+      "group": "loaders.gl",
+      "name": "worker-utils",
+      "version": "4.4.4",
+      "purl": "pkg:npm/%40loaders.gl/worker-utils@4.4.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40lukeed/ms@2.0.2",
+      "group": "lukeed",
+      "name": "ms",
+      "version": "2.0.2",
+      "purl": "pkg:npm/%40lukeed/ms@2.0.2",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40luma.gl/core@9.3.6",
+      "group": "luma.gl",
+      "name": "core",
+      "version": "9.3.6",
+      "purl": "pkg:npm/%40luma.gl/core@9.3.6",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40luma.gl/engine@9.3.6",
+      "group": "luma.gl",
+      "name": "engine",
+      "version": "9.3.6",
+      "purl": "pkg:npm/%40luma.gl/engine@9.3.6",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40luma.gl/shadertools@9.3.6",
+      "group": "luma.gl",
+      "name": "shadertools",
+      "version": "9.3.6",
+      "purl": "pkg:npm/%40luma.gl/shadertools@9.3.6",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40luma.gl/webgl@9.3.6",
+      "group": "luma.gl",
+      "name": "webgl",
+      "version": "9.3.6",
+      "purl": "pkg:npm/%40luma.gl/webgl@9.3.6",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40mapbox/tiny-sdf@2.2.0",
+      "group": "mapbox",
+      "name": "tiny-sdf",
+      "version": "2.2.0",
+      "purl": "pkg:npm/%40mapbox/tiny-sdf@2.2.0",
+      "licenses": [
+        {
+          "expression": "BSD-2-Clause"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40math.gl/core@4.1.0",
+      "group": "math.gl",
+      "name": "core",
+      "version": "4.1.0",
+      "purl": "pkg:npm/%40math.gl/core@4.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40math.gl/polygon@4.1.0",
+      "group": "math.gl",
+      "name": "polygon",
+      "version": "4.1.0",
+      "purl": "pkg:npm/%40math.gl/polygon@4.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40math.gl/sun@4.1.0",
+      "group": "math.gl",
+      "name": "sun",
+      "version": "4.1.0",
+      "purl": "pkg:npm/%40math.gl/sun@4.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40math.gl/types@4.1.0",
+      "group": "math.gl",
+      "name": "types",
+      "version": "4.1.0",
+      "purl": "pkg:npm/%40math.gl/types@4.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40math.gl/web-mercator@4.1.0",
+      "group": "math.gl",
+      "name": "web-mercator",
+      "version": "4.1.0",
+      "purl": "pkg:npm/%40math.gl/web-mercator@4.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40pinojs/redact@0.4.0",
+      "group": "pinojs",
+      "name": "redact",
+      "version": "0.4.0",
+      "purl": "pkg:npm/%40pinojs/redact@0.4.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40probe.gl/env@4.1.1",
+      "group": "probe.gl",
+      "name": "env",
+      "version": "4.1.1",
+      "purl": "pkg:npm/%40probe.gl/env@4.1.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40probe.gl/log@4.1.1",
+      "group": "probe.gl",
+      "name": "log",
+      "version": "4.1.1",
+      "purl": "pkg:npm/%40probe.gl/log@4.1.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40probe.gl/stats@4.1.1",
+      "group": "probe.gl",
+      "name": "stats",
+      "version": "4.1.1",
+      "purl": "pkg:npm/%40probe.gl/stats@4.1.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40types/geojson@7946.0.16",
+      "group": "types",
+      "name": "geojson",
+      "version": "7946.0.16",
+      "purl": "pkg:npm/%40types/geojson@7946.0.16",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40types/node@25.9.5",
+      "group": "types",
+      "name": "node",
+      "version": "25.9.5",
+      "purl": "pkg:npm/%40types/node@25.9.5",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/%40types/offscreencanvas@2019.7.3",
+      "group": "types",
+      "name": "offscreencanvas",
+      "version": "2019.7.3",
+      "purl": "pkg:npm/%40types/offscreencanvas@2019.7.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/abstract-logging@2.0.1",
+      "group": "",
+      "name": "abstract-logging",
+      "version": "2.0.1",
+      "purl": "pkg:npm/abstract-logging@2.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/ajv-formats@3.0.1",
+      "group": "",
+      "name": "ajv-formats",
+      "version": "3.0.1",
+      "purl": "pkg:npm/ajv-formats@3.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/ajv@8.20.0",
+      "group": "",
+      "name": "ajv",
+      "version": "8.20.0",
+      "purl": "pkg:npm/ajv@8.20.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/apache-arrow@21.2.0",
+      "group": "",
+      "name": "apache-arrow",
+      "version": "21.2.0",
+      "purl": "pkg:npm/apache-arrow@21.2.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/atomic-sleep@1.0.0",
+      "group": "",
+      "name": "atomic-sleep",
+      "version": "1.0.0",
+      "purl": "pkg:npm/atomic-sleep@1.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/avvio@9.3.0",
+      "group": "",
+      "name": "avvio",
+      "version": "9.3.0",
+      "purl": "pkg:npm/avvio@9.3.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/balanced-match@4.0.4",
+      "group": "",
+      "name": "balanced-match",
+      "version": "4.0.4",
+      "purl": "pkg:npm/balanced-match@4.0.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/brace-expansion@5.0.9",
+      "group": "",
+      "name": "brace-expansion",
+      "version": "5.0.9",
+      "purl": "pkg:npm/brace-expansion@5.0.9",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/content-disposition@2.0.1",
+      "group": "",
+      "name": "content-disposition",
+      "version": "2.0.1",
+      "purl": "pkg:npm/content-disposition@2.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/cookie@1.1.1",
+      "group": "",
+      "name": "cookie",
+      "version": "1.1.1",
+      "purl": "pkg:npm/cookie@1.1.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/debug@4.4.3",
+      "group": "",
+      "name": "debug",
+      "version": "4.4.3",
+      "purl": "pkg:npm/debug@4.4.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/depd@2.0.0",
+      "group": "",
+      "name": "depd",
+      "version": "2.0.0",
+      "purl": "pkg:npm/depd@2.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/dequal@2.0.3",
+      "group": "",
+      "name": "dequal",
+      "version": "2.0.3",
+      "purl": "pkg:npm/dequal@2.0.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/earcut@2.2.4",
+      "group": "",
+      "name": "earcut",
+      "version": "2.2.4",
+      "purl": "pkg:npm/earcut@2.2.4",
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/escape-html@1.0.3",
+      "group": "",
+      "name": "escape-html",
+      "version": "1.0.3",
+      "purl": "pkg:npm/escape-html@1.0.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fast-decode-uri-component@1.0.1",
+      "group": "",
+      "name": "fast-decode-uri-component",
+      "version": "1.0.1",
+      "purl": "pkg:npm/fast-decode-uri-component@1.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fast-deep-equal@3.1.3",
+      "group": "",
+      "name": "fast-deep-equal",
+      "version": "3.1.3",
+      "purl": "pkg:npm/fast-deep-equal@3.1.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fast-json-stringify@7.0.1",
+      "group": "",
+      "name": "fast-json-stringify",
+      "version": "7.0.1",
+      "purl": "pkg:npm/fast-json-stringify@7.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fast-querystring@1.1.2",
+      "group": "",
+      "name": "fast-querystring",
+      "version": "1.1.2",
+      "purl": "pkg:npm/fast-querystring@1.1.2",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fast-uri@3.1.5",
+      "group": "",
+      "name": "fast-uri",
+      "version": "3.1.5",
+      "purl": "pkg:npm/fast-uri@3.1.5",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fast-uri@4.1.2",
+      "group": "",
+      "name": "fast-uri",
+      "version": "4.1.2",
+      "purl": "pkg:npm/fast-uri@4.1.2",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fastify-plugin@6.0.0",
+      "group": "",
+      "name": "fastify-plugin",
+      "version": "6.0.0",
+      "purl": "pkg:npm/fastify-plugin@6.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fastify@5.11.3",
+      "group": "",
+      "name": "fastify",
+      "version": "5.11.3",
+      "purl": "pkg:npm/fastify@5.11.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fastq@1.20.1",
+      "group": "",
+      "name": "fastq",
+      "version": "1.20.1",
+      "purl": "pkg:npm/fastq@1.20.1",
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/find-my-way@9.7.0",
+      "group": "",
+      "name": "find-my-way",
+      "version": "9.7.0",
+      "purl": "pkg:npm/find-my-way@9.7.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/flatbuffers@25.9.23",
+      "group": "",
+      "name": "flatbuffers",
+      "version": "25.9.23",
+      "purl": "pkg:npm/flatbuffers@25.9.23",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/gl-matrix@3.4.4",
+      "group": "",
+      "name": "gl-matrix",
+      "version": "3.4.4",
+      "purl": "pkg:npm/gl-matrix@3.4.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/glob@13.0.6",
+      "group": "",
+      "name": "glob",
+      "version": "13.0.6",
+      "purl": "pkg:npm/glob@13.0.6",
+      "licenses": [
+        {
+          "expression": "BlueOak-1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/h3-js@4.5.0",
+      "group": "",
+      "name": "h3-js",
+      "version": "4.5.0",
+      "purl": "pkg:npm/h3-js@4.5.0",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/has-flag@4.0.0",
+      "group": "",
+      "name": "has-flag",
+      "version": "4.0.0",
+      "purl": "pkg:npm/has-flag@4.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/http-errors@2.0.1",
+      "group": "",
+      "name": "http-errors",
+      "version": "2.0.1",
+      "purl": "pkg:npm/http-errors@2.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/inherits@2.0.4",
+      "group": "",
+      "name": "inherits",
+      "version": "2.0.4",
+      "purl": "pkg:npm/inherits@2.0.4",
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/ipaddr.js@2.5.0",
+      "group": "",
+      "name": "ipaddr.js",
+      "version": "2.5.0",
+      "purl": "pkg:npm/ipaddr.js@2.5.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/json-schema-ref-resolver@3.0.0",
+      "group": "",
+      "name": "json-schema-ref-resolver",
+      "version": "3.0.0",
+      "purl": "pkg:npm/json-schema-ref-resolver@3.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/json-schema-resolver@3.0.0",
+      "group": "",
+      "name": "json-schema-resolver",
+      "version": "3.0.0",
+      "purl": "pkg:npm/json-schema-resolver@3.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/json-schema-traverse@1.0.0",
+      "group": "",
+      "name": "json-schema-traverse",
+      "version": "1.0.0",
+      "purl": "pkg:npm/json-schema-traverse@1.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/json-with-bigint@3.5.10",
+      "group": "",
+      "name": "json-with-bigint",
+      "version": "3.5.10",
+      "purl": "pkg:npm/json-with-bigint@3.5.10",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/light-my-request@6.6.0",
+      "group": "",
+      "name": "light-my-request",
+      "version": "6.6.0",
+      "purl": "pkg:npm/light-my-request@6.6.0",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/lru-cache@11.5.2",
+      "group": "",
+      "name": "lru-cache",
+      "version": "11.5.2",
+      "purl": "pkg:npm/lru-cache@11.5.2",
+      "licenses": [
+        {
+          "expression": "BlueOak-1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/mime@3.0.0",
+      "group": "",
+      "name": "mime",
+      "version": "3.0.0",
+      "purl": "pkg:npm/mime@3.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minimatch@10.2.6",
+      "group": "",
+      "name": "minimatch",
+      "version": "10.2.6",
+      "purl": "pkg:npm/minimatch@10.2.6",
+      "licenses": [
+        {
+          "expression": "BlueOak-1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/minipass@7.1.3",
+      "group": "",
+      "name": "minipass",
+      "version": "7.1.3",
+      "purl": "pkg:npm/minipass@7.1.3",
+      "licenses": [
+        {
+          "expression": "BlueOak-1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/mjolnir.js@3.0.1",
+      "group": "",
+      "name": "mjolnir.js",
+      "version": "3.0.1",
+      "purl": "pkg:npm/mjolnir.js@3.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/ms@2.1.3",
+      "group": "",
+      "name": "ms",
+      "version": "2.1.3",
+      "purl": "pkg:npm/ms@2.1.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/on-exit-leak-free@2.1.2",
+      "group": "",
+      "name": "on-exit-leak-free",
+      "version": "2.1.2",
+      "purl": "pkg:npm/on-exit-leak-free@2.1.2",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/openapi-types@12.1.3",
+      "group": "",
+      "name": "openapi-types",
+      "version": "12.1.3",
+      "purl": "pkg:npm/openapi-types@12.1.3",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/path-scurry@2.0.2",
+      "group": "",
+      "name": "path-scurry",
+      "version": "2.0.2",
+      "purl": "pkg:npm/path-scurry@2.0.2",
+      "licenses": [
+        {
+          "expression": "BlueOak-1.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pg-cloudflare@1.4.0",
+      "group": "",
+      "name": "pg-cloudflare",
+      "version": "1.4.0",
+      "purl": "pkg:npm/pg-cloudflare@1.4.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pg-connection-string@2.14.0",
+      "group": "",
+      "name": "pg-connection-string",
+      "version": "2.14.0",
+      "purl": "pkg:npm/pg-connection-string@2.14.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pg-int8@1.0.1",
+      "group": "",
+      "name": "pg-int8",
+      "version": "1.0.1",
+      "purl": "pkg:npm/pg-int8@1.0.1",
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pg-pool@3.14.0",
+      "group": "",
+      "name": "pg-pool",
+      "version": "3.14.0",
+      "purl": "pkg:npm/pg-pool@3.14.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pg-protocol@1.16.0",
+      "group": "",
+      "name": "pg-protocol",
+      "version": "1.16.0",
+      "purl": "pkg:npm/pg-protocol@1.16.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pg-types@2.2.0",
+      "group": "",
+      "name": "pg-types",
+      "version": "2.2.0",
+      "purl": "pkg:npm/pg-types@2.2.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pg@8.23.0",
+      "group": "",
+      "name": "pg",
+      "version": "8.23.0",
+      "purl": "pkg:npm/pg@8.23.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pgpass@1.0.5",
+      "group": "",
+      "name": "pgpass",
+      "version": "1.0.5",
+      "purl": "pkg:npm/pgpass@1.0.5",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pino-abstract-transport@3.0.0",
+      "group": "",
+      "name": "pino-abstract-transport",
+      "version": "3.0.0",
+      "purl": "pkg:npm/pino-abstract-transport@3.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pino-std-serializers@7.1.0",
+      "group": "",
+      "name": "pino-std-serializers",
+      "version": "7.1.0",
+      "purl": "pkg:npm/pino-std-serializers@7.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pino@10.3.1",
+      "group": "",
+      "name": "pino",
+      "version": "10.3.1",
+      "purl": "pkg:npm/pino@10.3.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/postgres-array@2.0.0",
+      "group": "",
+      "name": "postgres-array",
+      "version": "2.0.0",
+      "purl": "pkg:npm/postgres-array@2.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/postgres-bytea@1.0.1",
+      "group": "",
+      "name": "postgres-bytea",
+      "version": "1.0.1",
+      "purl": "pkg:npm/postgres-bytea@1.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/postgres-date@1.0.7",
+      "group": "",
+      "name": "postgres-date",
+      "version": "1.0.7",
+      "purl": "pkg:npm/postgres-date@1.0.7",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/postgres-interval@1.2.0",
+      "group": "",
+      "name": "postgres-interval",
+      "version": "1.2.0",
+      "purl": "pkg:npm/postgres-interval@1.2.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/preact@10.29.8",
+      "group": "",
+      "name": "preact",
+      "version": "10.29.8",
+      "purl": "pkg:npm/preact@10.29.8",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/process-warning@4.0.1",
+      "group": "",
+      "name": "process-warning",
+      "version": "4.0.1",
+      "purl": "pkg:npm/process-warning@4.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/process-warning@5.1.0",
+      "group": "",
+      "name": "process-warning",
+      "version": "5.1.0",
+      "purl": "pkg:npm/process-warning@5.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/quick-format-unescaped@4.0.4",
+      "group": "",
+      "name": "quick-format-unescaped",
+      "version": "4.0.4",
+      "purl": "pkg:npm/quick-format-unescaped@4.0.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/react-dom@19.2.8",
+      "group": "",
+      "name": "react-dom",
+      "version": "19.2.8",
+      "purl": "pkg:npm/react-dom@19.2.8",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/react@19.2.8",
+      "group": "",
+      "name": "react",
+      "version": "19.2.8",
+      "purl": "pkg:npm/react@19.2.8",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/real-require@0.2.0",
+      "group": "",
+      "name": "real-require",
+      "version": "0.2.0",
+      "purl": "pkg:npm/real-require@0.2.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/real-require@1.0.0",
+      "group": "",
+      "name": "real-require",
+      "version": "1.0.0",
+      "purl": "pkg:npm/real-require@1.0.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/require-from-string@2.0.2",
+      "group": "",
+      "name": "require-from-string",
+      "version": "2.0.2",
+      "purl": "pkg:npm/require-from-string@2.0.2",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/ret@0.5.0",
+      "group": "",
+      "name": "ret",
+      "version": "0.5.0",
+      "purl": "pkg:npm/ret@0.5.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/reusify@1.1.0",
+      "group": "",
+      "name": "reusify",
+      "version": "1.1.0",
+      "purl": "pkg:npm/reusify@1.1.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/rfdc@1.4.1",
+      "group": "",
+      "name": "rfdc",
+      "version": "1.4.1",
+      "purl": "pkg:npm/rfdc@1.4.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/safe-regex2@5.1.1",
+      "group": "",
+      "name": "safe-regex2",
+      "version": "5.1.1",
+      "purl": "pkg:npm/safe-regex2@5.1.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/safe-stable-stringify@2.5.0",
+      "group": "",
+      "name": "safe-stable-stringify",
+      "version": "2.5.0",
+      "purl": "pkg:npm/safe-stable-stringify@2.5.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/scheduler@0.27.0",
+      "group": "",
+      "name": "scheduler",
+      "version": "0.27.0",
+      "purl": "pkg:npm/scheduler@0.27.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/secure-json-parse@4.1.0",
+      "group": "",
+      "name": "secure-json-parse",
+      "version": "4.1.0",
+      "purl": "pkg:npm/secure-json-parse@4.1.0",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/semver@7.8.5",
+      "group": "",
+      "name": "semver",
+      "version": "7.8.5",
+      "purl": "pkg:npm/semver@7.8.5",
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/set-cookie-parser@2.7.2",
+      "group": "",
+      "name": "set-cookie-parser",
+      "version": "2.7.2",
+      "purl": "pkg:npm/set-cookie-parser@2.7.2",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/setprototypeof@1.2.0",
+      "group": "",
+      "name": "setprototypeof",
+      "version": "1.2.0",
+      "purl": "pkg:npm/setprototypeof@1.2.0",
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/sonic-boom@4.2.1",
+      "group": "",
+      "name": "sonic-boom",
+      "version": "4.2.1",
+      "purl": "pkg:npm/sonic-boom@4.2.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/split2@4.2.0",
+      "group": "",
+      "name": "split2",
+      "version": "4.2.0",
+      "purl": "pkg:npm/split2@4.2.0",
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/statuses@2.0.2",
+      "group": "",
+      "name": "statuses",
+      "version": "2.0.2",
+      "purl": "pkg:npm/statuses@2.0.2",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/supports-color@7.2.0",
+      "group": "",
+      "name": "supports-color",
+      "version": "7.2.0",
+      "purl": "pkg:npm/supports-color@7.2.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/thread-stream@4.2.0",
+      "group": "",
+      "name": "thread-stream",
+      "version": "4.2.0",
+      "purl": "pkg:npm/thread-stream@4.2.0",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/toad-cache@3.7.4",
+      "group": "",
+      "name": "toad-cache",
+      "version": "3.7.4",
+      "purl": "pkg:npm/toad-cache@3.7.4",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/toidentifier@1.0.1",
+      "group": "",
+      "name": "toidentifier",
+      "version": "1.0.1",
+      "purl": "pkg:npm/toidentifier@1.0.1",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/tslib@2.8.1",
+      "group": "",
+      "name": "tslib",
+      "version": "2.8.1",
+      "purl": "pkg:npm/tslib@2.8.1",
+      "licenses": [
+        {
+          "expression": "0BSD"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/undici-types@7.24.6",
+      "group": "",
+      "name": "undici-types",
+      "version": "7.24.6",
+      "purl": "pkg:npm/undici-types@7.24.6",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/xtend@4.0.2",
+      "group": "",
+      "name": "xtend",
+      "version": "4.0.2",
+      "purl": "pkg:npm/xtend@4.0.2",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/yaml@2.9.0",
+      "group": "",
+      "name": "yaml",
+      "version": "2.9.0",
+      "purl": "pkg:npm/yaml@2.9.0",
+      "licenses": [
+        {
+          "expression": "ISC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "h3-toolkit:workspace",
+          "value": "false"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:npm/%40deck.gl/core@9.3.9",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40deck.gl/layers@9.3.9",
+      "dependsOn": [
+        "pkg:npm/%40deck.gl/core@9.3.9",
+        "pkg:npm/%40loaders.gl/core@4.4.4",
+        "pkg:npm/%40loaders.gl/images@4.4.4",
+        "pkg:npm/%40loaders.gl/schema@4.4.4",
+        "pkg:npm/%40luma.gl/core@9.3.6",
+        "pkg:npm/%40luma.gl/engine@9.3.6",
+        "pkg:npm/%40luma.gl/shadertools@9.3.6",
+        "pkg:npm/%40mapbox/tiny-sdf@2.2.0",
+        "pkg:npm/%40math.gl/core@4.1.0",
+        "pkg:npm/%40math.gl/polygon@4.1.0",
+        "pkg:npm/%40math.gl/web-mercator@4.1.0",
+        "pkg:npm/%40types/geojson@7946.0.16",
+        "pkg:npm/earcut@2.2.4"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40deck.gl/react@9.3.9",
+      "dependsOn": [
+        "pkg:npm/%40deck.gl/core@9.3.9",
+        "pkg:npm/%40deck.gl/widgets@9.3.9",
+        "pkg:npm/react-dom@19.2.8",
+        "pkg:npm/react@19.2.8"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40deck.gl/widgets@9.3.9",
+      "dependsOn": [
+        "pkg:npm/%40deck.gl/core@9.3.9",
+        "pkg:npm/%40floating-ui/dom@1.8.0",
+        "pkg:npm/%40luma.gl/core@9.3.6",
+        "pkg:npm/preact@10.29.8"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40fastify/accept-negotiator@2.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40fastify/ajv-compiler@4.0.6",
+      "dependsOn": [
+        "pkg:npm/ajv-formats@3.0.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/fast-uri@4.1.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40fastify/error@4.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40fastify/fast-json-stringify-compiler@5.1.0",
+      "dependsOn": [
+        "pkg:npm/fast-json-stringify@7.0.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40fastify/forwarded@3.0.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40fastify/merge-json-schemas@0.2.1",
+      "dependsOn": [
+        "pkg:npm/dequal@2.0.3"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40fastify/proxy-addr@5.1.0",
+      "dependsOn": [
+        "pkg:npm/%40fastify/forwarded@3.0.2",
+        "pkg:npm/ipaddr.js@2.5.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40fastify/send@4.1.1",
+      "dependsOn": [
+        "pkg:npm/%40lukeed/ms@2.0.2",
+        "pkg:npm/escape-html@1.0.3",
+        "pkg:npm/fast-decode-uri-component@1.0.1",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/mime@3.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40fastify/static@10.1.3",
+      "dependsOn": [
+        "pkg:npm/%40fastify/accept-negotiator@2.1.0",
+        "pkg:npm/%40fastify/error@4.2.0",
+        "pkg:npm/%40fastify/send@4.1.1",
+        "pkg:npm/content-disposition@2.0.1",
+        "pkg:npm/fastify-plugin@6.0.0",
+        "pkg:npm/fastq@1.20.1",
+        "pkg:npm/glob@13.0.6"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40fastify/swagger-ui@6.1.1",
+      "dependsOn": [
+        "pkg:npm/%40fastify/static@10.1.3",
+        "pkg:npm/fastify-plugin@6.0.0",
+        "pkg:npm/openapi-types@12.1.3",
+        "pkg:npm/rfdc@1.4.1",
+        "pkg:npm/yaml@2.9.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40fastify/swagger@9.8.1",
+      "dependsOn": [
+        "pkg:npm/fastify-plugin@6.0.0",
+        "pkg:npm/json-schema-resolver@3.0.0",
+        "pkg:npm/openapi-types@12.1.3",
+        "pkg:npm/rfdc@1.4.1",
+        "pkg:npm/yaml@2.9.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40floating-ui/core@1.8.0",
+      "dependsOn": [
+        "pkg:npm/%40floating-ui/utils@0.2.12"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40floating-ui/dom@1.8.0",
+      "dependsOn": [
+        "pkg:npm/%40floating-ui/core@1.8.0",
+        "pkg:npm/%40floating-ui/utils@0.2.12"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40floating-ui/utils@0.2.12",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/h3-js@4.5.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/api@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40fastify/swagger-ui@6.1.1",
+        "pkg:npm/%40fastify/swagger@9.8.1",
+        "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+        "pkg:npm/%40h3-toolkit/flow@0.2.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+        "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+        "pkg:npm/fastify@5.11.3",
+        "pkg:npm/h3-js@4.5.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/cli@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+        "pkg:npm/%40h3-toolkit/flow@0.2.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+        "pkg:npm/%40h3-toolkit/io@0.2.0",
+        "pkg:npm/%40h3-toolkit/neighborhood@0.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/core@0.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/flow@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40h3-toolkit/core@0.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/io@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40h3-toolkit/core@0.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/h3-js@4.5.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/postgis@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/pg@8.23.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40h3-toolkit/web-demo@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40deck.gl/core@9.3.9",
+        "pkg:npm/%40deck.gl/layers@9.3.9",
+        "pkg:npm/%40deck.gl/react@9.3.9",
+        "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+        "pkg:npm/h3-js@4.5.0",
+        "pkg:npm/react-dom@19.2.8",
+        "pkg:npm/react@19.2.8"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40loaders.gl/core@4.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40loaders.gl/images@4.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40loaders.gl/loader-utils@4.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40loaders.gl/schema-utils@4.4.4",
+      "dependsOn": [
+        "pkg:npm/%40loaders.gl/core@4.4.4",
+        "pkg:npm/%40loaders.gl/schema@4.4.4",
+        "pkg:npm/%40math.gl/types@4.1.0",
+        "pkg:npm/%40types/geojson@7946.0.16",
+        "pkg:npm/apache-arrow@21.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40loaders.gl/schema@4.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40loaders.gl/worker-utils@4.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40lukeed/ms@2.0.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40luma.gl/core@9.3.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40luma.gl/engine@9.3.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40luma.gl/shadertools@9.3.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40luma.gl/webgl@9.3.6",
+      "dependsOn": [
+        "pkg:npm/%40luma.gl/core@9.3.6",
+        "pkg:npm/%40math.gl/types@4.1.0",
+        "pkg:npm/%40probe.gl/env@4.1.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40mapbox/tiny-sdf@2.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40math.gl/core@4.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40math.gl/polygon@4.1.0",
+      "dependsOn": [
+        "pkg:npm/%40math.gl/core@4.1.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40math.gl/sun@4.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40math.gl/types@4.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40math.gl/web-mercator@4.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40pinojs/redact@0.4.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40probe.gl/env@4.1.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40probe.gl/log@4.1.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40probe.gl/stats@4.1.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40types/geojson@7946.0.16",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/%40types/node@25.9.5",
+      "dependsOn": [
+        "pkg:npm/undici-types@7.24.6"
+      ]
+    },
+    {
+      "ref": "pkg:npm/%40types/offscreencanvas@2019.7.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/abstract-logging@2.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/ajv-formats@3.0.1",
+      "dependsOn": [
+        "pkg:npm/ajv@8.20.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/ajv@8.20.0",
+      "dependsOn": [
+        "pkg:npm/fast-deep-equal@3.1.3",
+        "pkg:npm/fast-uri@3.1.5",
+        "pkg:npm/json-schema-traverse@1.0.0",
+        "pkg:npm/require-from-string@2.0.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/apache-arrow@21.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/atomic-sleep@1.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/avvio@9.3.0",
+      "dependsOn": [
+        "pkg:npm/%40fastify/error@4.2.0",
+        "pkg:npm/fastq@1.20.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/balanced-match@4.0.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/brace-expansion@5.0.9",
+      "dependsOn": [
+        "pkg:npm/balanced-match@4.0.4"
+      ]
+    },
+    {
+      "ref": "pkg:npm/content-disposition@2.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/cookie@1.1.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/debug@4.4.3",
+      "dependsOn": [
+        "pkg:npm/ms@2.1.3",
+        "pkg:npm/supports-color@7.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/depd@2.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/dequal@2.0.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/earcut@2.2.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/escape-html@1.0.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/fast-decode-uri-component@1.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/fast-deep-equal@3.1.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/fast-json-stringify@7.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/fast-querystring@1.1.2",
+      "dependsOn": [
+        "pkg:npm/fast-decode-uri-component@1.0.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/fast-uri@3.1.5",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/fast-uri@4.1.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/fastify-plugin@6.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/fastify@5.11.3",
+      "dependsOn": [
+        "pkg:npm/%40fastify/ajv-compiler@4.0.6",
+        "pkg:npm/%40fastify/error@4.2.0",
+        "pkg:npm/%40fastify/fast-json-stringify-compiler@5.1.0",
+        "pkg:npm/%40fastify/proxy-addr@5.1.0",
+        "pkg:npm/abstract-logging@2.0.1",
+        "pkg:npm/avvio@9.3.0",
+        "pkg:npm/fast-json-stringify@7.0.1",
+        "pkg:npm/find-my-way@9.7.0",
+        "pkg:npm/light-my-request@6.6.0",
+        "pkg:npm/pino@10.3.1",
+        "pkg:npm/process-warning@5.1.0",
+        "pkg:npm/rfdc@1.4.1",
+        "pkg:npm/secure-json-parse@4.1.0",
+        "pkg:npm/semver@7.8.5",
+        "pkg:npm/toad-cache@3.7.4"
+      ]
+    },
+    {
+      "ref": "pkg:npm/fastq@1.20.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/find-my-way@9.7.0",
+      "dependsOn": [
+        "pkg:npm/fast-deep-equal@3.1.3",
+        "pkg:npm/fast-querystring@1.1.2",
+        "pkg:npm/safe-regex2@5.1.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/flatbuffers@25.9.23",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/gl-matrix@3.4.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/glob@13.0.6",
+      "dependsOn": [
+        "pkg:npm/minimatch@10.2.6",
+        "pkg:npm/minipass@7.1.3",
+        "pkg:npm/path-scurry@2.0.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/h3-js@4.5.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/h3-spatial-toolkit@0.2.0",
+      "dependsOn": [
+        "pkg:npm/%40deck.gl/core@9.3.9",
+        "pkg:npm/%40deck.gl/layers@9.3.9",
+        "pkg:npm/%40deck.gl/react@9.3.9",
+        "pkg:npm/%40deck.gl/widgets@9.3.9",
+        "pkg:npm/%40fastify/accept-negotiator@2.1.0",
+        "pkg:npm/%40fastify/ajv-compiler@4.0.6",
+        "pkg:npm/%40fastify/error@4.2.0",
+        "pkg:npm/%40fastify/fast-json-stringify-compiler@5.1.0",
+        "pkg:npm/%40fastify/forwarded@3.0.2",
+        "pkg:npm/%40fastify/merge-json-schemas@0.2.1",
+        "pkg:npm/%40fastify/proxy-addr@5.1.0",
+        "pkg:npm/%40fastify/send@4.1.1",
+        "pkg:npm/%40fastify/static@10.1.3",
+        "pkg:npm/%40fastify/swagger-ui@6.1.1",
+        "pkg:npm/%40fastify/swagger@9.8.1",
+        "pkg:npm/%40floating-ui/core@1.8.0",
+        "pkg:npm/%40floating-ui/dom@1.8.0",
+        "pkg:npm/%40floating-ui/utils@0.2.12",
+        "pkg:npm/%40h3-toolkit/aggregation@0.2.0",
+        "pkg:npm/%40h3-toolkit/api@0.2.0",
+        "pkg:npm/%40h3-toolkit/cli@0.2.0",
+        "pkg:npm/%40h3-toolkit/core@0.2.0",
+        "pkg:npm/%40h3-toolkit/coverage@0.2.0",
+        "pkg:npm/%40h3-toolkit/flow@0.2.0",
+        "pkg:npm/%40h3-toolkit/geometry@0.2.0",
+        "pkg:npm/%40h3-toolkit/io@0.2.0",
+        "pkg:npm/%40h3-toolkit/neighborhood@0.2.0",
+        "pkg:npm/%40h3-toolkit/postgis@0.2.0",
+        "pkg:npm/%40h3-toolkit/web-demo@0.2.0",
+        "pkg:npm/%40loaders.gl/core@4.4.4",
+        "pkg:npm/%40loaders.gl/images@4.4.4",
+        "pkg:npm/%40loaders.gl/loader-utils@4.4.4",
+        "pkg:npm/%40loaders.gl/schema-utils@4.4.4",
+        "pkg:npm/%40loaders.gl/schema@4.4.4",
+        "pkg:npm/%40loaders.gl/worker-utils@4.4.4",
+        "pkg:npm/%40lukeed/ms@2.0.2",
+        "pkg:npm/%40luma.gl/core@9.3.6",
+        "pkg:npm/%40luma.gl/engine@9.3.6",
+        "pkg:npm/%40luma.gl/shadertools@9.3.6",
+        "pkg:npm/%40luma.gl/webgl@9.3.6",
+        "pkg:npm/%40mapbox/tiny-sdf@2.2.0",
+        "pkg:npm/%40math.gl/core@4.1.0",
+        "pkg:npm/%40math.gl/polygon@4.1.0",
+        "pkg:npm/%40math.gl/sun@4.1.0",
+        "pkg:npm/%40math.gl/types@4.1.0",
+        "pkg:npm/%40math.gl/web-mercator@4.1.0",
+        "pkg:npm/%40pinojs/redact@0.4.0",
+        "pkg:npm/%40probe.gl/env@4.1.1",
+        "pkg:npm/%40probe.gl/log@4.1.1",
+        "pkg:npm/%40probe.gl/stats@4.1.1",
+        "pkg:npm/%40types/geojson@7946.0.16",
+        "pkg:npm/%40types/node@25.9.5",
+        "pkg:npm/%40types/offscreencanvas@2019.7.3",
+        "pkg:npm/abstract-logging@2.0.1",
+        "pkg:npm/ajv-formats@3.0.1",
+        "pkg:npm/ajv@8.20.0",
+        "pkg:npm/apache-arrow@21.2.0",
+        "pkg:npm/atomic-sleep@1.0.0",
+        "pkg:npm/avvio@9.3.0",
+        "pkg:npm/balanced-match@4.0.4",
+        "pkg:npm/brace-expansion@5.0.9",
+        "pkg:npm/content-disposition@2.0.1",
+        "pkg:npm/cookie@1.1.1",
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/depd@2.0.0",
+        "pkg:npm/dequal@2.0.3",
+        "pkg:npm/earcut@2.2.4",
+        "pkg:npm/escape-html@1.0.3",
+        "pkg:npm/fast-decode-uri-component@1.0.1",
+        "pkg:npm/fast-deep-equal@3.1.3",
+        "pkg:npm/fast-json-stringify@7.0.1",
+        "pkg:npm/fast-querystring@1.1.2",
+        "pkg:npm/fast-uri@3.1.5",
+        "pkg:npm/fast-uri@4.1.2",
+        "pkg:npm/fastify-plugin@6.0.0",
+        "pkg:npm/fastify@5.11.3",
+        "pkg:npm/fastq@1.20.1",
+        "pkg:npm/find-my-way@9.7.0",
+        "pkg:npm/flatbuffers@25.9.23",
+        "pkg:npm/gl-matrix@3.4.4",
+        "pkg:npm/glob@13.0.6",
+        "pkg:npm/h3-js@4.5.0",
+        "pkg:npm/has-flag@4.0.0",
+        "pkg:npm/http-errors@2.0.1",
+        "pkg:npm/inherits@2.0.4",
+        "pkg:npm/ipaddr.js@2.5.0",
+        "pkg:npm/json-schema-ref-resolver@3.0.0",
+        "pkg:npm/json-schema-resolver@3.0.0",
+        "pkg:npm/json-schema-traverse@1.0.0",
+        "pkg:npm/json-with-bigint@3.5.10",
+        "pkg:npm/light-my-request@6.6.0",
+        "pkg:npm/lru-cache@11.5.2",
+        "pkg:npm/mime@3.0.0",
+        "pkg:npm/minimatch@10.2.6",
+        "pkg:npm/minipass@7.1.3",
+        "pkg:npm/mjolnir.js@3.0.1",
+        "pkg:npm/ms@2.1.3",
+        "pkg:npm/on-exit-leak-free@2.1.2",
+        "pkg:npm/openapi-types@12.1.3",
+        "pkg:npm/path-scurry@2.0.2",
+        "pkg:npm/pg-cloudflare@1.4.0",
+        "pkg:npm/pg-connection-string@2.14.0",
+        "pkg:npm/pg-int8@1.0.1",
+        "pkg:npm/pg-pool@3.14.0",
+        "pkg:npm/pg-protocol@1.16.0",
+        "pkg:npm/pg-types@2.2.0",
+        "pkg:npm/pg@8.23.0",
+        "pkg:npm/pgpass@1.0.5",
+        "pkg:npm/pino-abstract-transport@3.0.0",
+        "pkg:npm/pino-std-serializers@7.1.0",
+        "pkg:npm/pino@10.3.1",
+        "pkg:npm/postgres-array@2.0.0",
+        "pkg:npm/postgres-bytea@1.0.1",
+        "pkg:npm/postgres-date@1.0.7",
+        "pkg:npm/postgres-interval@1.2.0",
+        "pkg:npm/preact@10.29.8",
+        "pkg:npm/process-warning@4.0.1",
+        "pkg:npm/process-warning@5.1.0",
+        "pkg:npm/quick-format-unescaped@4.0.4",
+        "pkg:npm/react-dom@19.2.8",
+        "pkg:npm/react@19.2.8",
+        "pkg:npm/real-require@0.2.0",
+        "pkg:npm/real-require@1.0.0",
+        "pkg:npm/require-from-string@2.0.2",
+        "pkg:npm/ret@0.5.0",
+        "pkg:npm/reusify@1.1.0",
+        "pkg:npm/rfdc@1.4.1",
+        "pkg:npm/safe-regex2@5.1.1",
+        "pkg:npm/safe-stable-stringify@2.5.0",
+        "pkg:npm/scheduler@0.27.0",
+        "pkg:npm/secure-json-parse@4.1.0",
+        "pkg:npm/semver@7.8.5",
+        "pkg:npm/set-cookie-parser@2.7.2",
+        "pkg:npm/setprototypeof@1.2.0",
+        "pkg:npm/sonic-boom@4.2.1",
+        "pkg:npm/split2@4.2.0",
+        "pkg:npm/statuses@2.0.2",
+        "pkg:npm/supports-color@7.2.0",
+        "pkg:npm/thread-stream@4.2.0",
+        "pkg:npm/toad-cache@3.7.4",
+        "pkg:npm/toidentifier@1.0.1",
+        "pkg:npm/tslib@2.8.1",
+        "pkg:npm/undici-types@7.24.6",
+        "pkg:npm/xtend@4.0.2",
+        "pkg:npm/yaml@2.9.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/has-flag@4.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/http-errors@2.0.1",
+      "dependsOn": [
+        "pkg:npm/depd@2.0.0",
+        "pkg:npm/inherits@2.0.4",
+        "pkg:npm/setprototypeof@1.2.0",
+        "pkg:npm/statuses@2.0.2",
+        "pkg:npm/toidentifier@1.0.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/inherits@2.0.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/ipaddr.js@2.5.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/json-schema-ref-resolver@3.0.0",
+      "dependsOn": [
+        "pkg:npm/dequal@2.0.3"
+      ]
+    },
+    {
+      "ref": "pkg:npm/json-schema-resolver@3.0.0",
+      "dependsOn": [
+        "pkg:npm/debug@4.4.3",
+        "pkg:npm/fast-uri@3.1.5",
+        "pkg:npm/rfdc@1.4.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/json-schema-traverse@1.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/json-with-bigint@3.5.10",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/light-my-request@6.6.0",
+      "dependsOn": [
+        "pkg:npm/cookie@1.1.1",
+        "pkg:npm/process-warning@4.0.1",
+        "pkg:npm/set-cookie-parser@2.7.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/lru-cache@11.5.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/mime@3.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/minimatch@10.2.6",
+      "dependsOn": [
+        "pkg:npm/brace-expansion@5.0.9"
+      ]
+    },
+    {
+      "ref": "pkg:npm/minipass@7.1.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/mjolnir.js@3.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/ms@2.1.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/on-exit-leak-free@2.1.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/openapi-types@12.1.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/path-scurry@2.0.2",
+      "dependsOn": [
+        "pkg:npm/lru-cache@11.5.2",
+        "pkg:npm/minipass@7.1.3"
+      ]
+    },
+    {
+      "ref": "pkg:npm/pg-cloudflare@1.4.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pg-connection-string@2.14.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pg-int8@1.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pg-pool@3.14.0",
+      "dependsOn": [
+        "pkg:npm/pg@8.23.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/pg-protocol@1.16.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pg-types@2.2.0",
+      "dependsOn": [
+        "pkg:npm/pg-int8@1.0.1",
+        "pkg:npm/postgres-array@2.0.0",
+        "pkg:npm/postgres-bytea@1.0.1",
+        "pkg:npm/postgres-date@1.0.7",
+        "pkg:npm/postgres-interval@1.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/pg@8.23.0",
+      "dependsOn": [
+        "pkg:npm/pg-cloudflare@1.4.0",
+        "pkg:npm/pg-connection-string@2.14.0",
+        "pkg:npm/pg-pool@3.14.0",
+        "pkg:npm/pg-protocol@1.16.0",
+        "pkg:npm/pg-types@2.2.0",
+        "pkg:npm/pgpass@1.0.5"
+      ]
+    },
+    {
+      "ref": "pkg:npm/pgpass@1.0.5",
+      "dependsOn": [
+        "pkg:npm/split2@4.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/pino-abstract-transport@3.0.0",
+      "dependsOn": [
+        "pkg:npm/split2@4.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/pino-std-serializers@7.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pino@10.3.1",
+      "dependsOn": [
+        "pkg:npm/%40pinojs/redact@0.4.0",
+        "pkg:npm/atomic-sleep@1.0.0",
+        "pkg:npm/on-exit-leak-free@2.1.2",
+        "pkg:npm/pino-abstract-transport@3.0.0",
+        "pkg:npm/pino-std-serializers@7.1.0",
+        "pkg:npm/process-warning@5.1.0",
+        "pkg:npm/quick-format-unescaped@4.0.4",
+        "pkg:npm/real-require@0.2.0",
+        "pkg:npm/safe-stable-stringify@2.5.0",
+        "pkg:npm/sonic-boom@4.2.1",
+        "pkg:npm/thread-stream@4.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/postgres-array@2.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/postgres-bytea@1.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/postgres-date@1.0.7",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/postgres-interval@1.2.0",
+      "dependsOn": [
+        "pkg:npm/xtend@4.0.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/preact@10.29.8",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/process-warning@4.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/process-warning@5.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/quick-format-unescaped@4.0.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/react-dom@19.2.8",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/react@19.2.8",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/real-require@0.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/real-require@1.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/require-from-string@2.0.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/ret@0.5.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/reusify@1.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/rfdc@1.4.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/safe-regex2@5.1.1",
+      "dependsOn": [
+        "pkg:npm/ret@0.5.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/safe-stable-stringify@2.5.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/scheduler@0.27.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/secure-json-parse@4.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/semver@7.8.5",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/set-cookie-parser@2.7.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/setprototypeof@1.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/sonic-boom@4.2.1",
+      "dependsOn": [
+        "pkg:npm/atomic-sleep@1.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/split2@4.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/statuses@2.0.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/supports-color@7.2.0",
+      "dependsOn": [
+        "pkg:npm/has-flag@4.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/thread-stream@4.2.0",
+      "dependsOn": [
+        "pkg:npm/real-require@1.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/toad-cache@3.7.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/toidentifier@1.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/tslib@2.8.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/undici-types@7.24.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/xtend@4.0.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/yaml@2.9.0",
+      "dependsOn": []
+    }
+  ]
+}

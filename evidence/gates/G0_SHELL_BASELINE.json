@@ -1,0 +1,10 @@
+{
+  "gate": "G0_SHELL_BASELINE",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:44:00Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64", "bash": "5.x" },
+  "commands": ["pnpm check:shell"],
+  "summary": { "scripts": 2, "bashSyntax": true, "strictMode": true, "unsafeConstructs": 0 },
+  "artifacts": ["scripts/check-shell.mjs", "scripts/run-acceptance.sh", "scripts/verify-database.sh"],
+  "notes": ["ShellCheck is unavailable and remains NOT_RUN; this PASS is limited to the local Bash baseline"]
+}

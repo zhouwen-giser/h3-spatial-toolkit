@@ -1,0 +1,19 @@
+{
+  "gate": "G1_LOCAL_QUALITY",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:58:50Z",
+  "environment": { "node": "v24.14.0", "pnpm": "11.16.0", "platform": "linux", "arch": "x64", "cpus": 9 },
+  "commands": ["pnpm acceptance:local"],
+  "summary": {
+    "testsPassed": 84,
+    "testsSkipped": 11,
+    "testSuitesSkipped": 1,
+    "skippedReason": "PostGIS integration cases require TEST_DATABASE_URL from the unavailable Docker/Compose environment",
+    "lineCoveragePercent": 94.33,
+    "branchCoveragePercent": 89,
+    "builds": 11,
+    "knownProductionVulnerabilities": 0
+  },
+  "artifacts": ["coverage/coverage-summary.json"],
+  "notes": ["PostGIS integration remains skipped and does not count as a database PASS; local psql is not required"]
+}

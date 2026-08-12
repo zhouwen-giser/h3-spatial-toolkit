@@ -1,0 +1,17 @@
+{
+  "gate": "G2_WEB_BUNDLE",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:19:00Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "commands": ["pnpm --filter @h3-toolkit/web-demo build"],
+  "summary": {
+    "entryBytes": 404532,
+    "entryGzipBytes": 126103,
+    "deckAsyncBytes": 632091,
+    "deckAsyncGzipBytes": 181874,
+    "totalJavaScriptBytes": 1036690,
+    "budgetViolations": 0
+  },
+  "artifacts": ["apps/web-demo/BUNDLE_BUDGET.json", "apps/web-demo/scripts/check-bundle-budget.mjs"],
+  "notes": ["Build and bundle budget only; real browser, WebGL, fallback and accessibility remain NOT_RUN"]
+}

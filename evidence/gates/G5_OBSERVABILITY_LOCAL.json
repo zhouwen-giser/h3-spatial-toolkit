@@ -1,0 +1,15 @@
+{
+  "gate": "G5_OBSERVABILITY_LOCAL",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:18:42Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "commands": ["pnpm test", "pnpm acceptance:api"],
+  "summary": {
+    "metricsEndpoint": true,
+    "lowCardinalityLabels": true,
+    "authHeaderRedaction": true,
+    "readinessSelfCheck": true
+  },
+  "artifacts": ["apps/api/src/metrics.ts", "test/metrics.test.ts", "apps/api/src/app.ts"],
+  "notes": ["Local controls only; OIDC, tenant isolation, OTel exporter, dashboards, alerts and SLO remain blocked"]
+}

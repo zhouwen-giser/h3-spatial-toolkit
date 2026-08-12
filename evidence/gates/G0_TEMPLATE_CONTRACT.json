@@ -1,0 +1,10 @@
+{
+  "gate": "G0_TEMPLATE_CONTRACT",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:58:50Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "commands": ["pnpm check:contract"],
+  "summary": { "requirements": 12, "packages": 8, "apps": 3, "activeTasks": 1 },
+  "artifacts": ["template.json", ".codex/project-state.json"],
+  "notes": []
+}

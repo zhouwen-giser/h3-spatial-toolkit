@@ -1,0 +1,16 @@
+{
+  "gate": "G2_API_CLI",
+  "status": "PASS",
+  "executedAt": "2026-08-12T07:04:00Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "commands": ["pnpm acceptance:api"],
+  "summary": {
+    "apiPaths": 9,
+    "cliScenarios": ["point", "polygon-csv"],
+    "readiness": true,
+    "metrics": true,
+    "loopbackPort": 3310
+  },
+  "artifacts": ["scripts/api-cli-smoke.mjs"],
+  "notes": ["Real browser/WebGL/accessibility remains NOT_RUN"]
+}

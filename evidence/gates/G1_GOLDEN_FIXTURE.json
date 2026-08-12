@@ -1,0 +1,15 @@
+{
+  "gate": "G1_GOLDEN_FIXTURE",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:39:03Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64", "h3Js": "4.5.0" },
+  "commands": ["pnpm check:golden", "pnpm test:unit"],
+  "summary": { "pointCases": 6, "polygonCases": 4, "nodeAssertions": 11, "databaseExecuted": false },
+  "artifacts": [
+    "database/fixtures/h3-cross-engine-golden.json",
+    "scripts/generate-golden-fixture.mjs",
+    "test/golden-fixture.test.ts",
+    "test/postgis.integration.test.ts"
+  ],
+  "notes": ["PostGIS comparison is wired but remains NOT_RUN until Docker is available"]
+}

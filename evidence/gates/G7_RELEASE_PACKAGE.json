@@ -1,0 +1,25 @@
+{
+  "gate": "G7_RELEASE_PACKAGE",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:58:50Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64", "zip": "Info-ZIP", "unzip": "6.00" },
+  "commands": ["pnpm check:release"],
+  "summary": {
+    "manifestFiles": 198,
+    "reproducible": true,
+    "unzipIntegrity": true,
+    "forbiddenEntries": 0,
+    "cleanFrozenInstall": true,
+    "cleanStaticGate": true
+  },
+  "artifacts": [
+    "MANIFEST.json",
+    "release/h3-spatial-toolkit-codex-template-v1.3.0.zip",
+    "release/h3-spatial-toolkit-codex-template-v1.3.0-RELEASE-SUMMARY.json",
+    "release/h3-spatial-toolkit-codex-template-v1.3.0-SHA256SUMS.txt"
+  ],
+  "notes": [
+    "Final source package was extracted into a new temporary directory before frozen install and static gate verification",
+    "Source package only; production release remains BLOCKED"
+  ]
+}

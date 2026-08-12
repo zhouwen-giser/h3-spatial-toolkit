@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-12T00:00:00.000Z",
+  "engine": "h3-js",
+  "engineVersion": "4.5.0",
+  "coordinateOrder": "longitude-latitude",
+  "boundaryToleranceDegrees": 1e-7,
+  "pointCases": [
+    {
+      "id": "tokyo-station-r9",
+      "longitude": 139.7671,
+      "latitude": 35.6812,
+      "resolution": 9,
+      "parentResolution": 5,
+      "expectedCell": "892f5a32d97ffff",
+      "expectedParent": "852f5a33fffffff",
+      "expectedPentagon": false,
+      "expectedBoundary": [
+        [
+          139.7699587835592,
+          35.679415565929745
+        ],
+        [
+          139.7693935613047,
+          35.68116959059887
+        ],
+        [
+          139.76740838735952,
+          35.681642601473065
+        ],
+        [
+          139.76598853227412,
+          35.68036160645357
+        ],
+        [
+          139.76655380425578,
+          35.678607634779674
+        ],
+        [
+          139.76853888159891,
+          35.67813460513032
+        ],
+        [
+          139.7699587835592,
+          35.679415565929745
+        ]
+      ]
+    },
+    {
+      "id": "tokyo-global-r0",
+      "longitude": 139.7671,
+      "latitude": 35.6812,
+      "resolution": 0,
+      "expectedCell": "802ffffffffffff",
+      "expectedPentagon": false,
+      "expectedBoundary": [
+        [
+          154.7440406879096,
+          31.88396300415958
+        ],
+        [
+          158.38289640953528,
+          43.9123040175714
+        ],
+        [
+          145.32851606893578,
+          51.12825449972589
+        ],
+        [
+          131.7744009814935,
+          45.253613490980094
+        ],
+        [
+          132.30837745804206,
+          34.331158600979165
+        ],
+        [
+          142.4332217566576,
+          27.949605976503907
+        ],
+        [
+          154.7440406879096,
+          31.88396300415958
+        ]
+      ]
+    },
+    {
+      "id": "dateline-east-r15",
+      "longitude": 179.999,
+      "latitude": 0,
+      "resolution": 15,
+      "parentResolution": 9,
+      "expectedCell": "8f7eb57221acba8",
+      "expectedParent": "897eb57221bffff",
+      "expectedPentagon": false,
+      "expectedBoundary": [
+        [
+          179.99899595043976,
+          0.0000014390267578059593
+        ],
+        [
+          179.99899507670898,
+          -0.0000031091680651308686
+        ],
+        [
+          179.99899833125548,
+          -0.0000067258403536278015
+        ],
+        [
+          179.9990024595331,
+          -0.000005794317913014253
+        ],
+        [
+          179.99900333326414,
+          -0.0000012461228769802536
+        ],
+        [
+          179.99900007871733,
+          0.0000023705495562319047
+        ],
+        [
+          179.99899595043976,
+          0.0000014390267578059593
+        ]
+      ]
+    },
+    {
+      "id": "north-polar-r5",
+      "longitude": 45,
+      "latitude": 89.9,
+      "resolution": 5,
+      "parentResolution": 0,
+      "expectedCell": "85032633fffffff",
+      "expectedParent": "8003fffffffffff",
+      "expectedPentagon": false,
+      "expectedBoundary": [
+        [
+          53.971113020985,
+          89.7647149334888
+        ],
+        [
+          76.77204179593011,
+          89.78026658563809
+        ],
+        [
+          96.35900390669688,
+          89.85141298286649
+        ],
+        [
+          85.08552895170844,
+          89.94192908128895
+        ],
+        [
+          20.229380088752748,
+          89.90079605031617
+        ],
+        [
+          32.1705283153334,
+          89.81125672506899
+        ],
+        [
+          53.971113020985,
+          89.7647149334888
+        ]
+      ]
+    },
+    {
+      "id": "south-polar-r5",
+      "longitude": -135,
+      "latitude": -89.9,
+      "resolution": 5,
+      "parentResolution": 0,
+      "expectedCell": "85f29387fffffff",
+      "expectedParent": "80f3fffffffffff",
+      "expectedPentagon": false,
+      "expectedBoundary": [
+        [
+          -140.2973079364063,
+          -89.91569643275959
+        ],
+        [
+          -57.75736293338402,
+          -89.9499858379423
+        ],
+        [
+          -55.603769919983854,
+          -89.85873658869028
+        ],
+        [
+          -78.4638277747184,
+          -89.79342904111441
+        ],
+        [
+          -103.22795820406948,
+          -89.78026658563809
+        ],
+        [
+          -126.50536011865853,
+          -89.82629952833074
+        ],
+        [
+          -140.2973079364063,
+          -89.91569643275959
+        ]
+      ]
+    },
+    {
+      "id": "pentagon-center-r1",
+      "longitude": 10.536199075467675,
+      "latitude": 64.70000012793487,
+      "resolution": 1,
+      "parentResolution": 0,
+      "expectedCell": "81083ffffffffff",
+      "expectedParent": "8009fffffffffff",
+      "expectedPentagon": true,
+      "expectedBoundary": [
+        [
+          4.012620898449967,
+          63.3270613280184
+        ],
+        [
+          8.644221197607187,
+          61.89083847532621
+        ],
+        [
+          11.08066005848237,
+          61.5405146000252
+        ],
+        [
+          15.771773841154108,
+          62.889968357962516
+        ],
+        [
+          17.535446308408357,
+          63.800792653212156
+        ],
+        [
+          16.433696996747432,
+          66.32726173342834
+        ],
+        [
+          14.813658725827544,
+          67.35176867523613
+        ],
+        [
+          8.130261032188674,
+          67.46842788455005
+        ],
+        [
+          5.239258880169456,
+          67.01563262841769
+        ],
+        [
+          3.6999332602878776,
+          64.52560842196841
+        ],
+        [
+          4.012620898449967,
+          63.3270613280184
+        ]
+      ]
+    }
+  ],
+  "polygonCases": [
+    {
+      "id": "tokyo-simple-r9",
+      "resolution": 9,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              139.75,
+              35.675
+            ],
+            [
+              139.77,
+              35.675
+            ],
+            [
+              139.77,
+              35.69
+            ],
+            [
+              139.75,
+              35.69
+            ],
+            [
+              139.75,
+              35.675
+            ]
+          ]
+        ]
+      },
+      "expectedCellCount": 31,
+      "expectedCells": [
+        "892f5a32d07ffff",
+        "892f5a32d13ffff",
+        "892f5a32d17ffff",
+        "892f5a32d33ffff",
+        "892f5a32d37ffff",
+        "892f5a32d83ffff",
+        "892f5a32d87ffff",
+        "892f5a32d8bffff",
+        "892f5a32d8fffff",
+        "892f5a32d97ffff",
+        "892f5a32da3ffff",
+        "892f5a32da7ffff",
+        "892f5a32dabffff",
+        "892f5a32dafffff",
+        "892f5a32db3ffff",
+        "892f5a32db7ffff",
+        "892f5a32dbbffff",
+        "892f5aadac3ffff",
+        "892f5aadacbffff",
+        "892f5aadad3ffff",
+        "892f5aadadbffff",
+        "892f5aade43ffff",
+        "892f5aade47ffff",
+        "892f5aade4bffff",
+        "892f5aade4fffff",
+        "892f5aade5bffff",
+        "892f5aade63ffff",
+        "892f5aade67ffff",
+        "892f5aade6bffff",
+        "892f5aade6fffff",
+        "892f5aade7bffff"
+      ]
+    },
+    {
+      "id": "tokyo-hole-r9",
+      "resolution": 9,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              139.75,
+              35.675
+            ],
+            [
+              139.78,
+              35.675
+            ],
+            [
+              139.78,
+              35.7
+            ],
+            [
+              139.75,
+              35.7
+            ],
+            [
+              139.75,
+              35.675
+            ]
+          ],
+          [
+            [
+              139.76,
+              35.683
+            ],
+            [
+              139.77,
+              35.683
+            ],
+            [
+              139.77,
+              35.692
+            ],
+            [
+              139.76,
+              35.692
+            ],
+            [
+              139.76,
+              35.683
+            ]
+          ]
+        ]
+      },
+      "expectedCellCount": 71,
+      "expectedCells": [
+        "892f5a32983ffff",
+        "892f5a32993ffff",
+        "892f5a32997ffff",
+        "892f5a3299bffff",
+        "892f5a32c23ffff",
+        "892f5a32c27ffff",
+        "892f5a32c2bffff",
+        "892f5a32c2fffff",
+        "892f5a32c37ffff",
+        "892f5a32ca7ffff",
+        "892f5a32d0bffff",
+        "892f5a32d0fffff",
+        "892f5a32d23ffff",
+        "892f5a32d27ffff",
+        "892f5a32d2bffff",
+        "892f5a32d2fffff",
+        "892f5a32d33ffff",
+        "892f5a32d37ffff",
+        "892f5a32d3bffff",
+        "892f5a32d43ffff",
+        "892f5a32d47ffff",
+        "892f5a32d4fffff",
+        "892f5a32d53ffff",
+        "892f5a32d57ffff",
+        "892f5a32d5bffff",
+        "892f5a32d63ffff",
+        "892f5a32d67ffff",
+        "892f5a32d73ffff",
+        "892f5a32d77ffff",
+        "892f5a32d7bffff",
+        "892f5a32d83ffff",
+        "892f5a32d87ffff",
+        "892f5a32d93ffff",
+        "892f5a32d97ffff",
+        "892f5a32d9bffff",
+        "892f5a32da3ffff",
+        "892f5a32da7ffff",
+        "892f5a32dafffff",
+        "892f5a32db3ffff",
+        "892f5a32db7ffff",
+        "892f5a32dc3ffff",
+        "892f5a32dc7ffff",
+        "892f5a32dcbffff",
+        "892f5a32dcfffff",
+        "892f5a32dd3ffff",
+        "892f5a32dd7ffff",
+        "892f5a32ddbffff",
+        "892f5aad30fffff",
+        "892f5aad323ffff",
+        "892f5aad32bffff",
+        "892f5aad32fffff",
+        "892f5aad33bffff",
+        "892f5aad363ffff",
+        "892f5aad367ffff",
+        "892f5aad36bffff",
+        "892f5aad36fffff",
+        "892f5aad377ffff",
+        "892f5aadac3ffff",
+        "892f5aadacbffff",
+        "892f5aadad3ffff",
+        "892f5aadadbffff",
+        "892f5aade43ffff",
+        "892f5aade47ffff",
+        "892f5aade4bffff",
+        "892f5aade4fffff",
+        "892f5aade5bffff",
+        "892f5aade63ffff",
+        "892f5aade67ffff",
+        "892f5aade6bffff",
+        "892f5aade6fffff",
+        "892f5aade7bffff"
+      ]
+    },
+    {
+      "id": "tokyo-multipolygon-r9",
+      "resolution": 9,
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                139.75,
+                35.675
+              ],
+              [
+                139.758,
+                35.675
+              ],
+              [
+                139.758,
+                35.683
+              ],
+              [
+                139.75,
+                35.683
+              ],
+              [
+                139.75,
+                35.675
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                139.772,
+                35.69
+              ],
+              [
+                139.78,
+                35.69
+              ],
+              [
+                139.78,
+                35.698
+              ],
+              [
+                139.772,
+                35.698
+              ],
+              [
+                139.772,
+                35.69
+              ]
+            ]
+          ]
+        ]
+      },
+      "expectedCellCount": 13,
+      "expectedCells": [
+        "892f5a32c23ffff",
+        "892f5a32c27ffff",
+        "892f5a32c37ffff",
+        "892f5a32d53ffff",
+        "892f5a32da7ffff",
+        "892f5a32dcbffff",
+        "892f5a32ddbffff",
+        "892f5aadad3ffff",
+        "892f5aade63ffff",
+        "892f5aade67ffff",
+        "892f5aade6bffff",
+        "892f5aade6fffff",
+        "892f5aade7bffff"
+      ]
+    },
+    {
+      "id": "antimeridian-r5",
+      "resolution": 5,
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              179.7,
+              -0.2
+            ],
+            [
+              -179.7,
+              -0.2
+            ],
+            [
+              -179.7,
+              0.2
+            ],
+            [
+              179.7,
+              0.2
+            ],
+            [
+              179.7,
+              -0.2
+            ]
+          ]
+        ]
+      },
+      "expectedCellCount": 16,
+      "expectedCells": [
+        "857eb0b3fffffff",
+        "857eb503fffffff",
+        "857eb507fffffff",
+        "857eb50bfffffff",
+        "857eb50ffffffff",
+        "857eb52bfffffff",
+        "857eb53bfffffff",
+        "857eb543fffffff",
+        "857eb547fffffff",
+        "857eb54ffffffff",
+        "857eb553fffffff",
+        "857eb557fffffff",
+        "857eb563fffffff",
+        "857eb573fffffff",
+        "857eb577fffffff",
+        "857eb57bfffffff"
+      ]
+    }
+  ]
+}

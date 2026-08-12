@@ -1,0 +1,39 @@
+name: Bug report
+description: 报告可复现缺陷，不提交 Secret 或真实敏感位置数据
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Toolkit、Node、H3 和目标环境版本
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 最小复现
+      description: 使用虚构或脱敏数据，写出命令、输入和实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响领域
+      options: ["Core/Geometry", "Analysis", "API/CLI", "Web", "Database", "Security", "Release"]
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 数据安全
+      options:
+        - label: 我已移除 Secret、凭据、真实轨迹和个人位置数据
+          required: true

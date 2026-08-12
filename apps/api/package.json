@@ -1,0 +1,28 @@
+{
+  "name": "@h3-toolkit/api",
+  "version": "0.2.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsup --config tsup.config.ts && node scripts/export-openapi.mjs"
+  },
+  "dependencies": {
+    "@fastify/swagger": "9.8.1",
+    "@fastify/swagger-ui": "6.1.1",
+    "@h3-toolkit/aggregation": "workspace:*",
+    "@h3-toolkit/core": "workspace:*",
+    "@h3-toolkit/coverage": "workspace:*",
+    "@h3-toolkit/flow": "workspace:*",
+    "@h3-toolkit/geometry": "workspace:*",
+    "@h3-toolkit/neighborhood": "workspace:*",
+    "fastify": "5.11.3",
+    "h3-js": "4.5.0"
+  },
+  "devDependencies": {
+    "tsup": "8.5.1",
+    "tsx": "4.20.6"
+  }
+}

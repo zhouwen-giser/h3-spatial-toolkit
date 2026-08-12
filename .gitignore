@@ -1,0 +1,14 @@
+node_modules/
+dist/
+/coverage/
+.env
+benchmark/results/*.tmp
+*.zip
+SHA256SUMS
+MANIFEST.json
+output/acceptance/
+release/
+*.pem
+*.key
+*.p12
+*.pfx

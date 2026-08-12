@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.h3-toolkit.dev/h3-flow.schema.json",
+  "title": "H3Flow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["origin", "destination", "count"],
+  "properties": {
+    "origin": { "type": "string", "pattern": "^[0-9a-f]{15}$" },
+    "destination": { "type": "string", "pattern": "^[0-9a-f]{15}$" },
+    "count": { "type": "integer", "minimum": 0 },
+    "weight": { "type": "number" }
+  }
+}

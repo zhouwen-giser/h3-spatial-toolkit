@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "maxEntryBytes": 450000,
+  "maxEntryGzipBytes": 150000,
+  "maxAsyncChunkBytes": 650000,
+  "maxAsyncChunkGzipBytes": 200000,
+  "maxTotalJavaScriptBytes": 1100000,
+  "requiredAsyncChunkPrefixes": ["DeckMap-"]
+}

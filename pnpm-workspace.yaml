@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+  - apps/*
+
+allowBuilds:
+  esbuild: true
+
+minimumReleaseAgeExclude:
+  - globals@17.10.0

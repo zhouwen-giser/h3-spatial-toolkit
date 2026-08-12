@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noUncheckedIndexedAccess": true,
+    "types": ["node", "vitest/globals"],
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@h3-toolkit/core": ["packages/core/src/index.ts"],
+      "@h3-toolkit/geometry": ["packages/geometry/src/index.ts"],
+      "@h3-toolkit/neighborhood": ["packages/neighborhood/src/index.ts"],
+      "@h3-toolkit/aggregation": ["packages/aggregation/src/index.ts"],
+      "@h3-toolkit/coverage": ["packages/coverage/src/index.ts"],
+      "@h3-toolkit/flow": ["packages/flow/src/index.ts"],
+      "@h3-toolkit/io": ["packages/io/src/index.ts"],
+      "@h3-toolkit/postgis": ["packages/postgis/src/index.ts"]
+    }
+  },
+  "include": [
+    "packages/**/*.ts",
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "benchmark/**/*.ts",
+    "test/**/*.ts",
+    "scripts/**/*.ts"
+  ],
+  "exclude": ["**/dist/**", "**/node_modules/**"]
+}

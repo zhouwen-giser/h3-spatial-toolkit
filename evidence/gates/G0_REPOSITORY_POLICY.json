@@ -1,0 +1,16 @@
+{
+  "gate": "G0_REPOSITORY_POLICY",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:58:50Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "commands": ["pnpm check:repository", "pnpm format:check", "pnpm lint"],
+  "summary": {
+    "filesChecked": 197,
+    "passEvidence": 19,
+    "invalidJson": 0,
+    "unpinnedDependencies": 0,
+    "taskContractFailures": 0
+  },
+  "artifacts": ["scripts/check-repository-policy.mjs", "eslint.config.mjs", "prettier.config.mjs"],
+  "notes": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@h3-toolkit/core",
+  "version": "0.2.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean"
+  },
+  "dependencies": {
+    "h3-js": "4.5.0"
+  },
+  "devDependencies": {
+    "@types/geojson": "7946.0.16",
+    "tsup": "8.5.1"
+  }
+}

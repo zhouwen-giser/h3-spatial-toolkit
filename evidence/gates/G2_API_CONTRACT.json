@@ -1,0 +1,10 @@
+{
+  "gate": "G2_API_CONTRACT",
+  "status": "PASS",
+  "executedAt": "2026-08-12T06:18:42Z",
+  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
+  "commands": ["pnpm check:contracts"],
+  "summary": { "openapiPaths": 9, "baselinePaths": 7, "jsonSchemas": 4, "breakingChanges": 0 },
+  "artifacts": ["apps/api/openapi.json", "contracts/openapi.v1.baseline.json", "packages/io/schema"],
+  "notes": []
+}
