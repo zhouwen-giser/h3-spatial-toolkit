@@ -31,6 +31,9 @@ describe.skipIf(!databaseUrl)("PostGIS/H3 integration", () => {
       }
       const geometry = await adapter.cellToGeometry(cell);
       expect(geometry.type).toBe("Polygon");
+      if (geometry.type !== "Polygon") {
+        throw new Error(`Expected Polygon for Golden point case ${item.id}, received ${geometry.type}`);
+      }
       expect(canonicalRing(geometry.coordinates[0] ?? [], fixture.boundaryToleranceDegrees)).toEqual(
         canonicalRing(item.expectedBoundary, fixture.boundaryToleranceDegrees)
       );
@@ -45,6 +48,48 @@ describe.skipIf(!databaseUrl)("PostGIS/H3 integration", () => {
       const cells = (await adapter.geometryToCells(item.geometry, item.resolution)).sort();
       expect(cells).toHaveLength(item.expectedCellCount);
       expect(cells).toEqual(item.expectedCells);
+    } finally {
+      await adapter.close();
+    }
+  });
+
+  it("returns a split MultiPolygon boundary for an antimeridian cell", async () => {
+    const antimeridianCell = "857eb503fffffff";
+    const goldenCase = fixture.polygonCases.find((item) => item.id === "antimeridian-r5");
+    expect(goldenCase?.expectedCells).toContain(antimeridianCell);
+
+    const adapter = new PostgisH3Adapter(databaseUrl!);
+    try {
+      const geometry = await adapter.cellToGeometry(antimeridianCell);
+      expect(geometry.type).toBe("MultiPolygon");
+      if (geometry.type !== "MultiPolygon") {
+        throw new Error(`Expected MultiPolygon, received ${geometry.type}`);
+      }
+
+      expect(geometry.coordinates).toHaveLength(2);
+      const rings = geometry.coordinates.flat();
+      expect(rings).toHaveLength(2);
+      for (const ring of rings) {
+        expect(ring[0]).toEqual(ring.at(-1));
+        for (const [longitude, latitude] of ring) {
+          expect(longitude).toBeGreaterThanOrEqual(-180);
+          expect(longitude).toBeLessThanOrEqual(180);
+          expect(latitude).toBeGreaterThanOrEqual(-90);
+          expect(latitude).toBeLessThanOrEqual(90);
+        }
+      }
+      expect(rings.some((ring) => ring.some(([longitude]) => longitude === -180))).toBe(true);
+      expect(rings.some((ring) => ring.some(([longitude]) => longitude === 180))).toBe(true);
+    } finally {
+      await adapter.close();
+    }
+  });
+
+  it("rejects invalid cell inputs with the shared toolkit error", async () => {
+    const adapter = new PostgisH3Adapter(databaseUrl!);
+    try {
+      await expect(adapter.cellToGeometry("not-a-cell")).rejects.toMatchObject({ code: "INVALID_H3_CELL" });
+      await expect(adapter.cellToParent("not-a-cell", 0)).rejects.toMatchObject({ code: "INVALID_H3_CELL" });
     } finally {
       await adapter.close();
     }

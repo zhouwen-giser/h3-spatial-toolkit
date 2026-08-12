@@ -1,6 +1,6 @@
 # P1-CROSS-PLATFORM-001 — 跨平台运行矩阵
 
-状态：`PARTIAL`。
+Work 状态：`READY`。Gate 状态：`PARTIAL`。
 
 ## 目标
 
@@ -17,6 +17,6 @@
 
 ## 当前证据
 
-- CI 定义已覆盖 Linux x64 Node 22/24，并为两个版本执行 Local/API/production layout 门禁。
-- 当前 Work 仅真实执行 Linux x64 Node 24；CI 文件存在不算 Node 22 PASS。
-- macOS、Windows 和 arm64 仍缺 Runner/设备与支持决策。
+- CI 定义已覆盖 Node 22/24 及 Linux/Windows/macOS、x64/arm64 的适用组合，并执行 frozen install、环境报告和 portable acceptance subset。
+- 当前 Work 已真实执行 Windows x64 Node 22 及 Playwright 三引擎；Workflow 文件存在不算其它 OS/arch PASS。
+- 完整托管矩阵、支持决策和失败处置仍需远端运行证据。

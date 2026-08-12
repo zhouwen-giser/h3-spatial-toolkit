@@ -83,9 +83,10 @@ label {
   color: #a9c5c2;
   font-size: 13px;
 }
-label strong {
+label output {
   color: #74ffd7;
   font-size: 20px;
+  font-weight: 700;
 }
 input {
   grid-column: 1/-1;
@@ -94,6 +95,7 @@ input {
 }
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 button {
@@ -109,6 +111,12 @@ button.secondary {
   background: transparent;
   color: #c7ddda;
   border: 1px solid #386068;
+}
+button:focus-visible,
+input:focus-visible,
+pre:focus-visible {
+  outline: 3px solid #fff29a;
+  outline-offset: 3px;
 }
 .metrics {
   display: grid;
@@ -140,6 +148,9 @@ button.secondary {
   border-radius: 22px;
   overflow: hidden;
   background: #09161a;
+}
+.workspace > * {
+  min-width: 0;
 }
 .map {
   min-height: 590px;

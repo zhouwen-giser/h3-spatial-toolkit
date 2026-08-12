@@ -2,6 +2,7 @@ name: local-quality
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -20,8 +21,8 @@ jobs:
       matrix:
         node: [22, 24]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ matrix.node }}
       - run: corepack enable
@@ -30,9 +31,9 @@ jobs:
       - run: pnpm acceptance:local
       - run: pnpm acceptance:api
       - if: matrix.node == 24
-        run: pnpm benchmark
+        run: pnpm benchmark:diagnostic
       - if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: local-quality-node-${{ matrix.node }}
           path: |
@@ -43,28 +44,105 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
       - if: matrix.node == 24
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: benchmark-node-24
           path: benchmark/results/latest.json
           if-no-files-found: error
           retention-days: 14
 
-  source-package:
-    needs: quality
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+  portable:
+    name: portable-${{ matrix.runner.name }}-node-${{ matrix.node }}
+    runs-on: ${{ matrix.runner.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+        runner:
+          - name: windows-x64
+            os: windows-latest
+          - name: macos-arm64
+            os: macos-15
+          - name: linux-arm64
+            os: ubuntu-24.04-arm
+    env:
+      CI: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Enable the repository-pinned package manager
+        run: corepack enable
+      - name: Install the frozen dependency graph
+        run: corepack pnpm install --frozen-lockfile
+      - name: Record the runner environment
+        run: corepack pnpm environment:report -- --write
+      - name: Check project contract
+        run: corepack pnpm check:contract
+      - name: Check documentation
+        run: corepack pnpm check:docs
+      - name: Check repository policy
+        run: corepack pnpm check:repository
+      - name: Check release metadata
+        run: corepack pnpm check:release-metadata
+      - name: Check formatting
+        run: corepack pnpm format:check
+      - name: Lint
+        run: corepack pnpm lint
+      - name: Check golden fixtures
+        run: corepack pnpm check:golden
+      - name: Check supply-chain artifacts
+        run: corepack pnpm check:supply-chain
+      - name: Typecheck
+        run: corepack pnpm typecheck
+      - name: Run unit tests (PostGIS integration skips without a database)
+        run: corepack pnpm test
+      - name: Build all packages
+        run: corepack pnpm build
+      - name: Check generated contracts
+        run: corepack pnpm check:contracts
+      - name: Check licenses
+        run: corepack pnpm check:licenses
+      - name: Audit production dependencies
+        run: corepack pnpm audit --prod
+      - name: Run API and CLI acceptance
+        run: corepack pnpm acceptance:api
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: portable-${{ matrix.runner.name }}-node-${{ matrix.node }}
+          path: |
+            output/acceptance/environment/
+            coverage/
+            apps/api/openapi.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  browser:
+    name: browser-ubuntu-x64-node-24
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24
-      - run: corepack enable
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm check:release
-      - uses: actions/upload-artifact@v4
+      - name: Enable the repository-pinned package manager
+        run: corepack enable
+      - name: Install the frozen dependency graph
+        run: corepack pnpm install --frozen-lockfile
+      - name: Install real Playwright browsers and system dependencies
+        run: corepack pnpm exec playwright install --with-deps chromium firefox webkit
+      - name: Run browser functional and accessibility acceptance
+        run: corepack pnpm acceptance:browser
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: source-package
-          path: release/
-          if-no-files-found: error
+          name: browser-acceptance
+          path: output/acceptance/browser/
+          if-no-files-found: warn
           retention-days: 14

@@ -2,7 +2,7 @@
 
 ## 支持范围
 
-当前 `0.1.x` 是源码模板/MVP 基线，不是生产认证版本。模板当前没有完成 OIDC、租户隔离、SBOM/镜像签名、目标平台渗透测试与 HA 演练；状态以 `PROJECT_STATUS.md` 为准。
+当前支持的源码候选为 `0.3.x`，仍不是生产认证版本。已完成本地资源限额、脱敏、Source SBOM/License 和平台中立的 fail-closed 鉴权契约；具体 OIDC/JWKS、持久租户隔离、Gateway、达到漏洞阈值的镜像、签名/provenance、目标平台渗透测试与 HA/PITR 演练尚未完成。状态以 `PROJECT_STATUS.md` 为准。
 
 ## 报告漏洞
 
@@ -12,8 +12,10 @@
 
 ## 安全门禁
 
-- 本地：Secret pattern、依赖 Audit、License、恶意输入单测和发行包内容检查。
+- 本地：Secret pattern、依赖 Audit、License、恶意输入、注入 Authenticator/Principal/Tenant/Scope 契约和镜像扫描。
 - 目标环境：Auth/Tenant、DAST、Gateway 限流、容器/镜像扫描、签名和 provenance。
 - 数据：位置数据分类、最小化、保留、删除、导出和事件通知需组织/法律审批。
+
+当前镜像扫描仍未达到 Critical/High 策略阈值，不得把“已扫描”写成供应链 PASS。用户已将本轮新源码包内容审计从完成要求中移除；这不降低源码仓库、日志、镜像层和远端发布不得包含真实凭据或私钥的安全要求。
 
 完整控制和限制见 `docs/27_SECURITY_PRIVACY_COMPLIANCE.md`。

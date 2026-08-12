@@ -153,6 +153,19 @@ export function assertFlowPointLimit(
   }
 }
 
+export function assertCoverageVisitLimit(
+  input: { visitedCells?: ReadonlyArray<unknown>; visitedPoints?: ReadonlyArray<unknown> },
+  policy: ResourcePolicy
+): void {
+  const actual = (input.visitedCells?.length ?? 0) + (input.visitedPoints?.length ?? 0);
+  if (actual > policy.maxBatchRecords) {
+    throw limitError("COVERAGE_VISIT_LIMIT_EXCEEDED", "Total coverage visit count exceeds server policy", {
+      actual,
+      limit: policy.maxBatchRecords
+    });
+  }
+}
+
 export function assertDistinctLimit(
   records: AggregateRecord[],
   operation: AggregateOperation,
@@ -174,6 +187,22 @@ export function assertDistinctLimit(
 export function assertResultLimit(actual: number, policy: ResourcePolicy): void {
   if (actual > policy.maxResultCells) {
     throw limitError("RESULT_CELL_LIMIT_EXCEEDED", "Result cell count exceeds server policy", {
+      actual,
+      limit: policy.maxResultCells
+    });
+  }
+}
+
+export function assertCoverageResultLimit(
+  requiredCellCount: number,
+  visitedCellCount: number,
+  missingCellCount: number,
+  duplicateCellCount: number,
+  policy: ResourcePolicy
+): void {
+  const actual = requiredCellCount + visitedCellCount + missingCellCount + duplicateCellCount;
+  if (actual > policy.maxResultCells) {
+    throw limitError("RESULT_CELL_LIMIT_EXCEEDED", "Coverage result cell entries exceed server policy", {
       actual,
       limit: policy.maxResultCells
     });

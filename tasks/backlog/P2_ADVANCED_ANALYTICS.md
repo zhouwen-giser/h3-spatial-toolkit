@@ -1,6 +1,6 @@
 # P2-ADV-ANALYTICS-001 — 高级时空分析
 
-状态：`DEFERRED`。
+Work 状态：`DEFERRED`。Gate 状态：`NOT_RUN`。
 
 ## 目标
 

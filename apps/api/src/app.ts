@@ -15,9 +15,20 @@ import { aggregateFlow, trajectoryToFlow, type TrajectoryPoint } from "@h3-toolk
 import { cellsToGeoJSON, geometryToCells, validatePolygonal, type Polygonal } from "@h3-toolkit/geometry";
 import { gridDisk } from "@h3-toolkit/neighborhood";
 import Fastify, { type FastifyInstance, type FastifyRequest } from "fastify";
+import {
+  API_SCOPES,
+  AccessError,
+  authenticate,
+  resolveAuthentication,
+  type ApiScope,
+  type AuthContext,
+  type AuthenticationOptions
+} from "./auth.js";
 import { ApiMetrics, metricRoute } from "./metrics.js";
 import {
   assertAllowedResolution,
+  assertCoverageResultLimit,
+  assertCoverageVisitLimit,
   assertDistinctLimit,
   assertFlowPointLimit,
   assertGeoJsonLimit,
@@ -25,10 +36,23 @@ import {
   assertResultLimit,
   createResourcePolicy,
   preflightPolygon,
-  type AppOptions
+  type AppOptions as ResourceAppOptions
 } from "./policy.js";
 
-export type { AppOptions } from "./policy.js";
+declare module "fastify" {
+  interface FastifyRequest {
+    authContext: AuthContext | null;
+  }
+
+  interface FastifyContextConfig {
+    requiredScope?: ApiScope;
+    authPublic?: boolean;
+  }
+}
+
+export interface AppOptions extends ResourceAppOptions {
+  authentication?: AuthenticationOptions;
+}
 
 const pointSchema = {
   type: "object",
@@ -71,12 +95,112 @@ const metaSchema = {
   }
 } as const;
 
-const successSchema = {
+const cellIndexSchema = { type: "string", minLength: 15, maxLength: 16, pattern: "^[0-9a-f]+$" } as const;
+const cellArraySchema = { type: "array", items: cellIndexSchema } as const;
+const h3CellSchema = {
   type: "object",
   additionalProperties: false,
-  required: ["data", "meta"],
-  properties: { data: {}, meta: metaSchema }
+  required: ["index", "resolution"],
+  properties: {
+    index: cellIndexSchema,
+    resolution: { type: "integer", minimum: 0, maximum: 15 }
+  }
 } as const;
+const metricSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: ["cell", "resolution", "metric", "value"],
+  properties: {
+    cell: cellIndexSchema,
+    resolution: { type: "integer", minimum: 0, maximum: 15 },
+    metric: { type: "string" },
+    value: { type: "number" }
+  }
+} as const;
+const flowSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: ["origin", "destination", "count"],
+  properties: {
+    origin: cellIndexSchema,
+    destination: cellIndexSchema,
+    count: { type: "integer", minimum: 0 },
+    weight: { type: "number" }
+  }
+} as const;
+const featureCollectionSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: ["type", "features"],
+  properties: {
+    type: { type: "string", enum: ["FeatureCollection"] },
+    features: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["type", "properties", "geometry"],
+        properties: {
+          type: { type: "string", enum: ["Feature"] },
+          properties: {
+            type: "object",
+            additionalProperties: false,
+            required: ["cell"],
+            properties: { cell: cellIndexSchema }
+          },
+          geometry: {
+            type: "object",
+            additionalProperties: false,
+            required: ["type", "coordinates"],
+            properties: {
+              type: { type: "string", enum: ["Polygon"] },
+              coordinates: { type: "array" }
+            }
+          }
+        }
+      }
+    }
+  }
+} as const;
+const coverageSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: [
+    "resolution",
+    "requiredCells",
+    "visitedCells",
+    "missingCells",
+    "duplicateCells",
+    "requiredCount",
+    "visitedRequiredCount",
+    "missingCount",
+    "duplicateVisitCount",
+    "coverageRatio",
+    "coverageEfficiency"
+  ],
+  properties: {
+    resolution: { type: "integer", minimum: 0, maximum: 15 },
+    requiredCells: cellArraySchema,
+    visitedCells: cellArraySchema,
+    missingCells: cellArraySchema,
+    duplicateCells: cellArraySchema,
+    requiredCount: { type: "integer", minimum: 0 },
+    visitedRequiredCount: { type: "integer", minimum: 0 },
+    missingCount: { type: "integer", minimum: 0 },
+    duplicateVisitCount: { type: "integer", minimum: 0 },
+    coverageRatio: { type: "number", minimum: 0, maximum: 1 },
+    coverageEfficiency: { type: "number", minimum: 0, maximum: 1 }
+  }
+} as const;
+
+function successSchema(data: object) {
+  return {
+    type: "object",
+    additionalProperties: false,
+    required: ["data", "meta"],
+    properties: { data, meta: metaSchema }
+  } as const;
+}
 
 const errorSchema = {
   type: "object",
@@ -98,14 +222,24 @@ const errorSchema = {
 } as const;
 
 const standardErrorResponses = {
+  401: errorSchema,
+  403: errorSchema,
   400: errorSchema,
   413: errorSchema,
   422: errorSchema,
   500: errorSchema
 } as const;
 
+function protectedOperation(scope: ApiScope, authenticationRequired: boolean) {
+  return {
+    security: authenticationRequired ? [{ deploymentCredential: [] }] : [],
+    "x-required-scope": scope
+  } as const;
+}
+
 export async function buildApp(options: AppOptions = {}): Promise<FastifyInstance> {
   const policy = createResourcePolicy(options);
+  const authentication = resolveAuthentication(options.authentication);
   const requestStartedAt = new WeakMap<FastifyRequest, bigint>();
   const metrics = new ApiMetrics();
   const app = Fastify({
@@ -128,6 +262,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     requestTimeout: policy.requestTimeoutMs,
     bodyLimit: policy.bodyLimitBytes
   });
+  app.decorateRequest("authContext", null);
 
   await app.register(swagger as never, {
     openapi: {
@@ -137,6 +272,16 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
         description: "Standard H3 indexing, geometry, aggregation, coverage and flow API."
       },
       servers: [{ url: "http://localhost:3000" }],
+      components: {
+        securitySchemes: {
+          deploymentCredential: {
+            type: "apiKey",
+            in: "header",
+            name: "Authorization",
+            description: "Deployment-defined credential verified by the injected authenticator."
+          }
+        }
+      },
       tags: ["Index", "Geometry", "Neighborhood", "Analysis"].map((name) => ({ name }))
     }
   });
@@ -146,6 +291,21 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     requestStartedAt.set(request, process.hrtime.bigint());
     void reply.header("x-request-id", request.id);
     if (policy.metricsEnabled) metrics.requestStarted();
+  });
+
+  app.addHook("onRequest", async (request) => {
+    const requiredScope = request.routeOptions.config.requiredScope;
+    if (authentication.mode !== "required" || requiredScope === undefined) return;
+    request.authContext = await authenticate(
+      authentication,
+      {
+        authorization: request.headers.authorization,
+        requestId: request.id,
+        method: request.method,
+        route: request.routeOptions.url ?? request.url
+      },
+      requiredScope
+    );
   });
 
   app.addHook("onResponse", async (request, reply) => {
@@ -161,7 +321,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.get(
     "/health",
     {
+      config: { authPublic: true },
       schema: {
+        security: [],
+        "x-auth-behavior": "public",
         response: {
           200: {
             type: "object",
@@ -182,7 +345,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.get(
     "/ready",
     {
+      config: { authPublic: true },
       schema: {
+        security: [],
+        "x-auth-behavior": "public",
         response: {
           200: {
             type: "object",
@@ -216,9 +382,11 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
     app.get(
       "/metrics",
       {
+        config: { requiredScope: API_SCOPES.metricsRead },
         schema: {
           tags: ["Operations"],
-          response: { 200: { type: "string" } }
+          ...protectedOperation(API_SCOPES.metricsRead, authentication.mode === "required"),
+          response: { 200: { type: "string" }, 401: errorSchema, 403: errorSchema }
         }
       },
       async (_request, reply) => {
@@ -231,8 +399,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.post<{ Body: { points: GeoPoint[]; resolution: ResolutionInput } }>(
     "/v1/h3/index",
     {
+      config: { requiredScope: API_SCOPES.index },
       schema: {
         tags: ["Index"],
+        ...protectedOperation(API_SCOPES.index, authentication.mode === "required"),
         body: {
           type: "object",
           additionalProperties: false,
@@ -242,7 +412,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
             resolution: resolutionSchema
           }
         },
-        response: { 200: successSchema, ...standardErrorResponses }
+        response: {
+          200: successSchema({ type: "array", items: h3CellSchema }),
+          ...standardErrorResponses
+        }
       }
     },
     async (request) => {
@@ -259,8 +432,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.post<{ Body: { geometry: Polygonal; resolution: ResolutionInput; output?: "cells" | "geojson" } }>(
     "/v1/h3/polygon/cover",
     {
+      config: { requiredScope: API_SCOPES.polygonCover },
       schema: {
         tags: ["Geometry"],
+        ...protectedOperation(API_SCOPES.polygonCover, authentication.mode === "required"),
         body: {
           type: "object",
           additionalProperties: false,
@@ -271,7 +446,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
             output: { type: "string", enum: ["cells", "geojson"] }
           }
         },
-        response: { 200: successSchema, ...standardErrorResponses }
+        response: {
+          200: successSchema({ anyOf: [cellArraySchema, featureCollectionSchema] }),
+          ...standardErrorResponses
+        }
       }
     },
     async (request) => {
@@ -289,8 +467,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.post<{ Body: { cell: string; radius?: number } }>(
     "/v1/h3/neighbors",
     {
+      config: { requiredScope: API_SCOPES.neighbors },
       schema: {
         tags: ["Neighborhood"],
+        ...protectedOperation(API_SCOPES.neighbors, authentication.mode === "required"),
         body: {
           type: "object",
           additionalProperties: false,
@@ -300,7 +480,7 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
             radius: { type: "integer", minimum: 0, maximum: 1000, default: 1 }
           }
         },
-        response: { 200: successSchema, ...standardErrorResponses }
+        response: { 200: successSchema(cellArraySchema), ...standardErrorResponses }
       }
     },
     async (request) => {
@@ -317,8 +497,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   }>(
     "/v1/h3/aggregate",
     {
+      config: { requiredScope: API_SCOPES.aggregate },
       schema: {
         tags: ["Analysis"],
+        ...protectedOperation(API_SCOPES.aggregate, authentication.mode === "required"),
         body: {
           type: "object",
           additionalProperties: false,
@@ -348,7 +530,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
             metric: { type: "string", minLength: 1, maxLength: 128 }
           }
         },
-        response: { 200: successSchema, ...standardErrorResponses }
+        response: {
+          200: successSchema({ type: "array", items: metricSchema }),
+          ...standardErrorResponses
+        }
       }
     },
     async (request) => {
@@ -363,8 +548,12 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.post<{ Body: CoverageInput }>(
     "/v1/h3/coverage",
     {
+      config: { requiredScope: API_SCOPES.coverage },
       schema: {
         tags: ["Analysis"],
+        ...protectedOperation(API_SCOPES.coverage, authentication.mode === "required"),
+        description:
+          "Calculates coverage with combined input and response budgets. visitedCells plus visitedPoints must fit the batch limit; every serialized cell entry across requiredCells, visitedCells, missingCells and duplicateCells must fit the result-cell limit.",
         body: {
           type: "object",
           additionalProperties: false,
@@ -375,20 +564,33 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
             visitedCells: {
               type: "array",
               maxItems: policy.maxBatchRecords,
+              description: "Shares the combined coverage visit limit with visitedPoints.",
               items: { type: "string", minLength: 1, maxLength: 32 }
             },
-            visitedPoints: { type: "array", maxItems: policy.maxBatchRecords, items: pointSchema }
+            visitedPoints: {
+              type: "array",
+              maxItems: policy.maxBatchRecords,
+              description: "Shares the combined coverage visit limit with visitedCells.",
+              items: pointSchema
+            }
           }
         },
-        response: { 200: successSchema, ...standardErrorResponses }
+        response: { 200: successSchema(coverageSchema), ...standardErrorResponses }
       }
     },
     async (request) => {
       validatePolygonal(request.body.area);
       const resolution = assertAllowedResolution(request.body.resolution, policy);
+      assertCoverageVisitLimit(request.body, policy);
       const { warnings } = preflightPolygon(request.body.area, resolution, policy);
       const data = calculateCoverage({ ...request.body, resolution });
-      assertResultLimit(data.requiredCount, policy);
+      assertCoverageResultLimit(
+        data.requiredCells.length,
+        data.visitedCells.length,
+        data.missingCells.length,
+        data.duplicateCells.length,
+        policy
+      );
       return success(request, data, requestStartedAt, warnings);
     }
   );
@@ -396,8 +598,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
   app.post<{ Body: { trajectories: TrajectoryPoint[][]; resolution: ResolutionInput; directed?: boolean } }>(
     "/v1/h3/flow",
     {
+      config: { requiredScope: API_SCOPES.flow },
       schema: {
         tags: ["Analysis"],
+        ...protectedOperation(API_SCOPES.flow, authentication.mode === "required"),
         body: {
           type: "object",
           additionalProperties: false,
@@ -412,7 +616,10 @@ export async function buildApp(options: AppOptions = {}): Promise<FastifyInstanc
             directed: { type: "boolean", default: true }
           }
         },
-        response: { 200: successSchema, ...standardErrorResponses }
+        response: {
+          200: successSchema({ type: "array", items: flowSchema }),
+          ...standardErrorResponses
+        }
       }
     },
     async (request) => {
@@ -490,13 +697,16 @@ function responseMeta(
 }
 
 export interface NormalizedError {
-  statusCode: 400 | 404 | 408 | 413 | 422 | 500;
+  statusCode: 400 | 401 | 403 | 404 | 408 | 413 | 422 | 500;
   code: string;
   message: string;
   details?: Record<string, unknown>;
 }
 
 export function normalizeApiError(error: unknown): NormalizedError {
+  if (error instanceof AccessError) {
+    return { statusCode: error.statusCode, code: error.code, message: error.message };
+  }
   if (isFastifyValidationError(error)) {
     return {
       statusCode: 400,
@@ -540,6 +750,7 @@ function safeDetails(code: string, details: unknown): Record<string, unknown> | 
     ["CELL_RESOLUTION_MISMATCH", ["expectedResolution", "actualResolution"]],
     ["NEIGHBOR_RADIUS_LIMIT_EXCEEDED", ["actual", "limit"]],
     ["FLOW_POINT_LIMIT_EXCEEDED", ["actual", "limit"]],
+    ["COVERAGE_VISIT_LIMIT_EXCEEDED", ["actual", "limit"]],
     ["DISTINCT_VALUE_LIMIT_EXCEEDED", ["actual", "limit"]],
     ["POLYGON_COORDINATE_LIMIT_EXCEEDED", ["actual", "limit"]],
     ["RESULT_CELL_LIMIT_EXCEEDED", ["actual", "limit", "recommendedResolution"]],

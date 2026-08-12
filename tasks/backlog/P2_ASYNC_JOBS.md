@@ -1,6 +1,6 @@
 # P2-JOB-001 — 异步空间分析任务
 
-状态：`PLANNED`。
+Work 状态：`PLANNED`。Gate 状态：`NOT_RUN`。
 
 ## 目标
 

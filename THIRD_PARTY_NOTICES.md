@@ -1,6 +1,6 @@
 # Third-Party Production Dependencies
 
-Generated deterministically for h3-spatial-toolkit@0.2.0. This inventory does not replace the license text shipped by each dependency.
+Generated deterministically for h3-spatial-toolkit@0.3.0. This inventory does not replace the license text shipped by each dependency.
 
 | Package | License |
 |---|---|

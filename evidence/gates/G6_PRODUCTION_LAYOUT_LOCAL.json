@@ -1,19 +1,21 @@
 {
   "gate": "G6_PRODUCTION_LAYOUT_LOCAL",
   "status": "PASS",
-  "executedAt": "2026-08-12T07:04:00Z",
-  "environment": { "node": "v24.14.0", "pnpm": "11.16.0", "platform": "linux", "arch": "x64" },
-  "commands": ["pnpm acceptance:runtime"],
+  "executedAt": "2026-08-12T21:04:55Z",
+  "environment": { "node": "v22.14.0", "pnpm": "11.16.0", "platform": "win32", "arch": "x64" },
+  "commands": ["pnpm acceptance:api"],
   "summary": {
-    "deployBytes": 26014477,
+    "deployBytes": 26117340,
     "maxDeployBytes": 52428800,
     "devDependenciesExcluded": true,
     "readiness": true,
     "gracefulShutdown": true,
+    "shutdownTrigger": "test-ipc",
     "containerUser": "node"
   },
   "artifacts": ["Dockerfile", "scripts/production-deploy-smoke.mjs"],
   "notes": [
-    "Production filesystem layout was executed locally; Docker image build, digest, scan and runtime remain NOT_RUN"
+    "Production filesystem layout was executed locally on Windows x64; the staged server ran as user node and passed readiness and test-ipc graceful shutdown.",
+    "This does not assert a production deployment, container runtime, image digest, scan or signing result."
   ]
 }

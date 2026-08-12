@@ -1,10 +1,13 @@
 {
   "gate": "G5_DEPENDENCY_AUDIT",
   "status": "PASS",
-  "executedAt": "2026-08-12T06:18:42Z",
-  "environment": { "node": "v24.14.0", "pnpm": "11.16.0", "platform": "linux", "arch": "x64" },
-  "commands": ["pnpm audit --prod"],
+  "executedAt": "2026-08-12T21:02:57Z",
+  "environment": { "node": "v22.14.0", "pnpm": "11.16.0", "platform": "win32", "arch": "x64" },
+  "commands": ["pnpm acceptance:local", "pnpm audit --prod"],
   "summary": { "knownProductionVulnerabilities": 0 },
   "artifacts": ["pnpm-lock.yaml"],
-  "notes": ["This does not cover container images or runtime penetration testing"]
+  "notes": [
+    "The production npm dependency audit reported 0 known vulnerabilities.",
+    "This does not cover container images or runtime penetration testing; image findings are recorded separately as G5_SBOM_IMAGE_SIGNING=PARTIAL."
+  ]
 }

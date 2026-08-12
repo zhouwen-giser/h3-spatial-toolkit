@@ -2,7 +2,7 @@
 
 ## 1. 计划目标
 
-以当前 `0.2.0` 本地强化基线为起点，把系统推进到可认证的生产级共享空间基础服务。开发顺序遵循：先认证数据库和跨引擎一致性，再完成身份/租户和目标平台观测，随后补异步大任务，最后完成生产发布及可选引擎。
+以当前 `0.3.0` / Codex 模板 `1.4.0` 本地强化基线为起点，把系统推进到可认证的生产级共享空间基础服务。当前优先把已分别验证的数据库切片收敛为一份获授权的 run-scoped G4 证据，同时将平台中立鉴权接入具体 IdP/租户/Gateway，并让已定义的跨平台 CI 在托管 Runner 上真实执行；随后补异步大任务、Load/Soak、HA/DR 和生产发布。
 
 ## 2. 角色建议
 
@@ -20,9 +20,9 @@
 
 | 迭代 | 建议投入 | 目标 | 退出条件 |
 |---|---:|---|---|
-| I0 | 4–6 人日 | 目标环境数据库认证 | G4 PASS |
+| I0 | 1–3 人日 + 授权等待 | 收敛完整 run-scoped 数据库认证 | G4 PASS |
 | I1 | 已完成（本轮） | 同步 API 生产硬化 | G1/G2 强化项 PASS |
-| I2 | 8–12 人日 | 身份、租户、安全和观测 | G5 PASS |
+| I2 | 6–10 人日 | 具体 IdP/租户/Gateway、镜像供应链和平台观测 | G5 PASS |
 | I3 | 10–15 人日 | 异步大任务平台 | Async Gate PASS |
 | I4 | 8–12 人日 | HA、恢复、升级与生产发布 | G6/G7 PASS |
 | I5 | 按证据立项 | DuckDB/ClickHouse 等 Adapter | Cross-engine Gate PASS |
@@ -35,12 +35,12 @@
 
 | 完成口径 | 还需投入 | 主要内容 | 置信度 |
 |---|---:|---|---|
-| 本地源码模板 | 0–1 人日 | 当前已 `SOURCE_TEMPLATE_READY`；仅处理评审反馈 | 高 |
-| 数据库支持的受控候选 | 3–6 人日 | 执行预置 G4、审阅 Golden/EXPLAIN、处理实机差异 | 中 |
-| 生产同步服务 | 23–37 人日 | 上述 + Auth/Tenant、平台 OTel/SLO、Browser、Load、镜像供应链、HA/DR、CI/Owner/发布 | 中低 |
-| 含异步大任务的完整目标 | 33–52 人日 | 生产同步服务 + Job/Worker/Result Store | 中低 |
+| 本地源码模板 | 0–1 人日 | 当前源码 Gate 和真实浏览器矩阵已通过；处理最终评审/远端 CI。用户已明确排除本轮新源码 ZIP 交付审计 | 高 |
+| 数据库支持的受控候选 | 1–3 人日 + 授权等待 | 获批执行严格 runner、审阅同一 run-id 下的最终镜像/规模/计划/恢复证据 | 中高 |
+| 生产同步服务 | 18–31 人日 | 上述 + 具体 IdP/Tenant/Gateway、平台 OTel/SLO、Load、镜像漏洞处置/签名、HA/DR、CI/Owner/发布 | 中低 |
+| 含异步大任务的完整目标 | 28–46 人日 | 生产同步服务 + Job/Worker/Result Store | 中低 |
 
-单人串行约为 6–10 周；3 人并行且目标平台已就绪时约 3–5 周。相较上一基线已减少约 3–5 人日，主要来自 Golden/SBOM/License/数据库证据自动化和关停门禁。最大不确定性不在 H3 算法，而在数据库扩展实机差异、身份/租户模型、目标平台接入、RTO/RPO 和组织批准。若这些决策尚未完成，日历周期会明显长于编码人日。
+单人串行约为 5–9 周；3 人并行且目标平台已就绪时约 2–4 周。估算减少来自严格数据库 runner、真实浏览器矩阵、可比较 Benchmark gate 和本地 fail-closed 鉴权边界。最大不确定性不在 H3 算法，而在破坏性本地认证授权、IdP/租户模型、镜像漏洞处置、目标平台接入、RTO/RPO 和组织批准。若这些决策尚未完成，日历周期会明显长于编码人日。
 
 ## 4. I0 — 目标环境认证
 
@@ -54,15 +54,17 @@
 2. 执行 `001_extensions.sql`、`002_schema.sql` 和 SQL Smoke。
 3. 验证 Point→Cell、Cell→Boundary、Polygon→Cells。
 4. 验证模板已修正的四列 Upsert conflict target。
-5. 记录扩展版本、镜像 digest、构建日志和执行环境。
+5. 记录扩展版本、镜像 digest、构建日志、执行环境、100K/1M/10M 计划、逻辑恢复指纹和生命周期结果。
 
-验收：`pnpm acceptance:database` 通过；证据写入 `output/acceptance/database/`。
+当前进展：严格 Schema/Upsert、13 个 Adapter、四类计划探针、100K/1M/10M、扩展升级和 DDL 回滚均已作为本地切片通过。完整 runner 会重建本地合成认证库并创建/删除隔离生命周期数据库，正等待用户明确授权。
+
+验收：`pnpm acceptance:database` 在同一 run-id 下完整通过；证据写入 `output/acceptance/database/runs/<run-id>/`，聚合 Gate 才能由 `PARTIAL` 升为 `PASS`。
 
 ### P0-GOLDEN-001：h3-js/h3-pg 一致性
 
 依赖：P0-DB-CERT-001。
 
-数据集：东京已知点、Resolution 0/15、Pentagon、极区、Antimeridian、Polygon hole、MultiPolygon。Node 期望值和 PostGIS runner 已在模板 v1.3.0 预置，剩余工作是目标数据库执行与差异审阅。
+数据集：东京已知点、Resolution 0/15、Pentagon、极区、Antimeridian、Polygon hole、MultiPolygon。Node 期望值和 PostGIS runner 已在模板 v1.4.0 预置；本地数据库对照 11/11 已通过，剩余工作是随完整 G4 run-id 重新绑定最终镜像证据。
 
 验收：Point/Parent/Boundary/Polygon 集合在定义的容差和集合语义内一致；差异有 ADR。
 
@@ -78,7 +80,7 @@
 - 验证 H3 B-tree、Geometry GiST、时间索引和 Parent partial index。
 - 建立 100K/1M/10M 数据规模结果。
 
-验收：G4 所有项 PASS，没有 Sequential Scan 异常或未解释的回退。
+当前进展：四类计划断言与 100K/1M/10M 本地切片已通过。验收仍要求完整 G4 run-id 内没有 Sequential Scan 异常或未解释的回退。
 
 ## 5. I1 — 同步接口硬化
 
@@ -110,10 +112,9 @@
 
 ### P1-AUTH-001
 
-- OIDC JWT 或服务间 mTLS。
-- Scope：`h3:read`、`h3:analyze`、`h3:job`、`h3:admin`。
-- Tenant 只从可信身份声明获取。
-- API、Job、结果下载执行同一租户隔离。
+- 已完成：默认本地模式；`required` 模式缺 authenticator 时启动失败；异常/空/畸形 Principal、Scope 不足稳定返回 401/403。
+- 已完成：六个业务端点和 Metrics 使用固定 Scope，Tenant 只来自已验证 Principal，不接受调用方 Body/Header 覆盖。
+- 待完成：接入具体 OIDC/JWKS 或服务间 mTLS，覆盖 expiry/revocation/rotation，并把 Principal 传播到数据库、Job 和结果下载的持久租户隔离。
 
 ### P1-OBS-001
 
@@ -127,6 +128,8 @@
 - 生成 SBOM、依赖/镜像扫描、License Notice。
 - 基础镜像 digest pin、最小运行镜像、签名和 provenance。
 - 依赖升级采用 lockfile + Golden + Benchmark 门禁。
+
+当前基础/应用/数据库镜像已固定 digest 并执行本地扫描，但当前 Critical/High 阈值仍失败；最终计数与处置结论以 `P1-SUPPLY-001` 和供应链证据为准，签名/provenance 仍依赖 Registry。
 
 退出：G5 PASS。
 
@@ -200,7 +203,7 @@ I1 已在数据库认证之前获准并行完成；I0 仍是生产工作的首�
 | 轨道 | Work Item | 完成条件 |
 |---|---|---|
 | Database lifecycle | P0-DB-CERT、P0-GOLDEN、P1-DB-MIGRATION | G4/G6 实机证据 |
-| Browser quality | P1-BROWSER-A11Y | 真实浏览器与 WCAG 证据 |
+| Browser quality | P1-BROWSER-A11Y | Windows Playwright Chromium/Firefox/WebKit 9/9 已完成；托管/跨平台持续矩阵由 Cross-platform/CI 轨道继续 |
 | Capacity | P1-LOAD-SOAK | 并发、长稳、故障注入报告 |
 | Security/data | P1-SEC-OBS、P1-DATA-GOV、P1-SUPPLY | Auth/Tenant/Data/SBOM/签名证据 |
 | Platform | P1-DEPLOY-DR、P1-CROSS-PLATFORM、P1-CI-CERT | 部署、恢复和矩阵执行记录 |

@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-12T20:39:39.258Z",
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 16,
+    "h3Js": "4.5.0",
+    "cpuModel": "11th gen intel(r) core(tm) i7-11800h @ 2.30ghz",
+    "osRelease": "10.0.26200",
+    "memoryBucket": "16-31GiB"
+  },
+  "methodology": {
+    "mode": "certifying",
+    "warmupRuns": 1,
+    "recordedRuns": 3,
+    "statistic": "median"
+  },
+  "pointToH3": [
+    {
+      "records": 10000,
+      "durationMs": 12.33,
+      "p95DurationMs": 12.73,
+      "recordsPerSecond": 811030,
+      "microsecondsPerRecord": 1.23,
+      "rssDeltaMb": 0.6,
+      "uniqueCells": 10000,
+      "checksum": 777629,
+      "samples": [
+        {
+          "durationMs": 12.73,
+          "recordsPerSecond": 785546,
+          "microsecondsPerRecord": 1.27,
+          "rssDeltaMb": 0.6,
+          "uniqueCells": 10000,
+          "checksum": 777629
+        },
+        {
+          "durationMs": 12.33,
+          "recordsPerSecond": 811030,
+          "microsecondsPerRecord": 1.23,
+          "rssDeltaMb": 0.55,
+          "uniqueCells": 10000,
+          "checksum": 777629
+        },
+        {
+          "durationMs": 12.24,
+          "recordsPerSecond": 816993,
+          "microsecondsPerRecord": 1.22,
+          "rssDeltaMb": 0.69,
+          "uniqueCells": 10000,
+          "checksum": 777629
+        }
+      ]
+    },
+    {
+      "records": 100000,
+      "durationMs": 130.6,
+      "p95DurationMs": 216.93,
+      "recordsPerSecond": 765697,
+      "microsecondsPerRecord": 1.31,
+      "rssDeltaMb": 2.05,
+      "uniqueCells": 26095,
+      "checksum": 7772288,
+      "samples": [
+        {
+          "durationMs": 126.96,
+          "recordsPerSecond": 787650,
+          "microsecondsPerRecord": 1.27,
+          "rssDeltaMb": 2.05,
+          "uniqueCells": 26095,
+          "checksum": 7772288
+        },
+        {
+          "durationMs": 130.6,
+          "recordsPerSecond": 765697,
+          "microsecondsPerRecord": 1.31,
+          "rssDeltaMb": 1.7,
+          "uniqueCells": 26095,
+          "checksum": 7772288
+        },
+        {
+          "durationMs": 216.93,
+          "recordsPerSecond": 460978,
+          "microsecondsPerRecord": 2.17,
+          "rssDeltaMb": 6.79,
+          "uniqueCells": 26095,
+          "checksum": 7772288
+        }
+      ]
+    },
+    {
+      "records": 1000000,
+      "durationMs": 1494.96,
+      "p95DurationMs": 1868.62,
+      "recordsPerSecond": 668914,
+      "microsecondsPerRecord": 1.49,
+      "rssDeltaMb": 1.77,
+      "uniqueCells": 26095,
+      "checksum": 77705513,
+      "samples": [
+        {
+          "durationMs": 1868.62,
+          "recordsPerSecond": 535154,
+          "microsecondsPerRecord": 1.87,
+          "rssDeltaMb": 2.09,
+          "uniqueCells": 26095,
+          "checksum": 77705513
+        },
+        {
+          "durationMs": 1494.96,
+          "recordsPerSecond": 668914,
+          "microsecondsPerRecord": 1.49,
+          "rssDeltaMb": 1.77,
+          "uniqueCells": 26095,
+          "checksum": 77705513
+        },
+        {
+          "durationMs": 1329.7,
+          "recordsPerSecond": 752049,
+          "microsecondsPerRecord": 1.33,
+          "rssDeltaMb": 1.77,
+          "uniqueCells": 26095,
+          "checksum": 77705513
+        }
+      ]
+    },
+    {
+      "records": 10000000,
+      "durationMs": 14737,
+      "p95DurationMs": 16026.04,
+      "recordsPerSecond": 678564,
+      "microsecondsPerRecord": 1.47,
+      "rssDeltaMb": 1.52,
+      "uniqueCells": 26095,
+      "checksum": 777037763,
+      "samples": [
+        {
+          "durationMs": 14658.03,
+          "recordsPerSecond": 682220,
+          "microsecondsPerRecord": 1.47,
+          "rssDeltaMb": 1.39,
+          "uniqueCells": 26095,
+          "checksum": 777037763
+        },
+        {
+          "durationMs": 16026.04,
+          "recordsPerSecond": 623984,
+          "microsecondsPerRecord": 1.6,
+          "rssDeltaMb": 1.52,
+          "uniqueCells": 26095,
+          "checksum": 777037763
+        },
+        {
+          "durationMs": 14737,
+          "recordsPerSecond": 678564,
+          "microsecondsPerRecord": 1.47,
+          "rssDeltaMb": 1.7,
+          "uniqueCells": 26095,
+          "checksum": 777037763
+        }
+      ]
+    }
+  ],
+  "aggregation": [
+    {
+      "records": 1000000,
+      "durationMs": 1400.95,
+      "p95DurationMs": 1459.42,
+      "recordsPerSecond": 713801,
+      "rssDeltaMb": 0.25,
+      "groups": 3815,
+      "total": 1000000,
+      "samples": [
+        {
+          "durationMs": 1400.95,
+          "recordsPerSecond": 713801,
+          "rssDeltaMb": 0.29,
+          "groups": 3815,
+          "total": 1000000
+        },
+        {
+          "durationMs": 1282.18,
+          "recordsPerSecond": 779922,
+          "rssDeltaMb": 0.25,
+          "groups": 3815,
+          "total": 1000000
+        },
+        {
+          "durationMs": 1459.42,
+          "recordsPerSecond": 685204,
+          "rssDeltaMb": 0.25,
+          "groups": 3815,
+          "total": 1000000
+        }
+      ]
+    },
+    {
+      "records": 10000000,
+      "durationMs": 15200.19,
+      "p95DurationMs": 16420.77,
+      "recordsPerSecond": 657887,
+      "rssDeltaMb": 0.38,
+      "groups": 3815,
+      "total": 10000000,
+      "samples": [
+        {
+          "durationMs": 15004.43,
+          "recordsPerSecond": 666470,
+          "rssDeltaMb": 0.31,
+          "groups": 3815,
+          "total": 10000000
+        },
+        {
+          "durationMs": 16420.77,
+          "recordsPerSecond": 608985,
+          "rssDeltaMb": 0.43,
+          "groups": 3815,
+          "total": 10000000
+        },
+        {
+          "durationMs": 15200.19,
+          "recordsPerSecond": 657887,
+          "rssDeltaMb": 0.38,
+          "groups": 3815,
+          "total": 10000000
+        }
+      ]
+    }
+  ],
+  "polygonToCells": [
+    {
+      "name": "small",
+      "resolution": 9,
+      "cells": 64,
+      "durationMs": 4.24,
+      "p95DurationMs": 4.64,
+      "samples": [
+        {
+          "cells": 64,
+          "durationMs": 4.64
+        },
+        {
+          "cells": 64,
+          "durationMs": 4.24
+        },
+        {
+          "cells": 64,
+          "durationMs": 2.25
+        }
+      ]
+    },
+    {
+      "name": "medium",
+      "resolution": 9,
+      "cells": 25945,
+      "durationMs": 100.68,
+      "p95DurationMs": 101.54,
+      "samples": [
+        {
+          "cells": 25945,
+          "durationMs": 93.09
+        },
+        {
+          "cells": 25945,
+          "durationMs": 100.68
+        },
+        {
+          "cells": 25945,
+          "durationMs": 101.54
+        }
+      ]
+    },
+    {
+      "name": "large",
+      "resolution": 9,
+      "cells": 647905,
+      "durationMs": 1961.48,
+      "p95DurationMs": 2016.37,
+      "samples": [
+        {
+          "cells": 647905,
+          "durationMs": 2016.37
+        },
+        {
+          "cells": 647905,
+          "durationMs": 1890.96
+        },
+        {
+          "cells": 647905,
+          "durationMs": 1961.48
+        }
+      ]
+    }
+  ],
+  "guidance": {
+    "nodeInMemoryCeiling": "Use streaming/chunking from 1M records; move repeatable shared queries or datasets beyond 10M to PostgreSQL/OLAP.",
+    "interpretation": "Performance is the median of three recorded repetitions after one explicit warmup per scenario; p95 is diagnostic."
+  },
+  "gate": {
+    "status": "NOT_COMPARABLE",
+    "correctness": {
+      "status": "PASS",
+      "failures": []
+    },
+    "performance": {
+      "status": "NOT_COMPARABLE",
+      "environmentKey": "node=v22.14.0;platform=win32;arch=x64;cpus=16;h3Js=4.5.0;cpuModel=11th gen intel(r) core(tm) i7-11800h @ 2.30ghz;osRelease=10.0.26200;memoryBucket=16-31GiB",
+      "baselineId": null,
+      "tolerancePercent": 20,
+      "comparisons": [],
+      "regressions": [],
+      "reason": "No certifying median baseline matches every declared environment field."
+    }
+  }
+}

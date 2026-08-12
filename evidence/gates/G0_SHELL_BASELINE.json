@@ -1,10 +1,27 @@
 {
   "gate": "G0_SHELL_BASELINE",
   "status": "PASS",
-  "executedAt": "2026-08-12T06:44:00Z",
-  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64", "bash": "5.x" },
-  "commands": ["pnpm check:shell"],
-  "summary": { "scripts": 2, "bashSyntax": true, "strictMode": true, "unsafeConstructs": 0 },
+  "executedAt": "2026-08-12T21:02:57Z",
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "bashRuntime": "Git Bash",
+    "shellcheckRuntime": "Docker"
+  },
+  "commands": ["pnpm acceptance:local", "pnpm check:shell"],
+  "summary": {
+    "scripts": 2,
+    "bashSyntax": true,
+    "strictMode": true,
+    "unsafeConstructs": 0,
+    "shellcheck": "PASS",
+    "shellcheckVersion": "v0.11.0",
+    "shellcheckImage": "koalaman/shellcheck:v0.11.0@sha256:61862eba1fcf09a484ebcc6feea46f1782532571a34ed51fedf90dd25f925a8d"
+  },
   "artifacts": ["scripts/check-shell.mjs", "scripts/run-acceptance.sh", "scripts/verify-database.sh"],
-  "notes": ["ShellCheck is unavailable and remains NOT_RUN; this PASS is limited to the local Bash baseline"]
+  "notes": [
+    "Actual ShellCheck ran through the pinned Docker image because no native Windows executable was required.",
+    "This PASS is limited to the local Git Bash and ShellCheck baseline; the hosted OS matrix remains G6_CROSS_PLATFORM=PARTIAL."
+  ]
 }

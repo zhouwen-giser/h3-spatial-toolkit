@@ -1,6 +1,6 @@
 # P1-DATA-GOV-001 — 位置数据治理
 
-状态：`BLOCKED_BY_POLICY`。
+Work 状态：`BLOCKED`。Gate 状态：`BLOCKED`（原因：Owner/Legal 数据政策未批准）。
 
 ## 目标
 

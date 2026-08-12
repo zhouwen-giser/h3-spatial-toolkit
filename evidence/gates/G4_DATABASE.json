@@ -1,6 +1,7 @@
 {
   "gate": "G4_DATABASE",
   "status": "PARTIAL",
+  "recordedAt": "2026-08-12T20:18:57Z",
   "executedAt": "2026-08-12T19:11:22Z",
   "environment": {
     "node": "v22.14.0",
@@ -21,7 +22,14 @@
     "crossEngineTestsPassed": 11,
     "crossEngineTestsFailed": 0,
     "explainArtifacts": 2,
-    "restoredFeatureRows": 10000
+    "restoredFeatureRows": 10000,
+    "strictRunnerImplemented": true,
+    "individualScaleRowsMax": 10000000,
+    "adapterIntegrationTestsPassed": 13,
+    "schemaAndUpsertAssertionsIndividuallyPassed": true,
+    "indexPlanAssertionsIndividuallyPassed": true,
+    "extensionUpgradeAndDdlRollbackIndividuallyPassed": true,
+    "fullRunScopedCertificationExecuted": false
   },
   "artifacts": [
     "output/acceptance/environment/capabilities.json",
@@ -36,6 +44,8 @@
   ],
   "notes": [
     "PostgreSQL was bound to 127.0.0.1:55432; no production or external database was used.",
-    "This is not G4 PASS. Cell/resolution and geometry/cell invariants, executable aggregate upsert, enforced H3/time/parent index plans, 100K/1M/10M scale, logical source/restore checksums, and upgrade/rollback remain unverified."
+    "Schema/upsert assertions, adapter edge cases, index-plan probes, 100K/1M/10M scale and lifecycle scripts passed as individual local slices; those results do not substitute for one complete run-scoped certification.",
+    "This is not G4 PASS. The strict runner would truncate and reload the local synthetic certification database and create/drop isolated lifecycle databases; its complete execution awaits the user's explicit destructive-local-DB approval.",
+    "Logical source/restore fingerprints and the final image identity must be captured by the full run-scoped certification before this gate can become PASS."
   ]
 }

@@ -1,6 +1,6 @@
 # P1-GOV-OWNER-001 — 所有权与批准链
 
-状态：`BLOCKED_BY_ORG`。
+Work 状态：`BLOCKED`。Gate 状态：`BLOCKED`（原因：组织人员与职责决策未完成）。
 
 ## 目标
 

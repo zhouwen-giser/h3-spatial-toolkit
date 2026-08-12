@@ -1,6 +1,6 @@
 # P1-PUBLISH-001 — 包分发与发布策略
 
-状态：`BLOCKED_BY_DECISION`。
+Work 状态：`BLOCKED`。Gate 状态：`BLOCKED`（原因：分发模式与 Registry 决策未完成）。
 
 ## 目标
 

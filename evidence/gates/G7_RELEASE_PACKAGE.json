@@ -1,25 +1,24 @@
 {
   "gate": "G7_RELEASE_PACKAGE",
-  "status": "PASS",
-  "executedAt": "2026-08-12T06:58:50Z",
-  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64", "zip": "Info-ZIP", "unzip": "6.00" },
-  "commands": ["pnpm check:release"],
+  "status": "NOT_RUN",
+  "recordedAt": "2026-08-12T20:18:57Z",
+  "environment": { "platform": "win32", "arch": "x64" },
+  "commands": [],
   "summary": {
-    "manifestFiles": 198,
-    "reproducible": true,
-    "unzipIntegrity": true,
-    "forbiddenEntries": 0,
-    "cleanFrozenInstall": true,
-    "cleanStaticGate": true
+    "excludedFromCurrentCompletionRequirements": true,
+    "currentProjectVersion": "0.3.0",
+    "currentTemplateVersion": "1.4.0",
+    "historicalLastPass": {
+      "projectVersion": "0.2.0",
+      "templateVersion": "1.3.0",
+      "executedAt": "2026-08-12T06:58:50Z",
+      "manifestFiles": 198
+    }
   },
-  "artifacts": [
-    "MANIFEST.json",
-    "release/h3-spatial-toolkit-codex-template-v1.3.0.zip",
-    "release/h3-spatial-toolkit-codex-template-v1.3.0-RELEASE-SUMMARY.json",
-    "release/h3-spatial-toolkit-codex-template-v1.3.0-SHA256SUMS.txt"
-  ],
+  "artifacts": [],
   "notes": [
-    "Final source package was extracted into a new temporary directory before frozen install and static gate verification",
-    "Source package only; production release remains BLOCKED"
+    "The user explicitly removed generation of a new ZIP, SHA256SUMS, MANIFEST.json and Release Summary, as well as fresh extraction/frozen-install/static/content audit, from the completion requirements.",
+    "Historical 0.2.0/template 1.3.0 package evidence does not certify the current 0.3.0/template 1.4.0 source tree.",
+    "Production release remains BLOCKED independently of this excluded gate."
   ]
 }

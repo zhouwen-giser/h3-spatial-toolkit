@@ -1,6 +1,6 @@
 # P2-OLAP-001 — 可选 OLAP Adapter
 
-状态：`DEFERRED`。
+Work 状态：`DEFERRED`。Gate 状态：`NOT_RUN`。
 
 ## 目标
 

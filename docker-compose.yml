@@ -5,6 +5,9 @@ services:
       dockerfile: database/Dockerfile
       args:
         H3_PG_VERSION: 4.5.0
+        H3_PG_SHA256: 72f48359cd49ffaa38eb22fbaa607d5497e0144a8f94824f826beb0b370c40d8
+        POSTGIS_IMAGE: postgis/postgis:17-3.5-alpine@sha256:61cb994f576480f5736974e5c9aff965d039d965301bcaec9c7ea72f94b61908
+        SOURCE_REVISION: ${SOURCE_REVISION:-uncommitted}
     environment:
       POSTGRES_DB: h3toolkit
       POSTGRES_USER: h3
@@ -25,6 +28,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        NODE_IMAGE: node:24-bookworm-slim@sha256:3638d9a6fe4030bd716be989438248074489337ba3275657f93595428be4fc03
+        SOURCE_REVISION: ${SOURCE_REVISION:-uncommitted}
     environment:
       DATABASE_URL: postgresql://h3:h3@postgres:5432/h3toolkit
       PORT: 3000
@@ -41,8 +47,9 @@ services:
       MAX_DISTINCT_VALUES: 50000
       ALLOWED_RESOLUTIONS: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
       REQUEST_TIMEOUT_MS: 30000
+      AUTH_MODE: local
     ports:
-      - "3000:3000"
+      - "127.0.0.1:${API_HOST_PORT:-3000}:3000"
     depends_on:
       postgres:
         condition: service_healthy

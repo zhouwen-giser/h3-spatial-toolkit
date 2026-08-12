@@ -1,16 +1,20 @@
 {
   "gate": "G7_RELEASE_METADATA",
   "status": "PASS",
-  "executedAt": "2026-08-12T06:58:50Z",
-  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64" },
-  "commands": ["pnpm check:release-metadata", "pnpm test:unit"],
+  "executedAt": "2026-08-12T21:04:55Z",
+  "environment": { "node": "v22.14.0", "pnpm": "11.16.0", "platform": "win32", "arch": "x64" },
+  "commands": ["pnpm check:release-metadata"],
   "summary": {
-    "projectVersion": "0.2.0",
-    "templateVersion": "1.3.0",
+    "projectVersion": "0.3.0",
+    "templateVersion": "1.4.0",
     "classification": "SOURCE_TEMPLATE_READY",
-    "policyTests": 4,
+    "sourceUnresolved": 0,
     "productionReady": false
   },
   "artifacts": ["scripts/release-policy.mjs", "scripts/check-release.mjs", "test/release-policy.test.ts"],
-  "notes": ["Production release remains BLOCKED by explicitly listed production-required gates"]
+  "notes": [
+    "Production release remains BLOCKED by explicitly listed production-required gates.",
+    "The current software 0.3.0/template 1.4.0 release metadata check passed with no source-required unresolved gates.",
+    "G7_RELEASE_PACKAGE is NOT_RUN and excluded from this round by explicit user direction."
+  ]
 }

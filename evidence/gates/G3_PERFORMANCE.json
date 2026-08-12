@@ -1,17 +1,49 @@
 {
   "gate": "G3_PERFORMANCE",
   "status": "PASS",
-  "executedAt": "2026-08-12T07:04:28Z",
-  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64", "cpus": 9 },
+  "executedAt": "2026-08-12T20:46:34Z",
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 16,
+    "h3Js": "4.5.0",
+    "cpuModel": "11th gen intel(r) core(tm) i7-11800h @ 2.30ghz",
+    "osRelease": "10.0.26200",
+    "memoryBucket": "16-31GiB"
+  },
   "commands": ["pnpm benchmark"],
   "summary": {
-    "point10mDurationMs": 17378.97,
-    "point10mRecordsPerSecond": 575408,
-    "aggregation10mDurationMs": 11364.7,
-    "aggregation10mRecordsPerSecond": 879917,
+    "baselineId": "win32-x64-node-v22.14.0-h3-4.5.0-i7-11800h-median3-2026-08-13",
+    "warmupRuns": 1,
+    "recordedRuns": 3,
+    "statistic": "median",
+    "tolerancePercent": 20,
+    "comparableScenariosPassed": 9,
+    "comparableScenariosFailed": 0,
+    "correctnessFailures": 0,
+    "point10mDurationMs": 13664.91,
+    "point10mP95DurationMs": 13820.54,
+    "point10mRecordsPerSecond": 731801,
+    "aggregation10mDurationMs": 13447.17,
+    "aggregation10mP95DurationMs": 13495.98,
+    "aggregation10mRecordsPerSecond": 743651,
     "largePolygonCells": 647905,
-    "largePolygonDurationMs": 1740.84
+    "largePolygonDurationMs": 1804.39,
+    "largePolygonP95DurationMs": 2030.28
   },
-  "artifacts": ["benchmark/results/latest.json"],
-  "notes": ["Single-machine algorithm benchmark only; load/soak remains NOT_RUN"]
+  "artifacts": [
+    "benchmark/results/latest.json",
+    "benchmark/results/win32-node22-median-baseline-2026-08-13.json",
+    "benchmark/results/win32-node22-median-validation-2026-08-13.json",
+    "benchmark/results/win32-node22-median-validation-quiet-2026-08-13.json",
+    "benchmark/results/linux-node24-2026-08-12.json"
+  ],
+  "notes": [
+    "Each scenario used one explicit warmup and three recorded repetitions; the median is certifying and p95 is diagnostic.",
+    "The quiet independent Windows validation matched every environment field and all 9 scenarios remained within the unchanged 20 percent threshold.",
+    "A concurrent-load independent validation failed Point 10K and 10M and is retained as FAIL evidence; it was not rewritten or treated as PASS.",
+    "The historical Linux result lacks CPU model, OS release and memory-bucket identity and is explicitly NOT_COMPARABLE; it is not treated as a regression PASS.",
+    "Single-machine algorithm benchmark only; G3_LOAD_SOAK remains NOT_RUN."
+  ]
 }

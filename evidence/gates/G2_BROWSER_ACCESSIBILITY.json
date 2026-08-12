@@ -1,0 +1,37 @@
+{
+  "gate": "G2_BROWSER_ACCESSIBILITY",
+  "status": "PASS",
+  "executedAt": "2026-08-12T19:58:24Z",
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "playwright": "1.62.1",
+    "axeCore": "4.13.0"
+  },
+  "commands": ["pnpm acceptance:browser"],
+  "summary": {
+    "testsPassed": 9,
+    "testsFailed": 0,
+    "browsers": {
+      "chromium": "151.0.7922.34",
+      "firefox": "153.0",
+      "webkit": "26.5"
+    },
+    "normalWebgl": true,
+    "forcedSvgFallback": true,
+    "keyboardAndFocus": true,
+    "resolutionClearReset": true,
+    "zoom200EquivalentReflow": true,
+    "axeCriticalOrSeriousViolations": 0
+  },
+  "artifacts": [
+    "output/acceptance/browser/results.json",
+    "output/acceptance/browser/html-report/index.html",
+    "output/acceptance/browser/test-results/"
+  ],
+  "notes": [
+    "The committed summary is backed by the ignored run-scoped Playwright JSON report and per-test Axe attachments.",
+    "This PASS is limited to the declared local Playwright browser matrix; it is not cross-platform or production deployment evidence."
+  ]
+}

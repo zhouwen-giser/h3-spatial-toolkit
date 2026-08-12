@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { buildApp, normalizeApiError } from "../apps/api/src/app.js";
 import { loadServerConfig } from "../apps/api/src/config.js";
+import { H3_TOOLKIT_VERSION } from "../packages/core/src/index.js";
 
 const area = {
   type: "Polygon" as const,
@@ -11,6 +12,19 @@ const area = {
       [139.768, 35.682],
       [139.767, 35.682],
       [139.767, 35.681]
+    ]
+  ]
+};
+
+const coverageBudgetArea = {
+  type: "Polygon" as const,
+  coordinates: [
+    [
+      [139.75, 35.67],
+      [139.772, 35.67],
+      [139.772, 35.698],
+      [139.75, 35.698],
+      [139.75, 35.67]
     ]
   ]
 };
@@ -47,7 +61,7 @@ describe("API response contract", () => {
     expect(response.statusCode).toBe(200);
     expect(response.headers["x-request-id"]).toBe(body.meta.requestId);
     expect(body.meta).toMatchObject({
-      toolkitVersion: "0.2.0",
+      toolkitVersion: H3_TOOLKIT_VERSION,
       engine: "h3-js",
       engineVersion: "4.5.0",
       warnings: []
@@ -88,6 +102,31 @@ describe("API response contract", () => {
 });
 
 describe("API resource policies", () => {
+  it("publishes concrete success data schemas for every v1 endpoint", async () => {
+    const document = app.swagger() as {
+      paths: Record<
+        string,
+        Record<
+          string,
+          {
+            responses?: Record<
+              string,
+              { content?: Record<string, { schema?: { properties?: { data?: Record<string, unknown> } } }> }
+            >;
+          }
+        >
+      >;
+    };
+    for (const [path, pathItem] of Object.entries(document.paths)) {
+      if (!path.startsWith("/v1/")) continue;
+      for (const operation of Object.values(pathItem)) {
+        const dataSchema = operation.responses?.["200"]?.content?.["application/json"]?.schema?.properties?.data;
+        expect(dataSchema, path).toBeDefined();
+        expect(Object.keys(dataSchema ?? {}), path).not.toHaveLength(0);
+      }
+    }
+  });
+
   it("rejects resolutions disabled by policy", async () => {
     const response = await limitedApp.inject({
       method: "POST",
@@ -119,6 +158,53 @@ describe("API resource policies", () => {
       payload: { trajectories: [trajectory, trajectory], resolution: 9 }
     });
     assertError(response, 413, "FLOW_POINT_LIMIT_EXCEEDED");
+  });
+
+  it("limits the combined visitedCells and visitedPoints batch size", async () => {
+    const response = await limitedApp.inject({
+      method: "POST",
+      url: "/v1/h3/coverage",
+      payload: {
+        area,
+        resolution: 9,
+        visitedCells: Array.from({ length: 6 }, () => "892f5a32d97ffff"),
+        visitedPoints: Array.from({ length: 5 }, () => ({ longitude: 139.7671, latitude: 35.6812 }))
+      }
+    });
+    assertError(response, 413, "COVERAGE_VISIT_LIMIT_EXCEEDED");
+    expect(response.json().error.details).toEqual({ actual: 11, limit: 10 });
+  });
+
+  it("counts every serialized coverage cell array in the result budget", async () => {
+    const discoveryApp = await buildApp({ maxBatchRecords: 200, maxResultCells: 1_000 });
+    const coverageBudgetApp = await buildApp({ maxBatchRecords: 200, maxResultCells: 150 });
+    try {
+      const discoveryResponse = await discoveryApp.inject({
+        method: "POST",
+        url: "/v1/h3/coverage",
+        payload: { area: coverageBudgetArea, resolution: 9 }
+      });
+      const requiredCells = discoveryResponse.json().data.requiredCells as string[];
+      expect(requiredCells).toHaveLength(64);
+
+      const requiredResponse = await coverageBudgetApp.inject({
+        method: "POST",
+        url: "/v1/h3/coverage",
+        payload: { area: coverageBudgetArea, resolution: 9 }
+      });
+      expect(requiredResponse.statusCode).toBe(200);
+      expect(requiredResponse.json().data.missingCells).toHaveLength(64);
+
+      const response = await coverageBudgetApp.inject({
+        method: "POST",
+        url: "/v1/h3/coverage",
+        payload: { area: coverageBudgetArea, resolution: 9, visitedCells: [...requiredCells, ...requiredCells] }
+      });
+      assertError(response, 413, "RESULT_CELL_LIMIT_EXCEEDED");
+      expect(response.json().error.details).toEqual({ actual: 192, limit: 150 });
+    } finally {
+      await Promise.all([discoveryApp.close(), coverageBudgetApp.close()]);
+    }
   });
 
   it("limits distinct cardinality", async () => {

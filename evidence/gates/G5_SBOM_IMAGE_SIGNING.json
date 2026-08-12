@@ -1,0 +1,59 @@
+{
+  "gate": "G5_SBOM_IMAGE_SIGNING",
+  "status": "PARTIAL",
+  "executedAt": "2026-08-12T20:20:22.657Z",
+  "environment": {
+    "scanner": "Docker Scout v1.22.0",
+    "scannerPinned": true,
+    "imagePlatform": "linux/amd64"
+  },
+  "commands": ["node scripts/container-supply-chain.mjs --write (pre-source-label-binding implementation)"],
+  "summary": {
+    "scannerStatus": "FAIL",
+    "severityThreshold": ["CRITICAL", "HIGH"],
+    "suppressions": 0,
+    "sourceRevisionBound": false,
+    "api": {
+      "imageId": "sha256:3d001e5a71a668fab77fcc7f30b9c64955afb28e04ed1d3f8e16d4349442fcba",
+      "sizeBytes": 85691609,
+      "sbomComponents": 219,
+      "critical": 2,
+      "high": 2,
+      "fixable": 0,
+      "unfixable": 4,
+      "runtimeInspection": "PASS",
+      "userCheck": "PASS"
+    },
+    "postgres": {
+      "imageId": "sha256:a4f60d05ad86d4ddfbb11517890810e27623f1c17d7a5bc9a59f48d810465bd5",
+      "sizeBytes": 187028785,
+      "sbomComponents": 147,
+      "critical": 1,
+      "high": 17,
+      "fixable": 17,
+      "unfixable": 1,
+      "runtimeInspection": "PASS",
+      "userCheck": "PASS"
+    },
+    "total": {
+      "critical": 3,
+      "high": 19,
+      "fixable": 17,
+      "unfixable": 5
+    },
+    "signing": "NOT_RUN",
+    "provenanceVerification": "NOT_RUN"
+  },
+  "artifacts": [
+    "output/acceptance/container-supply-chain/summary.json",
+    "output/acceptance/container-supply-chain/api.sbom.cdx.json",
+    "output/acceptance/container-supply-chain/api.vulnerabilities.sarif.json",
+    "output/acceptance/container-supply-chain/postgres.sbom.cdx.json",
+    "output/acceptance/container-supply-chain/postgres.vulnerabilities.sarif.json"
+  ],
+  "notes": [
+    "This scan was captured before OCI source-revision label binding was enforced, so neither image is certified against the current source commit and this evidence cannot upgrade the gate.",
+    "The scanner threshold failed with 3 Critical and 19 High findings across the two images; no suppressions were applied.",
+    "Registry identity and immutable publication digest, signing, and registry-backed provenance verification remain blocked."
+  ]
+}

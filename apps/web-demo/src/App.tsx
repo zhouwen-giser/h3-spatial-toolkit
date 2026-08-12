@@ -3,6 +3,13 @@ import { lazy, Suspense, useMemo, useState } from "react";
 
 const DeckMap = lazy(async () => ({ default: (await import("./DeckMap.js")).DeckMap }));
 
+type Renderer = "deck.gl" | "SVG fallback";
+
+interface RendererState {
+  name: Renderer;
+  source: "webgl" | "webgl-unavailable" | "webgl-error" | "forced-no-webgl";
+}
+
 const TOKYO_RING: [number, number][] = [
   [139.735, 35.665],
   [139.785, 35.665],
@@ -11,19 +18,26 @@ const TOKYO_RING: [number, number][] = [
   [139.735, 35.665]
 ];
 
-const hasWebGL = (() => {
+function detectRenderer(): RendererState {
+  const isLoopback = ["127.0.0.1", "localhost", "::1", "[::1]"].includes(window.location.hostname);
+  if (isLoopback && new URLSearchParams(window.location.search).get("testRenderer") === "svg") {
+    return { name: "SVG fallback", source: "forced-no-webgl" };
+  }
+
   try {
     const canvas = document.createElement("canvas");
-    return Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+    return canvas.getContext("webgl2") || canvas.getContext("webgl")
+      ? { name: "deck.gl", source: "webgl" }
+      : { name: "SVG fallback", source: "webgl-unavailable" };
   } catch {
-    return false;
+    return { name: "SVG fallback", source: "webgl-unavailable" };
   }
-})();
+}
 
 export function App() {
   const [resolution, setResolution] = useState(9);
   const [ring, setRing] = useState<[number, number][]>(TOKYO_RING);
-  const [renderer, setRenderer] = useState<"deck.gl" | "SVG fallback">(hasWebGL ? "deck.gl" : "SVG fallback");
+  const [renderer, setRenderer] = useState<RendererState>(detectRenderer);
   const polygon = useMemo<GeoJSON.Polygon>(() => ({ type: "Polygon", coordinates: [ring] }), [ring]);
   const cells = useMemo(
     () => (ring.length >= 4 ? polygonToCells(polygon, resolution) : []),
@@ -44,15 +58,16 @@ export function App() {
             SVG 边界渲染。
           </p>
         </div>
-        <div className="status">
+        <div className="status" aria-label="Runtime versions">
           <span /> H3 4.5.0 · EPSG:4326
         </div>
       </header>
 
       <section className="controls" aria-label="H3 parameters">
         <label>
-          Resolution <strong>{resolution}</strong>
+          Resolution <output htmlFor="resolution">{resolution}</output>
           <input
+            id="resolution"
             aria-label="Resolution"
             type="range"
             min="5"
@@ -62,19 +77,25 @@ export function App() {
           />
         </label>
         <div className="buttons">
-          <button onClick={reset}>恢复东京样例</button>
-          <button className="secondary" onClick={clear}>
+          <button type="button" onClick={reset}>
+            恢复东京样例
+          </button>
+          <button type="button" className="secondary" onClick={clear}>
             清空
           </button>
         </div>
         <div className="metrics">
           <article>
             <span>Cells</span>
-            <strong>{cells.length.toLocaleString()}</strong>
+            <strong data-testid="cell-count" aria-live="polite">
+              {cells.length.toLocaleString()}
+            </strong>
           </article>
           <article>
             <span>Renderer</span>
-            <strong>{renderer}</strong>
+            <strong data-testid="renderer" data-renderer-source={renderer.source}>
+              {renderer.name}
+            </strong>
           </article>
           <article>
             <span>Coordinate</span>
@@ -83,21 +104,21 @@ export function App() {
         </div>
       </section>
 
-      <section className="workspace">
-        <div className="map" aria-label="H3 cell map">
-          {renderer === "deck.gl" && cells.length > 0 ? (
+      <section className="workspace" aria-label="H3 visualization and output">
+        <section className="map" aria-label="H3 cell map">
+          {renderer.name === "deck.gl" && cells.length > 0 ? (
             <Suspense fallback={<div className="map-loading">正在加载 WebGL Renderer…</div>}>
-              <DeckMap cells={cells} onFailure={() => setRenderer("SVG fallback")} />
+              <DeckMap cells={cells} onFailure={() => setRenderer({ name: "SVG fallback", source: "webgl-error" })} />
             </Suspense>
           ) : (
             <SvgMap cells={cells} polygon={polygon} />
           )}
           {cells.length === 0 && <div className="empty">恢复样例后即可生成 H3 Cells</div>}
-        </div>
+        </section>
         <aside>
           <p className="eyebrow">LIVE OUTPUT</p>
           <h2>标准 H3 Cell Dataset</h2>
-          <pre>
+          <pre tabIndex={0} aria-label="First ten H3 cells as JSON">
             {JSON.stringify(
               cells.slice(0, 10).map((cell) => ({ cell, resolution })),
               null,

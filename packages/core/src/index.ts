@@ -15,7 +15,7 @@ import type * as GeoJSON from "geojson";
 
 export const H3_ENGINE = "h3-js";
 export const H3_ENGINE_VERSION = "4.5.0";
-export const H3_TOOLKIT_VERSION = "0.2.0";
+export const H3_TOOLKIT_VERSION = "0.3.0";
 export const MIN_RESOLUTION = 0;
 export const MAX_RESOLUTION = 15;
 
@@ -36,9 +36,11 @@ export interface H3Metric {
   value: number;
 }
 
+export type TimeBucket = "minute" | "hour" | "day" | "week" | "month";
+
 export interface H3TimeMetric extends H3Metric {
   timestamp: string;
-  bucket: string;
+  bucket: TimeBucket;
 }
 
 export interface H3Flow {

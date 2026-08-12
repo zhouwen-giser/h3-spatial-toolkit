@@ -1,12 +1,16 @@
 # Codex 开发模板验收报告
 
-执行日期：2026-08-13。软件版本：`0.2.0`；模板版本：`1.3.0`。
+执行日期：2026-08-13。软件版本：`0.3.0`；模板版本：`1.4.0`。
 
 ## 总结
 
-**模板状态：`SOURCE_TEMPLATE_READY`；项目生产状态：`BLOCKED`。**
+**源码候选状态：本地 Gate 范围内可交付；项目生产状态：`BLOCKED`。**
 
-当前 Work 环境已真实完成本地源码、契约、API/CLI 和单机性能历史门禁；2026-08-13 又在 Windows Docker Desktop 执行了数据库 10K/Golden/基础恢复切片。严格 G4、真实完整浏览器矩阵、OIDC/tenant、目标集群、HA/恢复平台和 Registry/signing 仍严格保留为 `NOT_RUN/BLOCKED/PARTIAL`。数据库客户端来自认证镜像，不要求本地安装 psql。
+当前 Windows Work 环境已真实完成本地源码/契约/API/CLI 子门禁、三引擎浏览器与可访问性矩阵，以及具备完整环境键的单机性能比较。平台中立的 fail-closed 鉴权边界也已由本地契约测试覆盖。严格数据库 runner 已实现，Schema/Upsert/Adapter/索引计划/10M 规模/生命周期等切片分别通过，但完整 runner 会重建本地合成认证数据库，在用户明确授权前没有执行，因此 G4 保持 `PARTIAL`。
+
+具体 IdP/JWKS、持久租户隔离、Gateway、OTel/SLO、Load/Soak、HA/PITR、镜像漏洞处置/签名和生产批准仍未完成。当前 `pnpm acceptance:local` 已通过并刷新版本化证据；跨平台 CI Workflow 已定义，但 G6 只有在远端托管 Runner 实际成功后才能升级。远端 CI/push 状态仍必须由实际仓库结果补充，不能由本报告预判。
+
+用户已明确将新源码 ZIP、`SHA256SUMS`、`MANIFEST.json`、Release Summary、全新目录解压/frozen install/static 复验和交付包内容审计排除出本轮完成要求。因此当前 `G7_RELEASE_PACKAGE=NOT_RUN`；历史 `0.2.0` / 模板 `1.3.0` 的包证据不适用于当前源码树。
 
 ## 模板内容验收
 
@@ -17,68 +21,64 @@
 | G0–G7 分层门禁与证据格式 | PASS |
 | 工程治理、测试、发布、运维、安全隐私 | PASS |
 | FR-001–FR-012、NFR-001–NFR-012 追踪 | PASS |
-| 当前任务与 20 个未完成工程 Work Item | PASS |
+| 当前任务、Backlog 和未完成工作登记 | PASS |
 | PR/Issue/ADR/Task/Acceptance 模板 | PASS |
-| CI/Database Workflow 定义 | PASS（仅静态；外部 CI 未执行） |
+| CI/Database/Browser Workflow 定义 | PASS（定义本身不替代远端执行） |
 
 ## 已执行门禁
 
 | Gate | 命令/关键结果 | 状态 |
 |---|---|---|
-| G0 Contract | 12 FR、8 packages、3 apps、1 active task | PASS |
-| G0 Docs/Repository | 66 Markdown；版本、任务、Secret、格式、ESLint | PASS |
-| G1 Local | Type；84 passed、PostGIS cases skipped；Lines 94.33% | PASS |
-| G1 Golden Fixture | 6 Point + 4 Polygon；11 Node cases；冻结值再生检查 | PASS（DB 对照 NOT_RUN） |
-| G1 Build | 8 packages + API + CLI + Web Demo | PASS |
-| G2 Contract | OpenAPI 9 paths、baseline 7 paths、4 JSON Schema；无 breaking change | PASS |
-| G2 API/CLI | 编译产物 Point、Polygon CSV、API loopback、readiness、metrics、SIGTERM clean exit | PASS |
-| G2 Web Bundle | Entry 404,532 bytes；DeckMap async 632,091 bytes；总量在预算内 | PASS（仅构建/预算） |
-| G3 Algorithm Performance | 10K/100K/1M/10M 实测 | PASS |
-| G5 Dependency/License/Secret | 0 known prod vulnerabilities；146 production components；0 manual review | PASS（子门禁） |
-| G5 Source SBOM | CycloneDX 1.6：145 components；134 external notices；0 unresolved licenses | PASS（不含镜像/签名） |
-| G6 Production Layout | 26,014,477 bytes；devDependencies excluded；non-root；readiness/clean exit | PASS（Docker runtime NOT_RUN） |
-| G7 Source Package | 版本/Gate policy、固定 epoch、Manifest、双 ZIP、Release Summary、unzip/content audit、全新目录 frozen install | PASS |
+| G0 Contract/Docs/Repository/Shell | 当前版本、任务、文档、Secret、格式、Lint、Bash syntax/strict mode；固定 Docker ShellCheck v0.11.0 实际执行 | PASS |
+| G1 Local/Golden/Build | 16 files passed + 1 DB file skipped；131 tests passed + 13 DB tests skipped；Statements 93.16%、Branches 89%、Functions 93.58%、Lines 94.73%；Build/Golden PASS | PASS |
+| G2 Contract/API/CLI | 0.3.0 OpenAPI、历史兼容基线、具体成功 Schema、六命令正反例、资源边界和 compiled smoke | PASS |
+| G2 Web Bundle | Entry 405,176 / gzip 126,346 bytes；Deck async 632,091 / gzip 181,874 bytes；total JS 1,037,334 bytes | PASS |
+| G2 Browser/Accessibility | Chromium 151.0.7922.34、Firefox 153.0、WebKit 26.5；正常 WebGL + 强制 SVG；键盘/Focus/Resolution/Clear/Reset/200% 等效回流；Axe critical/serious 0 | PASS：9/9 |
+| G3 Algorithm Performance | Windows Node 22 完整环境键；每场景 1 次预热 + 3 次记录并取 median；correctness 通过；静默独立复验 9/9 在 20% 阈值内 | PASS |
+| G5 Local Auth Contract | `local` 默认兼容；`required` 缺 authenticator 启动失败；Principal/Tenant/Scope/401/403 fail closed | PARTIAL：本地边界已证实，具体 IdP/Gateway 未接入 |
+| G5 Dependency/License/Secret/Source SBOM | npm audit 0；CycloneDX 145 components / 134 external packages；License 检查 146 production packages | PASS（不含镜像阈值/签名） |
+| G6 Local Runtime Layout | production-only layout、non-root、readiness 和 graceful shutdown 本地验证 | PASS（不等于容器/HA/跨平台） |
 
-## 未执行或阻塞门禁
+## 未执行、部分执行或阻塞门禁
 
 | Gate | 状态 | 原因/解锁条件 |
 |---|---|---|
-| G2 Browser/WebGL/A11y | NOT_RUN | 无 Chromium/Firefox/WebKit；需真实浏览器证据 |
-| G3 Load/Soak/Chaos | NOT_RUN | 需目标集群、SLO、代表性数据和故障注入授权 |
-| G4 PostgreSQL H3/PostGIS | PARTIAL | PostGIS 3.5.2、H3/H3 PostGIS 4.5.0、10K、Golden 11/11、基础恢复通过；严格 Schema/index/scale/upgrade 尚未完成 |
-| G5 Auth/Tenant | BLOCKED | OIDC issuer、tenant model、Gateway 未选定 |
-| G5 SBOM/Image scan/sign | PARTIAL | Source SBOM PASS；镜像清单、Scanner、Registry、签名身份和 provenance NOT_RUN |
-| G6 Container/HA/Recovery | NOT_RUN | 需部署与数据库平台、RTO/RPO 和演练 |
-| G6 Cross-platform/Shell | PARTIAL/NOT_RUN | 仅 Linux Node 24；无 macOS/Windows/arm64/shellcheck |
-| G7 Production Release | BLOCKED | G2 browser、G3 load、G4、G5、G6 与 Owner 未完成 |
+| G3 Load/Soak/Chaos | NOT_RUN | 需目标集群、SLO、代表性数据和故障注入授权；单机 Benchmark 不替代 |
+| G4 PostgreSQL H3/PostGIS | PARTIAL | 严格 runner 与个别切片已实现/执行；完整 run-scoped 执行会重建本地合成认证库，正等待用户明确授权 |
+| G5 Auth/Tenant | PARTIAL | 本地注入契约 fail closed；具体 OIDC/JWKS、持久租户隔离、Gateway 和跨组件传播待定 |
+| G5 Image scan/sign/provenance | PARTIAL | source-label 绑定前扫描共 3 Critical + 19 High（API 2C/2H；PostgreSQL 1C/17H），阈值 FAIL；不能绑定当前 commit 或提升 Gate；Registry 签名/provenance NOT_RUN |
+| G6 Container/HA/Recovery | PARTIAL/NOT_RUN | 本地容器候选与数据库切片不替代目标平台 HA、PITR、Failover、RTO/RPO 演练 |
+| G6 Cross-platform | PARTIAL | 矩阵 Workflow 已定义；远端 Linux/macOS/Windows、Node 22/24、x64/arm64 尚未全部执行成功 |
+| G7 Release Metadata | PASS | 当前 `acceptance:local` 已执行 0.3.0/1.4.0 版本、Changelog 与 Gate 分类检查 |
+| G7 Release Package | NOT_RUN | 用户明确排除当前轮的新 ZIP/Manifest/Checksum/Summary/解压复验和内容审计 |
+| G7 Production Release | BLOCKED | G3 Load、G4、G5、G6、Owner/批准链仍未完成 |
 
 ## 最新 Benchmark 摘要
 
-环境：Linux x64、Node v24.14.0、9 CPUs。
+可比较环境：Windows x64、Node v22.14.0、16 CPUs、h3-js 4.5.0；CPU/OS/内存档位与基线完全匹配。
 
 | 场景 | 规模 | 结果 |
 |---|---:|---:|
-| Point→H3 | 10M | 17,378.97ms；575,408 records/s |
-| Aggregation | 10M | 11,364.70ms；879,917 records/s |
-| Large Polygon Res 9 | 647,905 cells | 1,740.84ms |
+| Point→H3 | 10M | median 13,664.91ms；731,801 records/s；较同环境 median 基线 -7.27% duration；p95 13,820.54ms |
+| Aggregation | 10M | median 13,447.17ms；743,651 records/s；较同环境 median 基线 -11.53% duration；p95 13,495.98ms |
+| Large Polygon Res 9 | 647,905 cells | median 1,804.39ms；较同环境 median 基线 -8.01% duration；p95 2,030.28ms |
 
-完整结果位于 `benchmark/results/latest.json`；这是单机算法 Benchmark，不等于并发或长稳验证。
+静默独立复验 9/9 场景在 20% 阈值内。一次与 Docker/其他 Agent 并发的独立复验在 Point 10K/10M 超阈值并被如实保留为 FAIL，证明门禁没有放行噪声或失败；其后在静默条件下以同一基线和阈值复验 PASS。历史 Linux Node 24 因 CPU model、OS release 和 memory bucket 为 unknown，明确为 `NOT_COMPARABLE`。完整结果位于 `benchmark/results/latest.json` 和版本化 archives；这仍不是并发或长稳验证。
 
-## 本轮发现并修复
+## 本轮完成的工程补强
 
-1. OpenAPI 顶层 `tags` 从非法字符串数组改为标准对象数组，并同时校验当前文档与兼容基线。
-2. Release 内容规则不再把合法 `packages/coverage` 源码误判为根覆盖率产物。
-3. 三个私有 App 补齐 Apache-2.0 License metadata，License manual review 降为 0。
-4. pnpm frozen lockfile 已更新；新增依赖均为精确版本并受仓库策略检查。
-5. Deck.gl 已改为异步 chunk，并建立 entry/async/total 自动预算；真实浏览器回归仍保持 `NOT_RUN`。
-6. API 增加稳定 Envelope/错误分类、请求 ID、资源限额、语义校验、readiness、低基数 Metrics 和日志认证头脱敏。
-7. Release policy 可阻止源码 Gate 缺失和生产 Gate 绕过，并输出机器可读候选摘要。
-8. 修正 License Gate 只统计工作区包的问题，现递归覆盖全部传递生产依赖。
-9. 数据库认证的一次性人工步骤已收敛为证据脚本；因无 Docker，未把预置脚本写成执行通过。
-10. Runtime 不再复制完整工作区 `node_modules/packages`，改为 pnpm production deploy；独立临时目录启动通过。
+1. 软件版本升级为 `0.3.0`，Codex 模板升级为 `1.4.0`，同步 Workspace/OpenAPI/运行时版本常量和治理文档。
+2. OpenAPI 成功响应补齐具体 Schema，并将兼容检查扩展到 request body required 方向、新增边界、required 字段和枚举移除；历史 `0.1.0` 契约与 0.2.0 安全例外 ADR 保留。
+3. API/CLI 六个命令补齐正向、非法 operation、输入/输出组合预算和 Windows IPC 关停路径。
+4. 新增平台中立鉴权边界：只信任已验证 Principal，Tenant 不接受调用方覆盖，六业务 Scope 和 Metrics Scope fail closed。
+5. 新增 Playwright/Axe 三引擎矩阵并真实执行 9/9，覆盖正常 WebGL、强制 SVG、键盘/Focus、缩放与关键交互。
+6. Benchmark 采用完整环境键、1 次预热、3 次记录、median 判定与 p95 诊断；无匹配基线时门禁 `NOT_COMPARABLE` 并非零退出，同环境回归超过 20% 失败。
+7. 数据库追加 Schema 不变量、真实四列 Upsert、两阶段查询、四类计划探针、10K–10M、逻辑恢复指纹、扩展升级和 DDL 回滚自动化；完整执行仍受授权边界约束。
+8. CI 定义扩展到 Node/OS/架构和三浏览器矩阵；Workflow 文件存在不计作远端 PASS。
+9. 基础/应用/数据库镜像 digest 固定与本地扫描已推进；Scanner 阈值仍失败，不声称供应链完成。
 
 ## 交付判定
 
-模板满足 Codex 解压后读取设计、选择 Work Item、安装、开发、执行本地门禁、记录证据和构建源码交付包的要求。下一任务为 `P0-DB-CERT-001`，但当前 Work 环境不具备其执行条件。
+当前源码具备由后续 Codex 读取设计、选择 Work Item、安装、开发、执行本地/浏览器/数据库门禁和记录证据的完整入口。本轮按用户要求通过 Git commit/push 和远端 PR 交付，不生成新的源码交付包；远端 push/CI 的最终结果必须在完成时由实际仓库状态补录。
 
-生产发布不得引用本报告中的本地 PASS 代替数据库、浏览器、身份、负载、HA、恢复、跨平台和供应链平台证据。完整待办见 `docs/29_UNFINISHED_WORK_REGISTER.md`。
+生产发布不得引用本报告中的本地 PASS 代替数据库完整 run-id、具体身份平台、Load/Soak、镜像阈值/签名、HA/PITR、跨平台托管执行和组织批准。完整待办见 `docs/29_UNFINISHED_WORK_REGISTER.md`。

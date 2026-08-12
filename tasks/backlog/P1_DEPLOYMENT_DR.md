@@ -1,6 +1,6 @@
 # P1-DEPLOY-DR-001 — 部署、HA 与灾备认证
 
-状态：`NOT_RUN`。
+Work 状态：`READY`。Gate 状态：`NOT_RUN`（本地布局和单实例切片不替代目标 HA/DR）。
 
 ## 目标
 
@@ -19,4 +19,5 @@
 - production-only API deploy 为 26,014,477 bytes，排除 Vitest/TypeScript 等开发依赖。
 - Dockerfile 只复制 deploy 输出并使用 `USER node`；独立目录 readiness 与 SIGTERM clean exit PASS。
 - 数据库认证脚本已包含单容器 custom-format backup/restore 流程。
-- 未完成：实际 Docker build/run/scan、双副本 rolling update、托管 HA、PITR、故障注入和 RTO/RPO 演练。
+- 当前 API/PostgreSQL 候选已执行本地 Docker build/run/scan 切片；Scanner 阈值由 P1-SUPPLY 跟踪。
+- 未完成：双副本 rolling update、托管 HA、PITR、故障注入和 RTO/RPO 演练。

@@ -1,9 +1,9 @@
 {
   "gate": "G5_SBOM_SOURCE",
   "status": "PASS",
-  "executedAt": "2026-08-12T06:41:00Z",
-  "environment": { "node": "v24.14.0", "pnpm": "11.16.0", "platform": "linux", "arch": "x64" },
-  "commands": ["pnpm check:supply-chain", "pnpm check:licenses"],
+  "executedAt": "2026-08-12T21:02:57Z",
+  "environment": { "node": "v22.14.0", "pnpm": "11.16.0", "platform": "win32", "arch": "x64" },
+  "commands": ["pnpm acceptance:local", "pnpm check:supply-chain", "pnpm check:licenses"],
   "summary": {
     "format": "CycloneDX 1.6 JSON",
     "sbomComponents": 145,
@@ -12,5 +12,8 @@
     "unresolvedLicenses": 0
   },
   "artifacts": ["sbom/cyclonedx-bom.json", "THIRD_PARTY_NOTICES.md", "scripts/generate-supply-chain.mjs"],
-  "notes": ["Source/npm inventory only; container SBOM, image scan, signing and provenance remain NOT_RUN"]
+  "notes": [
+    "The current 0.3.0 source/npm inventory contains 145 CycloneDX components and 134 external production packages; the license traversal checked 146 production packages.",
+    "Container SBOM and image scanning are recorded separately as PARTIAL; registry signing and provenance remain NOT_RUN."
+  ]
 }

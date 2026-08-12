@@ -4,5 +4,6 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react()],
   build: { target: "es2022", chunkSizeWarningLimit: 640 },
-  server: { host: "0.0.0.0" }
+  server: { host: "127.0.0.1" },
+  preview: { host: "127.0.0.1" }
 });

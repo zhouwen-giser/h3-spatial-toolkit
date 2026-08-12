@@ -19,6 +19,13 @@ const shutdown = async () => {
 
 process.once("SIGINT", shutdown);
 process.once("SIGTERM", shutdown);
+if (process.env.H3_TOOLKIT_TEST_SHUTDOWN_IPC === "YES" && typeof process.send === "function") {
+  process.once("message", async (message) => {
+    if (message !== "shutdown") return;
+    await shutdown();
+    if (process.connected && typeof process.disconnect === "function") process.disconnect();
+  });
+}
 
 await app.listen({
   host: config.host,

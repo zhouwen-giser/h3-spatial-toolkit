@@ -1,15 +1,26 @@
 {
   "gate": "G1_GOLDEN_FIXTURE",
   "status": "PASS",
-  "executedAt": "2026-08-12T06:39:03Z",
-  "environment": { "node": "v24.14.0", "platform": "linux", "arch": "x64", "h3Js": "4.5.0" },
-  "commands": ["pnpm check:golden", "pnpm test:unit"],
-  "summary": { "pointCases": 6, "polygonCases": 4, "nodeAssertions": 11, "databaseExecuted": false },
+  "executedAt": "2026-08-12T21:06:44Z",
+  "environment": { "node": "v22.14.0", "platform": "win32", "arch": "x64", "h3Js": "4.5.0" },
+  "commands": ["pnpm check:golden"],
+  "summary": {
+    "pointCases": 6,
+    "polygonCases": 4,
+    "polygonCells": 131,
+    "frozenJavaScriptGolden": "PASS",
+    "databaseCrossEngineSlice": { "passed": 11, "failed": 0 },
+    "postgisAdapterSlice": { "passed": 13, "failed": 0 },
+    "fullRunScopedDatabaseCertification": "PARTIAL"
+  },
   "artifacts": [
     "database/fixtures/h3-cross-engine-golden.json",
     "scripts/generate-golden-fixture.mjs",
     "test/golden-fixture.test.ts",
     "test/postgis.integration.test.ts"
   ],
-  "notes": ["PostGIS comparison is wired but remains NOT_RUN until Docker is available"]
+  "notes": [
+    "G1 PASS certifies the current frozen h3-js golden fixture check.",
+    "A prior real local database slice passed cross-engine Golden 11/11 and the PostGIS Adapter 13/13; those results are recorded under G4_DATABASE=PARTIAL and do not substitute for the complete run-scoped G4 certification."
+  ]
 }
