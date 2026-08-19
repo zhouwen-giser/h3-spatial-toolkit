@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@deck.gl/core": "9.3.9",
-    "@deck.gl/layers": "9.3.9",
+    "@deck.gl/layers": "9.3.10",
     "@deck.gl/react": "9.3.9",
     "@h3-toolkit/geometry": "workspace:*",
     "h3-js": "4.5.0",
