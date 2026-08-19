@@ -143,14 +143,14 @@ importers:
   apps/web-demo:
     dependencies:
       '@deck.gl/core':
-        specifier: 9.3.9
-        version: 9.3.9
+        specifier: 9.3.10
+        version: 9.3.10
       '@deck.gl/layers':
         specifier: 9.3.9
-        version: 9.3.9(@deck.gl/core@9.3.9)(@loaders.gl/core@4.4.4)(@luma.gl/core@9.3.6)(@luma.gl/engine@9.3.6(@luma.gl/core@9.3.6)(@luma.gl/shadertools@9.3.6(@luma.gl/core@9.3.6)))
+        version: 9.3.9(@deck.gl/core@9.3.10)(@loaders.gl/core@4.4.4)(@luma.gl/core@9.3.6)(@luma.gl/engine@9.3.6(@luma.gl/core@9.3.6)(@luma.gl/shadertools@9.3.6(@luma.gl/core@9.3.6)))
       '@deck.gl/react':
         specifier: 9.3.9
-        version: 9.3.9(@deck.gl/core@9.3.9)(@deck.gl/widgets@9.3.9(@deck.gl/core@9.3.9)(@luma.gl/core@9.3.6))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 9.3.9(@deck.gl/core@9.3.10)(@deck.gl/widgets@9.3.9(@deck.gl/core@9.3.10)(@luma.gl/core@9.3.6))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@h3-toolkit/geometry':
         specifier: workspace:*
         version: link:../../packages/geometry
@@ -331,8 +331,8 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@deck.gl/core@9.3.9':
-    resolution: {integrity: sha512-W3NZH/swxJmyS8+O/eyzuGNcwZdGECU/+CwoVTzRXdhpclhzO5ik0ZX3rIPrRfGn3NQTb0GScLDeuvW5iq9guA==}
+  '@deck.gl/core@9.3.10':
+    resolution: {integrity: sha512-BAJ6r+eRV4euuGcIi2SnlzrodgZ+sD2VuXsoL1DER0LwwKXmKmQu6WA8ax6DB9KFsBghLVoTUN5zaCGF6uKHuQ==}
 
   '@deck.gl/layers@9.3.9':
     resolution: {integrity: sha512-vAgQNihu8qhgJnFoeM/DhDUfHIsxuQX2pO49aEkIVbneJooGV+JzOrnWdiDxivv4sVfxq67bprKn94/sWepRng==}
@@ -2361,7 +2361,7 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@deck.gl/core@9.3.9':
+  '@deck.gl/core@9.3.10':
     dependencies:
       '@loaders.gl/core': 4.4.4
       '@loaders.gl/images': 4.4.4(@loaders.gl/core@4.4.4)
@@ -2380,9 +2380,9 @@ snapshots:
       gl-matrix: 3.4.4
       mjolnir.js: 3.0.1
 
-  '@deck.gl/layers@9.3.9(@deck.gl/core@9.3.9)(@loaders.gl/core@4.4.4)(@luma.gl/core@9.3.6)(@luma.gl/engine@9.3.6(@luma.gl/core@9.3.6)(@luma.gl/shadertools@9.3.6(@luma.gl/core@9.3.6)))':
+  '@deck.gl/layers@9.3.9(@deck.gl/core@9.3.10)(@loaders.gl/core@4.4.4)(@luma.gl/core@9.3.6)(@luma.gl/engine@9.3.6(@luma.gl/core@9.3.6)(@luma.gl/shadertools@9.3.6(@luma.gl/core@9.3.6)))':
     dependencies:
-      '@deck.gl/core': 9.3.9
+      '@deck.gl/core': 9.3.10
       '@loaders.gl/core': 4.4.4
       '@loaders.gl/images': 4.4.4(@loaders.gl/core@4.4.4)
       '@loaders.gl/schema': 4.4.4
@@ -2396,16 +2396,16 @@ snapshots:
       '@types/geojson': 7946.0.16
       earcut: 2.2.4
 
-  '@deck.gl/react@9.3.9(@deck.gl/core@9.3.9)(@deck.gl/widgets@9.3.9(@deck.gl/core@9.3.9)(@luma.gl/core@9.3.6))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@deck.gl/react@9.3.9(@deck.gl/core@9.3.10)(@deck.gl/widgets@9.3.9(@deck.gl/core@9.3.10)(@luma.gl/core@9.3.6))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@deck.gl/core': 9.3.9
-      '@deck.gl/widgets': 9.3.9(@deck.gl/core@9.3.9)(@luma.gl/core@9.3.6)
+      '@deck.gl/core': 9.3.10
+      '@deck.gl/widgets': 9.3.9(@deck.gl/core@9.3.10)(@luma.gl/core@9.3.6)
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  '@deck.gl/widgets@9.3.9(@deck.gl/core@9.3.9)(@luma.gl/core@9.3.6)':
+  '@deck.gl/widgets@9.3.9(@deck.gl/core@9.3.10)(@luma.gl/core@9.3.6)':
     dependencies:
-      '@deck.gl/core': 9.3.9
+      '@deck.gl/core': 9.3.10
       '@floating-ui/dom': 1.8.0
       '@luma.gl/core': 9.3.6
       preact: 10.29.8
