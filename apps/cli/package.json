@@ -22,7 +22,7 @@
     "@h3-toolkit/neighborhood": "workspace:*"
   },
   "devDependencies": {
-    "tsup": "8.5.1",
-    "tsx": "4.20.6"
+    "tsup": "9.0.0",
+    "tsx": "4.23.15"
   }
 }
